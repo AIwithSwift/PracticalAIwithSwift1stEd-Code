@@ -20,7 +20,8 @@ do {
     print("Training evaluation: \(trainingAccuracy), \(validationAccuracy)")
     
     // Testing accruacy as a percentage
-    let evaluationMetrics = sentimentClassifier.evaluation(on: testingData)
+    //let evaluationMetrics = sentimentClassifier.evaluation(on: testingData) // Mojave
+    let evaluationMetrics = sentimentClassifier.evaluation(on: trainingData, textColumn: "text", labelColumn: "class") // Catalina
     let evaluationAccuracy = (1.0 - evaluationMetrics.classificationError) * 100
     print("Testing evaluation: \(evaluationAccuracy)")
     

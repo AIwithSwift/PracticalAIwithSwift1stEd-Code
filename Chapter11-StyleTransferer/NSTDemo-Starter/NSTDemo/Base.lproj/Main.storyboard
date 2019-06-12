@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14810.11" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14766.13"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -12,7 +11,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="NSTDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="ICDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -25,7 +24,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Transfer Style">
+                                <state key="normal" title="Classify Image">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -35,6 +34,7 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
+                                    <action selector="classifyImageButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8UB-HO-2LD"/>
                                     <action selector="transferStyleButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5aG-R9-Hpo"/>
                                 </connections>
                             </button>
@@ -47,22 +47,19 @@
                                     <navigationItem title="NSTDemo" id="5Yd-UG-dzC">
                                         <barButtonItem key="leftBarButtonItem" title="Select" id="hTi-Xo-Y5E">
                                             <connections>
-                                                <action selector="selectButtonPressed:" destination="BYZ-38-t0r" id="bfD-kR-XJ6"/>
+                                                <action selector="selectButtonPressed:" destination="BYZ-38-t0r" id="yu0-bJ-ecq"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" enabled="NO" systemItem="action" id="cIK-Q7-feP">
+                                        <barButtonItem key="rightBarButtonItem" enabled="NO" systemItem="camera" id="cIK-Q7-feP">
                                             <connections>
-                                                <action selector="shareButtonPressed:" destination="BYZ-38-t0r" id="Etl-Ht-dIW"/>
+                                                <action selector="cameraButtonPressed:" destination="BYZ-38-t0r" id="z5A-rS-1qF"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dwN-0J-Pp3">
-                                <rect key="frame" x="0.0" y="545.5" width="414" height="240.5"/>
-                            </pickerView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Style models" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YKg-wr-gc3">
-                                <rect key="frame" x="8" y="510" width="398" height="27.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pick or take a photo!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YKg-wr-gc3">
+                                <rect key="frame" x="8" y="510" width="398" height="276"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -77,8 +74,7 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="fEa-ae-nPD" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="1HO-wo-IaT"/>
-                            <constraint firstItem="dwN-0J-Pp3" firstAttribute="top" secondItem="YKg-wr-gc3" secondAttribute="bottom" constant="8" id="1Kz-Ah-zet"/>
-                            <constraint firstItem="dwN-0J-Pp3" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="5Wu-60-0ZX"/>
+                            <constraint firstItem="DN9-1e-a5h" firstAttribute="top" secondItem="YKg-wr-gc3" secondAttribute="bottom" constant="8" id="700-36-7vK"/>
                             <constraint firstItem="YKg-wr-gc3" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="KEo-kL-XEQ"/>
                             <constraint firstItem="YKg-wr-gc3" firstAttribute="top" secondItem="7Yg-bG-rtr" secondAttribute="bottom" constant="8" id="Ozr-oF-pAl"/>
                             <constraint firstItem="fEa-ae-nPD" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="WOD-Ax-8uh"/>
@@ -87,17 +83,17 @@
                             <constraint firstItem="7Yg-bG-rtr" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ckg-Ob-KcT"/>
                             <constraint firstItem="DN9-1e-a5h" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="edK-qU-cQc"/>
                             <constraint firstItem="7Yg-bG-rtr" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="hVI-Nj-pni"/>
-                            <constraint firstItem="dwN-0J-Pp3" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="jtU-Fp-IGz"/>
                             <constraint firstItem="fEa-ae-nPD" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="mPJ-fD-1pL"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="YKg-wr-gc3" secondAttribute="trailing" constant="8" id="n4d-T5-7KB"/>
                             <constraint firstItem="7Yg-bG-rtr" firstAttribute="top" secondItem="fEa-ae-nPD" secondAttribute="bottom" id="oKI-vL-G13"/>
-                            <constraint firstItem="DN9-1e-a5h" firstAttribute="top" secondItem="dwN-0J-Pp3" secondAttribute="bottom" constant="8" id="r1p-08-6MW"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outlet property="imageView" destination="7Yg-bG-rtr" id="9SE-Yz-sRU"/>
-                        <outlet property="modelSelector" destination="dwN-0J-Pp3" id="ZMe-tm-1a9"/>
+                        <outlet property="cameraButton" destination="cIK-Q7-feP" id="McZ-X3-4vJ"/>
+                        <outlet property="classLabel" destination="YKg-wr-gc3" id="Suf-rn-7vU"/>
+                        <outlet property="classifyImageButton" destination="DN9-1e-a5h" id="hr0-jy-kRc"/>
+                        <outlet property="imageView" destination="7Yg-bG-rtr" id="7Ec-aG-nyK"/>
                         <outlet property="shareButton" destination="cIK-Q7-feP" id="ixs-Ny-Nd5"/>
                         <outlet property="transferStyleButton" destination="DN9-1e-a5h" id="rvT-Ys-Xsg"/>
                     </connections>
