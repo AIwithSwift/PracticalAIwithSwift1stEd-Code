@@ -80,11 +80,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIPicker
     // MARK: Functionality
     
     private func classifyImage() {
-        // DO THING? GET RANDOM FRUIT?
-        
-        if classification == nil {
-            summonAlertView()
-        }
+        classification = "FRUIT!"
         
         refresh()
     }
