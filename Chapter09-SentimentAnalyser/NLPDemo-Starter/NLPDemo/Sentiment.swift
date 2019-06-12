@@ -8,17 +8,17 @@
 
 import UIKit
 
-enum Sentiment: String, CustomStringConvertible {
-    // String RawValues must match class labels in training files
-    case positive = "Pos"
-    case negative = "Neg"
-    
-    var description: String {
-        switch self {
-            case .positive: return "Positive"
-            case .negative: return "Negative"
-        }
+extension String {
+    func predictSentiment() -> Sentiment {
+        return [Sentiment.positive, Sentiment.negative].randomElement()!
     }
+}
+
+enum Sentiment: String, CustomStringConvertible {
+    case positive = "Positive"
+    case negative = "Negative"
+    
+    var description: String { return self.rawValue }
     
     var icon: String {
         switch self {

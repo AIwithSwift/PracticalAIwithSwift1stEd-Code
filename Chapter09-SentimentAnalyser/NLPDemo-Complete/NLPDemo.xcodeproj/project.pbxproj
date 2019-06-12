@@ -13,6 +13,7 @@
 		4127A84322B086380058A6E1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4127A84222B086380058A6E1 /* Assets.xcassets */; };
 		4127A84622B086380058A6E1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4127A84422B086380058A6E1 /* LaunchScreen.storyboard */; };
 		4127A87022B08AF60058A6E1 /* Sentiment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4127A86F22B08AF60058A6E1 /* Sentiment.swift */; };
+		4127A89422B0CC6D0058A6E1 /* SentimentClassificationModel.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 4127A89322B0CC6C0058A6E1 /* SentimentClassificationModel.mlmodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		4127A84522B086380058A6E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4127A84722B086380058A6E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4127A86F22B08AF60058A6E1 /* Sentiment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sentiment.swift; sourceTree = "<group>"; };
+		4127A89322B0CC6C0058A6E1 /* SentimentClassificationModel.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = SentimentClassificationModel.mlmodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 		4127A83822B086350058A6E1 /* NLPDemo */ = {
 			isa = PBXGroup;
 			children = (
+				4127A89322B0CC6C0058A6E1 /* SentimentClassificationModel.mlmodel */,
 				4127A83922B086350058A6E1 /* AppDelegate.swift */,
 				4127A83D22B086350058A6E1 /* ViewController.swift */,
 				4127A86F22B08AF60058A6E1 /* Sentiment.swift */,
@@ -138,6 +141,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4127A89422B0CC6D0058A6E1 /* SentimentClassificationModel.mlmodel in Sources */,
 				4127A83E22B086350058A6E1 /* ViewController.swift in Sources */,
 				4127A87022B08AF60058A6E1 /* Sentiment.swift in Sources */,
 				4127A83A22B086350058A6E1 /* AppDelegate.swift in Sources */,

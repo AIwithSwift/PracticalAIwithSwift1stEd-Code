@@ -37,10 +37,10 @@ class ViewController: UIViewController {
     
     // MARK: Functionality
     
-    
     private func performSentimentAnalysis() {
-        let sentimentClass = [Sentiment.positive, Sentiment.negative].randomElement()!
-        
+        let text = textView.text ?? ""
+        let sentimentClass = text.predictSentiment()
+
         emojiView.text = sentimentClass.icon
         labelView.text = sentimentClass.description
         colorView.backgroundColor = sentimentClass.color

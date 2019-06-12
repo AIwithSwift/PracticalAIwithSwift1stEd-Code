@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import NaturalLanguage
 
 class ViewController: UIViewController {
 
@@ -24,6 +25,9 @@ class ViewController: UIViewController {
     // MARK: Attributes
     
     private let placeholderText = "Type something here..."
+    private lazy var model: NLModel? = {
+        return try? NLModel(mlModel: SentimentClassificationModel().model)
+    }()
     
     // MARK: View Functions
     
@@ -37,9 +41,12 @@ class ViewController: UIViewController {
     
     // MARK: Functionality
     
-    
     private func performSentimentAnalysis() {
-        let sentimentClass = [Sentiment.positive, Sentiment.negative].randomElement()!
+        var sentimentClass = Sentiment.neutral
+        
+        if let text = textView.text, let nlModel = self.model {
+            sentimentClass = text.predictSentiment(with: nlModel)
+        }
         
         emojiView.text = sentimentClass.icon
         labelView.text = sentimentClass.description
