@@ -3,7 +3,7 @@ Code for the book's first edition.
 
 | Directory | App | Chapter | Notes |
 |:---|:---:|:---:|:---|
-|Chapter06-ImageClassifier | ✴️ | ⛔️ | Being made by Paris |
+|Chapter06-ImageClassifier | ✴️ | ⛔️ | Being completed by Paris |
 |Chapter07-ActivityClassifier | ⛔️ | ⛔️ | To be made by Mars |
 |Chapter08-SoundClassifier | ✴️ | ⛔️ | Being made by Mars |
 |Chapter09-SentimentAnalyser | ✅ | ✴️ | Ready for chapter writing with Paris |

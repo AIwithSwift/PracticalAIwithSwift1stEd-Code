@@ -45,11 +45,16 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIPicker
         if inputImage == nil {
             classLabel.text = "Pick or take a photo!"
             imageView.image = UIImage.placeholder
-        } else if classification == nil {
-            classifyImageButton.enable()
         } else {
-            classLabel.text = classification
-            classifyImageButton.disable()
+            imageView.image = inputImage
+            
+            if classification == nil {
+                classLabel.text = "None"
+                classifyImageButton.enable()
+            } else {
+                classLabel.text = classification
+                classifyImageButton.disable()
+            }
         }
     }
     
