@@ -19,12 +19,12 @@
 /* Begin PBXFileReference section */
 		4127A89622B0D5940058A6E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "../../../Chapter11-StyleTransferer/NSTDemo-Starter/NSTDemo/Base.lproj/Main.storyboard"; sourceTree = "<group>"; };
 		4127A89822B0D9F70058A6E1 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Utils.swift; path = "../../../Chapter11-StyleTransferer/NSTDemo-Starter/NSTDemo/Utils.swift"; sourceTree = "<group>"; };
+		4127A89C22B0DE7D0058A6E1 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6CC0433222B0ABBE002642EC /* ICDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ICDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CC0433522B0ABBE002642EC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6CC0433922B0ABBE002642EC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		6CC0433E22B0ABBE002642EC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6CC0434122B0ABBE002642EC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		6CC0434322B0ABBE002642EC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6CDD012722B0C8D1006A3D0C /* WhatsMyFruit.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = WhatsMyFruit.mlmodel; path = ../../WhatsMyFruit.mlmodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -65,7 +65,7 @@
 				4127A89522B0D5940058A6E1 /* Main.storyboard */,
 				6CC0433E22B0ABBE002642EC /* Assets.xcassets */,
 				6CC0434022B0ABBE002642EC /* LaunchScreen.storyboard */,
-				6CC0434322B0ABBE002642EC /* Info.plist */,
+				4127A89C22B0DE7D0058A6E1 /* Info.plist */,
 			);
 			path = ICDemo;
 			sourceTree = "<group>";
@@ -295,7 +295,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.aiwithswift.practical.binaryimageclassifier.BinaryImageClassifier;
+				PRODUCT_BUNDLE_IDENTIFIER = com.aiwithswift.practical.binaryimageclassifier.ICDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -313,7 +313,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.aiwithswift.practical.binaryimageclassifier.BinaryImageClassifier;
+				PRODUCT_BUNDLE_IDENTIFIER = com.aiwithswift.practical.binaryimageclassifier.ICDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
