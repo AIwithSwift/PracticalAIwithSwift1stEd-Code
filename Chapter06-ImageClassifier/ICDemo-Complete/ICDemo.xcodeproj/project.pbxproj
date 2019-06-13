@@ -10,6 +10,7 @@
 		4127A8A322B0E2D70058A6E1 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4127A8A222B0E2D70058A6E1 /* Utils.swift */; };
 		4127A8A622B0E51B0058A6E1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4127A8A422B0E51B0058A6E1 /* Main.storyboard */; };
 		4127A8A822B1CF360058A6E1 /* WhatsMyFruit.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 4127A8A722B1CF360058A6E1 /* WhatsMyFruit.mlmodel */; };
+		4127A8AA22B1CFA60058A6E1 /* Vision.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4127A8A922B1CFA60058A6E1 /* Vision.swift */; };
 		6CC0433622B0ABBE002642EC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC0433522B0ABBE002642EC /* AppDelegate.swift */; };
 		6CC0433A22B0ABBE002642EC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC0433922B0ABBE002642EC /* ViewController.swift */; };
 		6CC0433F22B0ABBE002642EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6CC0433E22B0ABBE002642EC /* Assets.xcassets */; };
@@ -21,6 +22,7 @@
 		4127A8A222B0E2D70058A6E1 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		4127A8A522B0E51B0058A6E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4127A8A722B1CF360058A6E1 /* WhatsMyFruit.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = WhatsMyFruit.mlmodel; sourceTree = "<group>"; };
+		4127A8A922B1CFA60058A6E1 /* Vision.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vision.swift; sourceTree = "<group>"; };
 		6CC0433222B0ABBE002642EC /* ICDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ICDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CC0433522B0ABBE002642EC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6CC0433922B0ABBE002642EC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -62,6 +64,7 @@
 				6CC0433522B0ABBE002642EC /* AppDelegate.swift */,
 				6CC0433922B0ABBE002642EC /* ViewController.swift */,
 				4127A8A222B0E2D70058A6E1 /* Utils.swift */,
+				4127A8A922B1CFA60058A6E1 /* Vision.swift */,
 				4127A8A422B0E51B0058A6E1 /* Main.storyboard */,
 				6CC0433E22B0ABBE002642EC /* Assets.xcassets */,
 				6CC0434022B0ABBE002642EC /* LaunchScreen.storyboard */,
@@ -143,6 +146,7 @@
 			files = (
 				6CC0433A22B0ABBE002642EC /* ViewController.swift in Sources */,
 				6CC0433622B0ABBE002642EC /* AppDelegate.swift in Sources */,
+				4127A8AA22B1CFA60058A6E1 /* Vision.swift in Sources */,
 				4127A8A322B0E2D70058A6E1 /* Utils.swift in Sources */,
 				4127A8A822B1CF360058A6E1 /* WhatsMyFruit.mlmodel in Sources */,
 			);

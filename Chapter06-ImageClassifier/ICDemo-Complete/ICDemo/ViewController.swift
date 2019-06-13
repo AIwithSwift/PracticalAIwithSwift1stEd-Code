@@ -26,8 +26,9 @@ class ViewController: UIViewController {
     @IBAction func cameraButtonPressed(_ sender: Any) { getPhoto(cameraSource: true) }
     @IBAction func classifyImageButtonPressed(_ sender: Any) { classifyImage() }
     
+    private let classifier = VisionClassifier(mlmodel: WhatsMyFruit().model)
     private var inputImage: UIImage?
-    private var classification: String?
+    var classification: String?
     
     // MARK: View Functions
     
@@ -36,15 +37,17 @@ class ViewController: UIViewController {
         
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
         imageView.contentMode = .scaleAspectFill
-        
         imageView.image = UIImage.placeholder
+        classifier?.delegate = self
+        refresh()
     }
     
     /// Disables and enables controls based on presence of input to categorise
-    private func refresh() {
+    func refresh() {
         if inputImage == nil {
             classLabel.text = "Pick or take a photo!"
             imageView.image = UIImage.placeholder
+            classifyImageButton.disable()
         } else {
             imageView.image = inputImage
             
@@ -61,9 +64,10 @@ class ViewController: UIViewController {
     // MARK: Functionality
     
     private func classifyImage() {
-        classification = "FRUIT!"
-        
-        refresh()
+        if let classifier = self.classifier, let image = inputImage {
+            classifier.classify(image)
+            classifyImageButton.disable()
+        }
     }
 }
 
@@ -92,7 +96,7 @@ extension ViewController: UINavigationControllerDelegate, UIPickerViewDelegate, 
         }
     }
     
-    private func summonAlertView(message: String? = nil) {
+    func summonAlertView(message: String? = nil) {
         let alertController = UIAlertController(
             title: "Error",
             message: message ?? "Action could not be completed.",
