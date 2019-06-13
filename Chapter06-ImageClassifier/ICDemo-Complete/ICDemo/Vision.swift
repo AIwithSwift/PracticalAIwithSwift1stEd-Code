@@ -5,7 +5,7 @@
 //  Created by Mars Geldard on 13/6/19.
 //  Copyright © 2019 Paris BA. All rights reserved.
 //
-
+// BEGIN im_class_ai_visiondotswift
 import UIKit
 import CoreML
 import Vision
@@ -74,7 +74,8 @@ class VisionClassifier {
         }
     }
 }
-
+// END im_class_ai_visiondotswift
+// BEGIN im_class_ai_visiondotswiftextension
 extension UIImage {
     var cgImageOrientation: CGImagePropertyOrientation {
         switch self.imageOrientation {
@@ -89,3 +90,4 @@ extension UIImage {
         }
     }
 }
+// END im_class_ai_visiondotswiftextension
