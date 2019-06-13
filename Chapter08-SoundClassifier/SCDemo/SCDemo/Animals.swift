@@ -6,7 +6,7 @@
 //  Copyright © 2019 Mars Geldard. All rights reserved.
 //
 
-enum Animal: String {
+enum Animal: String, CaseIterable {
     case dog, pig, cow, frog, cat, insects, sheep, crow, rooster, hen
     
     var icon: String {
