@@ -11,7 +11,7 @@ import MobileCoreServices
 import Photos
 
 
-class ViewController: UIViewController, UINavigationControllerDelegate, UIPickerViewDelegate {
+class ViewController: UIViewController {
     
     // MARK: Outlets
     
@@ -66,16 +66,20 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIPicker
         }
     }
     
-    // MARK: Supplementary View Functions
+    // MARK: Functionality
     
-    @objc private func summonImagePicker() {
-        let imagePicker = UIImagePickerController()
-        imagePicker.delegate = self
-        imagePicker.sourceType = .photoLibrary
-        imagePicker.mediaTypes = [kUTTypeImage as String]
-        present(imagePicker, animated: true)
+    private func performStyleTransfer() {
+        outputImage = inputImage?.styled(with: modelSelection)
+        
+        if outputImage == nil {
+            summonAlertView()
+        }
+        
+        refresh()
     }
-    
+}
+
+extension ViewController: UINavigationControllerDelegate {
     private func summonShareSheet() {
         guard let outputImage = outputImage else {
             summonAlertView()
@@ -96,26 +100,22 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIPicker
         alertController.addAction(UIAlertAction(title: "OK", style: .default))
         present(alertController, animated: true)
     }
-    
-    // MARK: Functionality
-    
-    private func performStyleTransfer() {
-        outputImage = inputImage?.styled(with: modelSelection)
-        
-        if outputImage == nil {
-            summonAlertView()
-        }
-        
-        refresh()
-    }
 }
 
 extension ViewController: UIImagePickerControllerDelegate {
+    private func summonImagePicker() {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.sourceType = .photoLibrary
+        imagePicker.mediaTypes = [kUTTypeImage as String]
+        present(imagePicker, animated: true)
+    }
+    
     @objc func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         let rawImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
         inputImage = rawImage?.aspectFilled(to: modelSelection.constraints)
         outputImage = nil
-
+        
         picker.dismiss(animated: true)
         refresh()
         
@@ -125,7 +125,7 @@ extension ViewController: UIImagePickerControllerDelegate {
     }
 }
 
-extension ViewController: UIPickerViewDataSource {
+extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }

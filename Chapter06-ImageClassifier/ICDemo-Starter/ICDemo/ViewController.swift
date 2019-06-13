@@ -11,7 +11,7 @@ import MobileCoreServices
 import Photos
 
 
-class ViewController: UIViewController, UINavigationControllerDelegate, UIPickerViewDelegate {
+class ViewController: UIViewController {
     
     // MARK: Outlets
     
@@ -40,7 +40,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIPicker
         imageView.image = UIImage.placeholder
     }
     
-    /// Disables and enables controls based on presence of input to Categorise
+    /// Disables and enables controls based on presence of input to categorise
     private func refresh() {
         if inputImage == nil {
             classLabel.text = "Pick or take a photo!"
@@ -58,9 +58,18 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIPicker
         }
     }
     
-    // MARK: Supplementary View Functions
+    // MARK: Functionality
     
-    @objc private func getPhoto(cameraSource: Bool = false) {
+    private func classifyImage() {
+        classification = "FRUIT!"
+        
+        refresh()
+    }
+}
+
+extension ViewController: UINavigationControllerDelegate, UIPickerViewDelegate, UIImagePickerControllerDelegate {
+    
+    private func getPhoto(cameraSource: Bool = false) {
         let photoSource: UIImagePickerController.SourceType
         photoSource = cameraSource ? .camera : .photoLibrary
         
@@ -69,6 +78,18 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIPicker
         imagePicker.sourceType = photoSource
         imagePicker.mediaTypes = [kUTTypeImage as String]
         present(imagePicker, animated: true)
+    }
+    
+    @objc func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+        inputImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
+        classification = nil
+        
+        picker.dismiss(animated: true)
+        refresh()
+        
+        if inputImage == nil {
+            summonAlertView(message: "Image was malformed.")
+        }
     }
     
     private func summonAlertView(message: String? = nil) {
@@ -80,28 +101,6 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIPicker
         
         alertController.addAction(UIAlertAction(title: "OK", style: .default))
         present(alertController, animated: true)
-    }
-    
-    // MARK: Functionality
-    
-    private func classifyImage() {
-        classification = "FRUIT!"
-        
-        refresh()
-    }
-}
-
-extension ViewController: UIImagePickerControllerDelegate {
-    @objc func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
-        inputImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
-        classification = nil
-        
-        picker.dismiss(animated: true)
-        refresh()
-        
-        if inputImage == nil {
-            summonAlertView(message: "Image was malformed.")
-        }
     }
 }
 
