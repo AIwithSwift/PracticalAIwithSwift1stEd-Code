@@ -37,7 +37,6 @@ class ThreeStateButton: UIButton {
 
 class ViewController: UIViewController {
 
-    
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var progressBar: UIProgressView!
     @IBOutlet weak var recordButton: ThreeStateButton!
@@ -54,9 +53,17 @@ class ViewController: UIViewController {
         return directory.appendingPathComponent("recording.m4a")
     }()
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        collectionView.dataSource = self
+    }
+    
     private func recordAudio() {
         guard let audioRecorder = audioRecorder else { return }
-        // TODO display error
+        
+        classification = nil
+        collectionView.reloadData()
         
         recordButton.changeState(to: .inProgress(title: "Recording...", color: .systemRed))
         progressBar.isHidden = false
@@ -70,22 +77,35 @@ class ViewController: UIViewController {
         progressBar.progress = 0
         
         if success, let audioFile = try? AVAudioFile(forReading: recordedAudioFilename) {
-            recordButton.changeState(to: .disabled(title: "Record Audio", color: .systemGray))
+            recordButton.changeState(to: .disabled(title: "Record Sound", color: .systemGray))
             classifySound(file: audioFile)
         } else {
-            // TODO display error
-            recordButton.changeState(to: .enabled(title: "Record Audio", color: .systemBlue))
+            summonAlertView()
+            classify(nil)
         }
     }
     
-    private func update() {
-        recordButton.changeState(to: .enabled(title: "Record Audio", color: .systemBlue))
+    private func classify(_ animal: Animal?) {
+        classification = animal
+        recordButton.changeState(to: .enabled(title: "Record Sound", color: .systemBlue))
+        collectionView.reloadData()
     }
     
     private func classifySound(file: AVAudioFile) {
-        classification = Animal.allCases.randomElement()
-        print(classification)
-        update()
+        classify(Animal.allCases.randomElement()!)
+    }
+}
+
+extension ViewController {
+    private func summonAlertView(message: String? = nil) {
+        let alertController = UIAlertController(
+            title: "Error",
+            message: message ?? "Action could not be completed.",
+            preferredStyle: .alert
+        )
+        
+        alertController.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alertController, animated: true)
     }
 }
 
@@ -108,3 +128,28 @@ extension ViewController: AVAudioRecorderDelegate {
     }
 }
 
+extension ViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return Animal.allCases.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AnimalCell.identifier, for: indexPath) as? AnimalCell else {
+            return UICollectionViewCell()
+        }
+
+        let animal = Animal.allCases[indexPath.item]
+        
+        cell.textLabel.text = animal.icon
+        cell.backgroundColor = (animal == self.classification) ? animal.color : .systemGray
+        
+        return cell
+    }
+}
+
+class AnimalCell: UICollectionViewCell {
+    static let identifier = "AnimalCollectionViewCell"
+    
+    @IBOutlet weak var cellView: UIView!
+    @IBOutlet weak var textLabel: UILabel!
+}
