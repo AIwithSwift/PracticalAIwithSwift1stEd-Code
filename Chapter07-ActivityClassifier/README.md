@@ -2,8 +2,8 @@
 
 | Category | Details |
 |:---|:---|
-| Input Data |  |
-| Training |  |
-| App UI |  |
-| Assets |  |
+| Input Data | Self-made |
+| Training | TuriCreate |
+| App UI | SwiftUI |
+| Assets | [App Icon](https://pixabay.com/photos/yoga-asana-pose-hatha-woman-girl-2959226/) |
 | Integration Difficulty |  |
