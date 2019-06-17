@@ -6,6 +6,7 @@
 //  Copyright © 2019 Mars Geldard. All rights reserved.
 //
 
+// BEGIN nlp_start_sentimentdotswift1
 import UIKit
 
 extension String {
@@ -13,7 +14,9 @@ extension String {
         return [Sentiment.positive, Sentiment.negative].randomElement()!
     }
 }
+// END nlp_start_sentimentdotswift1
 
+// BEGIN nlp_start_sentimentdotswift2
 enum Sentiment: String, CustomStringConvertible {
     case positive = "Positive"
     case negative = "Negative"
@@ -34,3 +37,4 @@ enum Sentiment: String, CustomStringConvertible {
         }
     }
 }
+// END nlp_start_sentimentdotswift2
