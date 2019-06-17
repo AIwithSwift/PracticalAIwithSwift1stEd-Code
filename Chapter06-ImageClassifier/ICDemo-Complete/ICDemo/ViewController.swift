@@ -27,7 +27,7 @@ class ViewController: UIViewController {
     @IBAction func classifyImageButtonPressed(_ sender: Any) { classifyImage() }
     
     // BEGIN im_class_ai_newvar
-    private let classifier = VisionClassifier(mlmodel: WhatsMyFruit().model)
+    private let classifier = VisionClassifier(mlmodel: SqueezeNet().model)
     // END im_class_ai_newvar
     private var inputImage: UIImage?
     var classification: String?

@@ -11,6 +11,8 @@
 		4127A8A622B0E51B0058A6E1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4127A8A422B0E51B0058A6E1 /* Main.storyboard */; };
 		4127A8A822B1CF360058A6E1 /* WhatsMyFruit.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 4127A8A722B1CF360058A6E1 /* WhatsMyFruit.mlmodel */; };
 		4127A8AA22B1CFA60058A6E1 /* Vision.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4127A8A922B1CFA60058A6E1 /* Vision.swift */; };
+		6C46E9A022B2280D007D138F /* BananaOrApple.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 6C46E99F22B2280D007D138F /* BananaOrApple.mlmodel */; };
+		6CAF0A9922B22C9E009D7E05 /* SqueezeNet.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 6CAF0A9822B22C9E009D7E05 /* SqueezeNet.mlmodel */; };
 		6CC0433622B0ABBE002642EC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC0433522B0ABBE002642EC /* AppDelegate.swift */; };
 		6CC0433A22B0ABBE002642EC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC0433922B0ABBE002642EC /* ViewController.swift */; };
 		6CC0433F22B0ABBE002642EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6CC0433E22B0ABBE002642EC /* Assets.xcassets */; };
@@ -23,6 +25,8 @@
 		4127A8A522B0E51B0058A6E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4127A8A722B1CF360058A6E1 /* WhatsMyFruit.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = WhatsMyFruit.mlmodel; sourceTree = "<group>"; };
 		4127A8A922B1CFA60058A6E1 /* Vision.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vision.swift; sourceTree = "<group>"; };
+		6C46E99F22B2280D007D138F /* BananaOrApple.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = BananaOrApple.mlmodel; sourceTree = "<group>"; };
+		6CAF0A9822B22C9E009D7E05 /* SqueezeNet.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = SqueezeNet.mlmodel; sourceTree = "<group>"; };
 		6CC0433222B0ABBE002642EC /* ICDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ICDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CC0433522B0ABBE002642EC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6CC0433922B0ABBE002642EC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -60,6 +64,8 @@
 		6CC0433422B0ABBE002642EC /* ICDemo */ = {
 			isa = PBXGroup;
 			children = (
+				6CAF0A9822B22C9E009D7E05 /* SqueezeNet.mlmodel */,
+				6C46E99F22B2280D007D138F /* BananaOrApple.mlmodel */,
 				4127A8A722B1CF360058A6E1 /* WhatsMyFruit.mlmodel */,
 				6CC0433522B0ABBE002642EC /* AppDelegate.swift */,
 				6CC0433922B0ABBE002642EC /* ViewController.swift */,
@@ -147,7 +153,9 @@
 				6CC0433A22B0ABBE002642EC /* ViewController.swift in Sources */,
 				6CC0433622B0ABBE002642EC /* AppDelegate.swift in Sources */,
 				4127A8AA22B1CFA60058A6E1 /* Vision.swift in Sources */,
+				6CAF0A9922B22C9E009D7E05 /* SqueezeNet.mlmodel in Sources */,
 				4127A8A322B0E2D70058A6E1 /* Utils.swift in Sources */,
+				6C46E9A022B2280D007D138F /* BananaOrApple.mlmodel in Sources */,
 				4127A8A822B1CF360058A6E1 /* WhatsMyFruit.mlmodel in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -295,6 +303,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G2HHLC6PEY;
 				INFOPLIST_FILE = ICDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -313,6 +322,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G2HHLC6PEY;
 				INFOPLIST_FILE = ICDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
