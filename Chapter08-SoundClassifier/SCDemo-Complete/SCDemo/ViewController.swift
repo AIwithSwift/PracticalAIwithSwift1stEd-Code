@@ -52,6 +52,9 @@ class ViewController: UIViewController {
         let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
         return directory.appendingPathComponent("recording.m4a")
     }()
+    private lazy var classifier = {
+        return SoundClassifier(model: AnimalSounds().model, delegate: self)
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,11 +62,15 @@ class ViewController: UIViewController {
         collectionView.dataSource = self
     }
     
+    private func refresh(clear: Bool = false) {
+        if clear { classification = nil }
+        collectionView.reloadData()
+    }
+    
     private func recordAudio() {
         guard let audioRecorder = audioRecorder else { return }
         
-        classification = nil
-        collectionView.reloadData()
+        refresh(clear: true)
         
         recordButton.changeState(to: .inProgress(title: "Recording...", color: .systemRed))
         progressBar.isHidden = false
@@ -76,23 +83,26 @@ class ViewController: UIViewController {
         progressBar.isHidden = true
         progressBar.progress = 0
         
-        if success, let audioFile = try? AVAudioFile(forReading: recordedAudioFilename) {
+        if success {
             recordButton.changeState(to: .disabled(title: "Record Sound", color: .systemGray))
-            classifySound(file: audioFile)
+            classifySound(file: recordedAudioFilename)
         } else {
-            summonAlertView()
             classify(nil)
         }
     }
     
-    private func classify(_ animal: Animal?) {
+    func classify(_ animal: Animal?) {
         classification = animal
         recordButton.changeState(to: .enabled(title: "Record Sound", color: .systemBlue))
-        collectionView.reloadData()
+        refresh()
+        
+        if classification == nil {
+            summonAlertView()
+        }
     }
     
-    private func classifySound(file: AVAudioFile) {
-        classify(Animal.allCases.randomElement()!)
+    private func classifySound(file: URL) {
+        classifier?.classify(audioFile: file)
     }
 }
 

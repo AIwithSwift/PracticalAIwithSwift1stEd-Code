@@ -10,51 +10,49 @@ import CoreML
 import AVFoundation
 import SoundAnalysis
 
-extension MLMultiArray {
+class ResultsObserver: NSObject, SNResultsObserving {
     
-    convenience init(size: Int, data: UnsafeMutablePointer<Float>, offset: Int = 0) {
-        do {
-            try self.init(shape: [size] as [NSNumber], dataType: MLMultiArrayDataType.float32)
-        } catch {
-            fatalError("Could not initialise MLMultiArray for MLModel options.")
-        }
+    private let completion: (String?) -> ()
+    
+    init(completion: @escaping (String?) -> ()) {
+        self.completion = completion
+    }
+    
+    func request(_ request: SNRequest, didProduce result: SNResult) {
+        guard let results = result as? SNClassificationResult,
+            let result = results.classifications.first else { return }
         
-        for index in (0 + offset)..<(size + offset) {
-            self[index] = NSNumber.init(value: data[index])
+        if (result.confidence > 0.6) {
+             print("Class: \(result.identifier), Confidence: \(Int(result.confidence * 100))%")
+            completion(result.identifier)
         }
+    }
+    
+    func request(_ request: SNRequest, didFailWithError error: Error) {
+        completion(nil)
     }
 }
 
-func prepare(audio file: AVAudioFile, model: MLModel) {
-    let chunkSize = 15600
-    let fileLength = Int(file.length)
-    var results: [String: Double] = [:]
+class SoundClassifier {
     
-    let buffer = AVAudioPCMBuffer(pcmFormat: file.processingFormat, frameCapacity: UInt32(fileLength))
-    do {
-        try file.read(into:buffer!)
-    } catch{
-        fatalError("Error reading buffer.")
-    }
-    guard let bufferData = buffer?.floatChannelData else { return }
+    private let model: MLModel
+    private let request: SNClassifySoundRequest
+    private let observer: ResultsObserver
     
-    // for each chunk of audio that can be processed at once
-    for offset in stride(from: 0, to: fileLength, by: chunkSize) {
+    init?(model: MLModel, delegate: ViewController) {
+        guard let request = try? SNClassifySoundRequest(mlModel: model) else { return nil }
         
-        // make model array input from given audio data
-        let audioData = MLMultiArray(size: chunkSize, data: bufferData[0], offset: offset)
-        let input = modelInput(audio: audioData)
-        
-        // get the result
-        guard let chunkResult = try? model.prediction(input: input) else { return }
-        
-        let tuple: (label: String, prob: Double) = chunkResult.labelProbability
-        results[tuple.label, default: 0.0] += tuple.prob
+        self.model = model
+        self.request = request
+        self.observer = ResultsObserver { result in
+            delegate.classify(Animal(rawValue: result ?? ""))
+        }
     }
     
-    let maxProbability = results.max { $0.value < $1.value }.key
-    
-    classify(Animal(rawValue: maxProbability))
+    func classify(audioFile: URL) {
+        guard let analyzer = try? SNAudioFileAnalyzer(url: audioFile),
+            let _ = try? analyzer.add(request, withObserver: observer) else { return }
+        
+        analyzer.analyze()
+    }
 }
-
-
