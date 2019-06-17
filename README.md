@@ -7,7 +7,7 @@ Code for the book's first edition.
 |Chapter07-ActivityClassifier | ⛔️ | ⛔️ | To be made by Mars |
 |Chapter08-SoundClassifier | ✅ | ✴️ | Ready for chapter by Paris |
 |Chapter09-SentimentAnalyser | ✅ | ✴️ | Chapter in Progress with Paris |
-|Chapter10-ImageComparer | ✴️ | ⛔️ | Being made by Mars |
+|Chapter10-ImageComparer | ✴️ | ⛔️ | Being made by Mars (**Issue: text resizing bug in SwiftUI?**) |
 |Chapter11-StyleTransferer | ✅ | ✴️ | Chapter in Progress with Paris; model in Progress with Paris |
 |Chapter12-ObjectDetector | ⛔️ | ⛔️ | To be made by Paris |
 |Chapter12-Recommender| ⛔️ | ⛔️ | To be made by Mars |
