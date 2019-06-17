@@ -88,7 +88,7 @@ class ViewController: UIViewController {
         }
     }
     
-    func classify(_ animal: Animal?) {
+    private func classify(_ animal: Animal?) {
         classification = animal
         recordButton.changeState(to: .enabled(title: "Record Sound", color: .systemBlue))
         refresh()
