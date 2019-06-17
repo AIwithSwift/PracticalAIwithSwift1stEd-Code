@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import SoundAnalysis
 
 class ThreeStateButton: UIButton {
     
@@ -41,9 +42,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var progressBar: UIProgressView!
     @IBOutlet weak var recordButton: ThreeStateButton!
     
-    @IBAction func recordButtonPressed(_ sender: Any) {
-        recordAudio()
-    }
+    @IBAction func recordButtonPressed(_ sender: Any) { recordAudio() }
     
     private var recordingLength: Double = 5.0
     private var classification: Animal?
@@ -52,9 +51,7 @@ class ViewController: UIViewController {
         let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
         return directory.appendingPathComponent("recording.m4a")
     }()
-    private lazy var classifier = {
-        return SoundClassifier(model: AnimalSounds().model, delegate: self)
-    }()
+    private let classifier = AudioClassifier(model: AnimalSounds().model)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -102,7 +99,9 @@ class ViewController: UIViewController {
     }
     
     private func classifySound(file: URL) {
-        classifier?.classify(audioFile: file)
+        classifier?.classify(audioFile: file) { result in
+            self.classify(Animal(rawValue: result ?? ""))
+        }
     }
 }
 

@@ -12,7 +12,11 @@ import SoundAnalysis
 
 class ResultsObserver: NSObject, SNResultsObserving {
     
-    private let completion: (String?) -> ()
+    private var completion: (String?) -> ()
+    private var results: [(String, Double)] = []
+    private var cumulativeResults: [String: Double] {
+        return results.reduce(into: [:]) { $0[$1.0, default: 0.0] += $1.1 }
+    }
     
     init(completion: @escaping (String?) -> ()) {
         self.completion = completion
@@ -22,34 +26,37 @@ class ResultsObserver: NSObject, SNResultsObserving {
         guard let results = result as? SNClassificationResult,
             let result = results.classifications.first else { return }
         
-        if (result.confidence > 0.6) {
-             print("Class: \(result.identifier), Confidence: \(Int(result.confidence * 100))%")
-            completion(result.identifier)
+        if result.confidence > 0.7 {
+            self.results.append((result.identifier, result.confidence))
+            print("Class: \(result.identifier), Confidence: \(result.confidence)")
         }
     }
     
     func request(_ request: SNRequest, didFailWithError error: Error) {
         completion(nil)
     }
+    
+    func requestDidComplete(_ request: SNRequest) {
+        let highestResult = cumulativeResults.max { $0.value < $1.value }
+        print("Class: \(highestResult?.key ?? "None"), Confidence: \(highestResult?.value ?? 0.0)")
+        completion(highestResult?.key ?? "")
+    }
 }
 
-class SoundClassifier {
+class AudioClassifier {
     
     private let model: MLModel
     private let request: SNClassifySoundRequest
-    private let observer: ResultsObserver
     
-    init?(model: MLModel, delegate: ViewController) {
+    init?(model: MLModel) {
         guard let request = try? SNClassifySoundRequest(mlModel: model) else { return nil }
         
         self.model = model
         self.request = request
-        self.observer = ResultsObserver { result in
-            delegate.classify(Animal(rawValue: result ?? ""))
-        }
     }
     
-    func classify(audioFile: URL) {
+    func classify(audioFile: URL, completion: @escaping (String?) -> ()) {
+        let observer = ResultsObserver(completion: completion)
         guard let analyzer = try? SNAudioFileAnalyzer(url: audioFile),
             let _ = try? analyzer.add(request, withObserver: observer) else { return }
         

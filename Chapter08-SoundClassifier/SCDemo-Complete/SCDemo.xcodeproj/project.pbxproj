@@ -8,9 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		412742A922B3D1A300A9C39E /* AnimalSounds.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 412742A822B3D1A300A9C39E /* AnimalSounds.mlmodel */; };
-		412742AB22B3D1C600A9C39E /* libAudioPreprocessing.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 412742AA22B3D1C600A9C39E /* libAudioPreprocessing.dylib */; };
-		412742AC22B3D1CC00A9C39E /* libAudioPreprocessing.dylib in Resources */ = {isa = PBXBuildFile; fileRef = 412742AA22B3D1C600A9C39E /* libAudioPreprocessing.dylib */; };
-		412742AD22B3D20000A9C39E /* libAudioPreprocessing.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 412742AA22B3D1C600A9C39E /* libAudioPreprocessing.dylib */; };
 		412742B022B3D27700A9C39E /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412742AF22B3D27700A9C39E /* Audio.swift */; };
 		4127A87E22B0B4ED0058A6E1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4127A87D22B0B4ED0058A6E1 /* AppDelegate.swift */; };
 		4127A88222B0B4ED0058A6E1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4127A88122B0B4ED0058A6E1 /* ViewController.swift */; };
@@ -27,7 +24,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				412742AD22B3D20000A9C39E /* libAudioPreprocessing.dylib in Embed Libraries */,
 			);
 			name = "Embed Libraries";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -36,7 +32,6 @@
 
 /* Begin PBXFileReference section */
 		412742A822B3D1A300A9C39E /* AnimalSounds.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = AnimalSounds.mlmodel; sourceTree = "<group>"; };
-		412742AA22B3D1C600A9C39E /* libAudioPreprocessing.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libAudioPreprocessing.dylib; sourceTree = "<group>"; };
 		412742AF22B3D27700A9C39E /* Audio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Audio.swift; sourceTree = "<group>"; };
 		4127A87A22B0B4ED0058A6E1 /* SCDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SCDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4127A87D22B0B4ED0058A6E1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -53,7 +48,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				412742AB22B3D1C600A9C39E /* libAudioPreprocessing.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -87,7 +81,6 @@
 				414B6FF422B228ED00D36576 /* Assets.xcassets */,
 				4127A88822B0B4EE0058A6E1 /* LaunchScreen.storyboard */,
 				4127A88B22B0B4EE0058A6E1 /* Info.plist */,
-				412742AA22B3D1C600A9C39E /* libAudioPreprocessing.dylib */,
 				412742AF22B3D27700A9C39E /* Audio.swift */,
 			);
 			path = SCDemo;
@@ -152,7 +145,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				412742AC22B3D1CC00A9C39E /* libAudioPreprocessing.dylib in Resources */,
 				4127A88A22B0B4EE0058A6E1 /* LaunchScreen.storyboard in Resources */,
 				414B6FF522B228ED00D36576 /* Assets.xcassets in Resources */,
 				4127A88522B0B4ED0058A6E1 /* Main.storyboard in Resources */,
