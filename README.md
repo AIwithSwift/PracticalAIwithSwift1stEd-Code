@@ -5,7 +5,7 @@ Code for the book's first edition.
 |:---|:---:|:---:|:---|
 |Chapter06-ImageClassifier | ✅ | ✴️ | Chapter in Progress with Paris |
 |Chapter07-ActivityClassifier | ⛔️ | ⛔️ | To be made by Mars |
-|Chapter08-SoundClassifier | ✴️ | ⛔️ | Being made by Mars |
+|Chapter08-SoundClassifier | ✅ | ✴️ | Ready for chapter by Paris |
 |Chapter09-SentimentAnalyser | ✅ | ✴️ | Chapter in Progress with Paris |
 |Chapter10-ImageComparer | ✴️ | ⛔️ | Being made by Mars |
 |Chapter11-StyleTransferer | ✅ | ✴️ | Chapter in Progress with Paris; model in Progress with Paris |
