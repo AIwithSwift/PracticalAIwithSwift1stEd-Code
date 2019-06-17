@@ -7,7 +7,9 @@
 //
 
 import UIKit
+// BEGIN nlp_new_import
 import NaturalLanguage
+// END nlp_new_import
 
 class ViewController: UIViewController {
 
@@ -25,10 +27,12 @@ class ViewController: UIViewController {
     // MARK: Attributes
     
     private let placeholderText = "Type something here..."
+    // BEGIN nlp_new_attributes
     private lazy var model: NLModel? = {
         return try? NLModel(mlModel: SentimentClassificationModel().model)
     }()
-    
+    // END nlp_new_attributes
+
     // MARK: View Functions
     
     override func viewDidLoad() {
@@ -42,11 +46,13 @@ class ViewController: UIViewController {
     // MARK: Functionality
     
     private func performSentimentAnalysis() {
+        // BEGIN nlp_new_analysis_code1
         var sentimentClass = Sentiment.neutral
         
         if let text = textView.text, let nlModel = self.model {
             sentimentClass = text.predictSentiment(with: nlModel)
         }
+        // END nlp_new_analysis_code1
         
         emojiView.text = sentimentClass.icon
         labelView.text = sentimentClass.description
