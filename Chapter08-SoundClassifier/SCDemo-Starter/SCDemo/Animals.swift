@@ -8,9 +8,13 @@
 
 import UIKit
 
+// BEGIN animalsdotswift
 enum Animal: String, CaseIterable {
+    // BEGIN adotswift1
     case dog, pig, cow, frog, cat, insects, sheep, crow, chicken
+    // END adotswift1
     
+    // BEGIN adotswift2
     init?(rawValue: String) {
         if let match = Self.allCases.first(where: { $0.rawValue == rawValue }) {
             self = match
@@ -20,7 +24,9 @@ enum Animal: String, CaseIterable {
             return nil
         }
     }
+    // END adotswift2
     
+    // BEGIN adotswift3
     var icon: String {
         switch self {
             case .dog: return "🐶"
@@ -34,7 +40,9 @@ enum Animal: String, CaseIterable {
             case .chicken: return "🐔"
         }
     }
+    // END adotswift3
     
+    // BEGIN adotswift4
     var color: UIColor {
         switch self {
             case .dog: return .systemRed
@@ -48,4 +56,6 @@ enum Animal: String, CaseIterable {
             case .chicken: return .systemIndigo
         }
     }
+    // END adotswift4
 }
+// END animalsdotswift

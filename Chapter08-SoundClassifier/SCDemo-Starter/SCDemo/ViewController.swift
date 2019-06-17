@@ -9,14 +9,18 @@
 import UIKit
 import AVFoundation
 
+// BEGIN SC_threestatebutton
 class ThreeStateButton: UIButton {
     
+    // BEGIN SC_tsb1
     enum ButtonState {
         case enabled(title: String, color: UIColor)
         case inProgress(title: String, color: UIColor)
         case disabled(title: String, color: UIColor)
     }
-    
+    // END SC_tsb1
+
+    // BEGIN SC_tsb2
     func changeState(to state: ThreeStateButton.ButtonState) {
         switch state {
             case .enabled(let title, let color):
@@ -33,18 +37,29 @@ class ThreeStateButton: UIButton {
                 self.isEnabled = false
         }
     }
+    // END SC_tsb2
 }
+// END SC_threestatebutton
+
 
 class ViewController: UIViewController {
 
+    // BEGIN SC_starter_outlets
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var progressBar: UIProgressView!
     @IBOutlet weak var recordButton: ThreeStateButton!
+    // END SC_starter_outlets
     
+    // BEGIN SC_starter_action
     @IBAction func recordButtonPressed(_ sender: Any) {
+        // start audio recording
+        // BEGIN SC_starter_action_inside
         recordAudio()
+        // END SC_starter_action_inside 
     }
+    // END SC_starter_action
     
+    // BEGIN SC_starter_attributes
     private var recordingLength: Double = 5.0
     private var classification: Animal?
     private lazy var audioRecorder: AVAudioRecorder? = { return initialiseAudioRecorder() }()
@@ -52,6 +67,7 @@ class ViewController: UIViewController {
         let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
         return directory.appendingPathComponent("recording.m4a")
     }()
+    // END SC_starter_attributes
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -147,9 +163,12 @@ extension ViewController: UICollectionViewDataSource {
     }
 }
 
+// BEGIN SC_animalcell
 class AnimalCell: UICollectionViewCell {
     static let identifier = "AnimalCollectionViewCell"
-    
+    // BEGIN SC_animalcell_inside
     @IBOutlet weak var cellView: UIView!
     @IBOutlet weak var textLabel: UILabel!
+    // END SC_animalcell_inside
 }
+// END SC_animalcell
