@@ -58,6 +58,8 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>This is why we need the microphone.</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
 	<string>Demonstrates text-to-speech functionality available with the Speech framework</string>
 </dict>
