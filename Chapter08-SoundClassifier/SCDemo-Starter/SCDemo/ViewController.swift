@@ -69,12 +69,15 @@ class ViewController: UIViewController {
     }()
     // END SC_starter_attributes
     
+    // BEGIN SC_vdl_starter
     override func viewDidLoad() {
         super.viewDidLoad()
         
         collectionView.dataSource = self
     }
+    // END SC_vdl_starter
     
+    // BEGIN SC_recAud
     private func recordAudio() {
         guard let audioRecorder = audioRecorder else { return }
         
@@ -87,7 +90,9 @@ class ViewController: UIViewController {
         audioRecorder.record(forDuration: TimeInterval(recordingLength))
         UIView.animate(withDuration: recordingLength) { self.progressBar.setProgress(Float(self.recordingLength), animated: true) }
     }
+    // END SC_recAud
     
+    // BEGIN SC_finRec
     private func finishRecording(success: Bool = true) {
         progressBar.isHidden = true
         progressBar.progress = 0
@@ -100,18 +105,24 @@ class ViewController: UIViewController {
             classify(nil)
         }
     }
+    // END SC_finRec
     
+    // BEGIN SC_classify_starter
     private func classify(_ animal: Animal?) {
         classification = animal
         recordButton.changeState(to: .enabled(title: "Record Sound", color: .systemBlue))
         collectionView.reloadData()
     }
+    // END SC_classify_starter
     
+    // BEGIN SC_classifySound_starter
     private func classifySound(file: AVAudioFile) {
         classify(Animal.allCases.randomElement()!)
     }
+    // END SC_classifySound_starter
 }
 
+// BEGIN SC_starter_alertView
 extension ViewController {
     private func summonAlertView(message: String? = nil) {
         let alertController = UIAlertController(
@@ -124,7 +135,9 @@ extension ViewController {
         present(alertController, animated: true)
     }
 }
+// END SC_starter_alertView
 
+// BEGIN SC_starter_ext_AV
 extension ViewController: AVAudioRecorderDelegate {
     func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
         finishRecording(success: flag)
@@ -143,7 +156,9 @@ extension ViewController: AVAudioRecorderDelegate {
         return recorder
     }
 }
+// END SC_starter_ext_AV
 
+// BEGIN SC_starter_ext_UIC
 extension ViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return Animal.allCases.count
@@ -162,6 +177,7 @@ extension ViewController: UICollectionViewDataSource {
         return cell
     }
 }
+// END SC_starter_ext_UIC
 
 // BEGIN SC_animalcell
 class AnimalCell: UICollectionViewCell {
