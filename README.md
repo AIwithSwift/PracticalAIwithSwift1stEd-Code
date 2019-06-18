@@ -11,7 +11,7 @@ Code for the book's first edition.
 |Chapter11-StyleTransferer | ✅ | ✴️ | Chapter in Progress with Paris; model in Progress with Paris |
 |Chapter12-ObjectDetector | ⛔️ | ⛔️ | To be made by Paris |
 |Chapter12-Recommender| ⛔️ | ⛔️ | To be made by Mars |
-| ?-DrawingDetector | - | - | - |
+| Chater12-DrawingDetector | ⛔️ | ⛔️ | To be made by Mars (if she can).  |
 | ? (Swift for Tensorflow Task) | - | - | - |
 | ? (coremltools Task) | - | - | - |
 | ? (Apple NLP tools Task) | - | - | - |
