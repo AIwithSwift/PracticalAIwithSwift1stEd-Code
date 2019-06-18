@@ -9,68 +9,65 @@
 import Speech
 import AVFoundation
 
-class SpeechRecorder {
-    private let audioEngine = AVAudioEngine()
-    private let audioSession = AVAudioSession.sharedInstance()
-    private let recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
+class SpeechRecognizer {
+    private let audioEngine: AVAudioEngine
+    private let audioSession: AVAudioSession
     private let recognizer: SFSpeechRecognizer
     private let inputBus: AVAudioNodeBus
+    private let inputNode: AVAudioInputNode
+    
+    private var request: SFSpeechAudioBufferRecognitionRequest?
+    private var task: SFSpeechRecognitionTask?
     
     init?(inputBus: AVAudioNodeBus = 0) {
-        guard let recognizer = SFSpeechRecognizer() else { return nil }
+        self.audioEngine = AVAudioEngine()
+        self.audioSession = AVAudioSession.sharedInstance()
+        
+        guard let _ = try? audioSession.setCategory(.record, mode: .measurement, options: .duckOthers), let _ = try? audioSession.setActive(true, options: .notifyOthersOnDeactivation),
+            let recognizer = SFSpeechRecognizer() else {
+            return nil
+        }
         
         self.recognizer = recognizer
         self.inputBus = inputBus
-        
-        self.recognitionRequest.shouldReportPartialResults = true
-
-        do {
-            // Configure the audio session for the app
-            try audioSession.setCategory(.record, mode: .measurement, options: .duckOthers)
-            try audioSession.setActive(true, options: .notifyOthersOnDeactivation)
-            let inputNode = audioEngine.inputNode
-
-            
-            // Configure the microphone input
-            let recordingFormat = inputNode.outputFormat(forBus: inputBus)
-            inputNode.installTap(onBus: inputBus, bufferSize: 1024, format: recordingFormat) { (buffer: AVAudioPCMBuffer, when: AVAudioTime) in
-                self.recognitionRequest.append(buffer)
-            }
-        } catch {
-            return nil
-        }
-
-        
-
-        
-//        audioEngine.prepare()
-//        try audioEngine.start()
+        self.inputNode = audioEngine.inputNode
     }
     
-    func startRecording() {
-        // Create a recognition task for the speech recognition session.
-        // Keep a reference to the task so that it can be canceled.
-        let recognitionTask = speechRecognizer.recognitionTask(with: recognitionRequest) { result, error in
-            var isFinal = false
-            
+    func startRecording(completion: @escaping (String?) -> ()) {
+        audioEngine.prepare()
+        request = SFSpeechAudioBufferRecognitionRequest()
+        request?.shouldReportPartialResults = true
+        
+        guard let _ = try? audioEngine.start() else { return completion(nil) }
+        guard let request = self.request else { return completion(nil) }
+        
+        let recordingFormat = inputNode.outputFormat(forBus: inputBus)
+        inputNode.installTap(onBus: inputBus, bufferSize: 1024, format: recordingFormat) { (buffer: AVAudioPCMBuffer, when: AVAudioTime) in
+            self.request?.append(buffer)
+        }
+
+        print("Started recording...")
+        
+        task = recognizer.recognitionTask(with: request) { result, error in
             if let result = result {
-                // Update the text view with the results.
-                self.textView.text = result.bestTranscription.formattedString
-                isFinal = result.isFinal
-                print("Text \(result.bestTranscription.formattedString)")
+                let transcript = result.bestTranscription.formattedString
+                print("Heard: \"\(transcript)\"")
+                completion(transcript)
             }
             
-            if error != nil || isFinal {
-                // Stop recognizing speech if there is a problem.
-                self.audioEngine.stop()
-                inputNode.removeTap(onBus: 0)
-                
-                self.recognitionRequest = nil
-                self.recognitionTask = nil
-                
-                self.recordButton.isEnabled = true
-                self.recordButton.setTitle("Start Recording", for: [])
+            if error != nil || result?.isFinal == true {
+                self.stopRecording()
+                completion(nil)
             }
         }
+    }
+    
+    func stopRecording() {
+        print("...stopped recording.")
+        request?.endAudio()
+        audioEngine.stop()
+        inputNode.removeTap(onBus: 0)
+        request = nil
+        task = nil
     }
 }
