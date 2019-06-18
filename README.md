@@ -17,3 +17,7 @@ Code for the book's first edition.
 | ? (coremltools Task) | - | - | - |
 | ? (Apple NLP tools Task) | - | - | - |
 | ? (Retraining on device Task) | - | - | - |
+
+## Other things to look at
+
+* https://developer.apple.com/documentation/coreimage/cidetector
