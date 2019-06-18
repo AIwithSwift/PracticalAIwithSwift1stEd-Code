@@ -1,13 +1,16 @@
+// BEGIN SC_python1
 import os
 import shutil
 import pandas as pd
 
+// BEGIN SC_python_inner
 # Configure as required
 input_classes_filename = '/Users/mars/Desktop/ESC-50-master/meta/esc50.csv'
 sounds_directory = '/Users/mars/Desktop/ESC-50-master/audio/'
 output_directory = '/Users/mars/Desktop/ESC-50-master/classes/'
 classes_to_include = ['dog', 'rooster', 'pig', 'cow', 'frog', 'cat', 'hen', 'insects', 'sheep', 'crow']
 include_unlicensed = False # whether to use whole ESC-50 dataset or lesser-restricted ESC-10 subset
+// END SC_python_inner
 
 # Make output directory
 try:
@@ -41,5 +44,5 @@ for line in classes_file.itertuples(index = False):
                 shutil.copy2(file_src, file_dst)
             except IOError:
                 raise
-
+// END SC_python1
 
