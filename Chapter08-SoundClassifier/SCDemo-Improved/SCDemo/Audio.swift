@@ -6,10 +6,13 @@
 //  Copyright © 2019 Mars Geldard. All rights reserved.
 //
 
+// BEGIN SC_improved_imports
 import CoreML
 import AVFoundation
 import SoundAnalysis
+// END SC_improved_imports
 
+// BEGIN SC_improved_resultsObserved
 class ResultsObserver: NSObject, SNResultsObserving {
     
     private var completion: (String?) -> ()
@@ -32,9 +35,12 @@ class ResultsObserver: NSObject, SNResultsObserving {
         completion(nil)
     }
 }
+// END SC_improved_resultsObserved
 
+// BEGIN SC_improved_AC_Class
 class AudioClassifier {
     
+    // BEGIN SC_improved_AC_Class1
     private let model: MLModel
     private let request: SNClassifySoundRequest
     private let audioEngine = AVAudioEngine()
@@ -44,7 +50,9 @@ class AudioClassifier {
     private let inputBus: AVAudioNodeBus
     
     private var observer: ResultsObserver?
+    // END SC_improved_AC_Class1
     
+    // BEGIN SC_improved_AC_Class2
     init?(model: MLModel, inputBus: AVAudioNodeBus = 0) {
         guard let request = try? SNClassifySoundRequest(mlModel: model) else { return nil }
         
@@ -54,7 +62,9 @@ class AudioClassifier {
         self.inputFormat = audioEngine.inputNode.inputFormat(forBus: inputBus)
         self.analyzer = SNAudioStreamAnalyzer(format: inputFormat)
     }
+    // END SC_improved_AC_Class2
 
+    // BEGIN SC_improved_AC_Class3
     func beginAnalysis(completion: @escaping (String?) -> ()) {
         guard let _ = try? audioEngine.start() else { return }
         
@@ -69,7 +79,9 @@ class AudioClassifier {
             }
         }
     }
+    // END SC_improved_AC_Class3
     
+    // BEGIN SC_improved_AC_Class4
     func stopAnalysis() {
         print("End recording...")
         analyzer.completeAnalysis()
@@ -77,4 +89,6 @@ class AudioClassifier {
         audioEngine.inputNode.removeTap(onBus: inputBus)
         audioEngine.stop()
     }
+    // END SC_improved_AC_Class4
 }
+// END SC_improved_AC_Class
