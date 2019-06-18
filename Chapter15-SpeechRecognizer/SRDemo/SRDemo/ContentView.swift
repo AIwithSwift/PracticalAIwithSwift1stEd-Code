@@ -65,7 +65,7 @@ struct ContentView: View {
         self.recognizer = recognizer
     }
     
-    private func startRecording() {
+    private func startRecording() {        
         self.recording = true
         self.speech = ""
         
@@ -84,30 +84,8 @@ struct ContentView: View {
     }
 }
 
-//class SpeechPermissions: NSObject, SFSpeechRecognizerDelegate {
-//
-//    var delegate: ContentView
-//    var recordingPermitted: Bool {
-//        didSet {
-//            delegate.recordingPermitted = setValue
-//        }
-//    }
-//
-//    override init() {
-//        SFSpeechRecognizer.requestAuthorization { authStatus in
-//            OperationQueue.main.addOperation {
-//                self.recordingPermitted = (authStatus == .authorized)
-//            }
-//        }
-//    }
-//
-//    public func speechRecognizer(_ speechRecognizer: SFSpeechRecognizer, availabilityDidChange available: Bool) {
-//        recordingPermitted = available
-//    }
-//}
-
 #if DEBUG
-struct ContentView_Previews : PreviewProvider {
+struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
     }
