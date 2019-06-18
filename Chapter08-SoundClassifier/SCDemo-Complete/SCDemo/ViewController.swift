@@ -84,7 +84,7 @@ class ViewController: UIViewController {
     }
     // END SC_complete_recAud
 
-    // BEGIN: SC_complete_finRec
+    // BEGIN SC_complete_finRec
     private func finishRecording(success: Bool = true) {
         progressBar.isHidden = true
         progressBar.progress = 0
