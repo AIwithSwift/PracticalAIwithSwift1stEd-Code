@@ -11,7 +11,7 @@ Code for the book's first edition.
 |Chapter11-StyleTransferer | ✅ | ✴️ | Chapter in Progress with Paris; model in Progress with Paris |
 |Chapter12-ObjectDetector | ⛔️ | ⛔️ | To be made by Paris, roll in face detection or make separate example for that? |
 |Chapter13-Recommender| ⛔️ | ⛔️ | To be made by Mars |
-|Chapter14-DrawingDetector | ⛔️ | ⛔️ | To be made by Mars (if she has time). [Turi Info](https://apple.github.io/turicreate/docs/userguide/drawing_classifier/) |
+|Chapter14-DrawingDetector | ⛔️ | ⛔️ | To be made by Mars (if she has time). [Turi Info](https://apple.github.io/turicreate/docs/userguide/drawing_classifier/) Paris thoughts: use the image scanner thing that the camera supports to get a grayscale bitmap to infer from! |
 |Chapter15-SpeechRecognizer | ✅ | ✅ | Chapter needs extension into training custom models/augmenting with domain-specific terminology  |
 |Chapter16-SwiftForTensorflow | ✴️ | ⛔️ | Being made by Paris |
 | ? (coremltools Task) | - | - | - |
