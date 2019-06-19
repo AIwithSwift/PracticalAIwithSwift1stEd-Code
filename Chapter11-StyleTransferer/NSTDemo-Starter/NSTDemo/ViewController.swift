@@ -14,27 +14,32 @@ import Photos
 class ViewController: UIViewController {
     
     // MARK: Outlets
-    
+    // BEGIN NST_starter_outlets
     @IBOutlet weak var shareButton: UIBarButtonItem!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var modelSelector: UIPickerView!
     @IBOutlet weak var transferStyleButton: UIButton!
+    // END NST_starter_outlets
     
     // MARK: Actions
     
+    // BEGIN NST_starter_actions
     @IBAction func selectButtonPressed(_ sender: Any) { summonImagePicker() }
     @IBAction func shareButtonPressed(_ sender: Any) {summonShareSheet() }
     @IBAction func transferStyleButtonPressed(_ sender: Any) { performStyleTransfer() }
+    // END NST_starter_actions
 
+    // BEGIN NST_starter_attributes
     private var inputImage: UIImage?
     private var outputImage: UIImage?
     private var modelSelection: StyleModel {
         let selectedModelIndex = modelSelector.selectedRow(inComponent: 0)
         return StyleModel(index: selectedModelIndex)
     }
+    // END NST_starter_attributes
     
     // MARK: View Functions
-    
+    // BEGIN NST_starter_vdl
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -44,12 +49,14 @@ class ViewController: UIViewController {
     
         refresh()
     }
+    // END NST_starter_vdl
     
     /// Disables and enables controls based on presence of input to Style Transfer and output to Share
     ///
     /// `if (input but no output) then  { enable NST function }`
     /// `else if (input and output) then { enable NST and Share function }`
     /// `else if (no input) then { disable both }`
+    // BEGIN NST_starter_refresh
     private func refresh() {
         switch (inputImage == nil, outputImage == nil) {
             case (false, false): imageView.image = outputImage
@@ -65,6 +72,7 @@ class ViewController: UIViewController {
                 shareButton.disable()
         }
     }
+    // END NST_starter_refresh
     
     // MARK: Functionality
     
