@@ -8,7 +8,9 @@
 
 import UIKit
 import AVFoundation
+// BEGIN SC_complete_imports
 import SoundAnalysis
+// END SC_complete_imports
 
 class ThreeStateButton: UIButton {
     
@@ -51,7 +53,9 @@ class ViewController: UIViewController {
         let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
         return directory.appendingPathComponent("recording.m4a")
     }()
+    // BEGIN SC_complete_newAttribute
     private let classifier = AudioClassifier(model: AnimalSounds().model)
+    // END SC_complete_newAttribute
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,11 +63,14 @@ class ViewController: UIViewController {
         collectionView.dataSource = self
     }
     
+    // BEGIN SC_complete_refresh
     private func refresh(clear: Bool = false) {
         if clear { classification = nil }
         collectionView.reloadData()
     }
+    // END SC_complete_refresh
     
+    // BEGIN SC_complete_recAud
     private func recordAudio() {
         guard let audioRecorder = audioRecorder else { return }
         
@@ -75,7 +82,9 @@ class ViewController: UIViewController {
         audioRecorder.record(forDuration: TimeInterval(recordingLength))
         UIView.animate(withDuration: recordingLength) { self.progressBar.setProgress(Float(self.recordingLength), animated: true) }
     }
-    
+    // END SC_complete_recAud
+
+    // BEGIN SC_complete_finRec
     private func finishRecording(success: Bool = true) {
         progressBar.isHidden = true
         progressBar.progress = 0
@@ -87,22 +96,27 @@ class ViewController: UIViewController {
             classify(nil)
         }
     }
+    // END SC_complete_finRec
     
     private func classify(_ animal: Animal?) {
         classification = animal
         recordButton.changeState(to: .enabled(title: "Record Sound", color: .systemBlue))
+        // BEGIN SC_new_bits_in_classify
         refresh()
         
         if classification == nil {
             summonAlertView()
         }
+        // END SC_new_bits_in_classify
     }
     
+    // BEGIN SC_complete_classifySound_call
     private func classifySound(file: URL) {
         classifier?.classify(audioFile: file) { result in
             self.classify(Animal(rawValue: result ?? ""))
         }
     }
+    // END SC_complete_classifySound_call
 }
 
 extension ViewController {

@@ -24,10 +24,12 @@ class ThreeStateButton: UIButton {
                 self.setTitle(title, for: .normal)
                 self.backgroundColor = color
                 self.isEnabled = true
+            // BEGIN SC_improved_inProgressCase
             case .inProgress(let title, let color):
                 self.setTitle(title, for: .normal)
                 self.backgroundColor = color
                 self.isEnabled = true
+            // END SC_improved_inProgressCase
             case .disabled(let title, let color):
                 self.setTitle(title, for: .disabled)
                 self.backgroundColor = color
@@ -37,7 +39,7 @@ class ThreeStateButton: UIButton {
 }
 
 class ViewController: UIViewController {
-
+    // BEGIN SC_improved_attributes
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var progressBar: UIProgressView!
     @IBOutlet weak var recordButton: ThreeStateButton!
@@ -47,7 +49,8 @@ class ViewController: UIViewController {
     private var recording: Bool = false
     private var classification: Animal?
     private let classifier = AudioClassifier(model: AnimalSounds().model)
-    
+    // END SC_improved_attributes
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -59,6 +62,7 @@ class ViewController: UIViewController {
         collectionView.reloadData()
     }
     
+    // BEGIN SC_improved_toggleRecording
     private func toggleRecording() {
         recording = !recording
         
@@ -74,11 +78,14 @@ class ViewController: UIViewController {
             classifier?.stopAnalysis()
         }
     }
+    // END SC_improved_toggleRecording
     
+    // BEGIN SC_improved_classify
     private func classify(_ animal: Animal?) {
         classification = animal
         refresh()
     }
+    // END SC_improved_classify
 }
 
 extension ViewController {
