@@ -1,8 +1,8 @@
 //
 //  AppDelegate.swift
-//  SRDemo
+//  ISDemo
 //
-//  Created by Mars Geldard on 18/6/19.
+//  Created by Mars Geldard on 13/6/19.
 //  Copyright © 2019 Mars Geldard. All rights reserved.
 //
 
