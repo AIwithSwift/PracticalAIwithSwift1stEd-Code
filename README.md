@@ -7,7 +7,7 @@ Code for the book's first edition.
 |Chapter07-ActivityClassifier | ✴️ | ⛔️ | Being made by Mars (Speech Synthesis to say classifications?) |
 |Chapter08-SoundClassifier | ✅ | ✅ | Chapter needs theory at end, and app needs functionality to request permission to record (init request and plist values), needs constraints adjustment on tiles |
 |Chapter09-SentimentAnalyser | ✅ | ✅ | Needs theory at end |
-|Chapter10-ImageComparer | ✴️ | ⛔️ | Being made by Mars (**Issue: text resizing bug in SwiftUI?**), [ImageSimilarity Vision](https://developer.apple.com/documentation/vision/analyzing_image_similarity_with_feature_print) |
+|Chapter10-ImageComparer | ✅ | ⛔️ | Completed by Mars, pending bug fixes (**SwiftUI Issues: Text() resizing on binding change, Image() views ignore aspectRatio() setting**) |
 |Chapter11-StyleTransferer | ✅ | ✴️ | Chapter in Progress with Paris; model in Progress with Paris |
 |Chapter12-ObjectDetector | ⛔️ | ⛔️ | To be made by Paris, roll in face detection or make separate example for that? |
 |Chapter13-Recommender| ⛔️ | ⛔️ | To be made by Mars |
