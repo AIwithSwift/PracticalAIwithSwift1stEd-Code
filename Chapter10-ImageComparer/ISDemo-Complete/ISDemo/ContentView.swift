@@ -18,7 +18,8 @@ struct ContentView: View {
     
     private let placeholderImage = UIImage(named: "placeholder")!
     private var cameraEnabled: Bool { UIImagePickerController.isSourceTypeAvailable(.camera) }
-    private var comparisonEnabled: Bool { firstImage != nil && secondImage != nil && similarity < 0 }
+    private var selectEnabled: Bool { secondImage == nil }
+    private var comparisonEnabled: Bool { secondImage != nil && similarity < 0 }
     
     var body: some View {
         if imagePickerOpen {
@@ -54,7 +55,7 @@ struct ContentView: View {
                         }.disabled(!comparisonEnabled)
                     }
                 }.padding().navigationBarTitle(Text("ISDemo"), displayMode: .inline)
-                .navigationBarItems(leading: Button(action: summonImagePicker) { Text("Select") },
+                .navigationBarItems(leading: Button(action: summonImagePicker) { Text("Select") }.disabled(!selectEnabled),
                     trailing: Button(action: summonCamera) { Image(systemName: "camera") }.disabled(!cameraEnabled))
             })
         }
@@ -68,7 +69,13 @@ struct ContentView: View {
     
     private func getSimilarity() {
         print("Getting similarity...")
-        similarity = 0
+        if let firstImage = firstImage, let secondImage = secondImage,
+            let similarityMeasure = firstImage.similarity(to: secondImage){
+            similarity = Int(similarityMeasure)
+        } else {
+            similarity = 0
+        }
+        print("Similarity: \(similarity)%")
     }
     
     private func controlReturned(image: UIImage?) {
