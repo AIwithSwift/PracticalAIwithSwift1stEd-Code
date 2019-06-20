@@ -15,16 +15,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="crowd" translatesAutoresizingMaskIntoConstraints="NO" id="qwi-bq-PVU">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="crowd" translatesAutoresizingMaskIntoConstraints="NO" id="Cf6-dg-wRA">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="qwi-bq-PVU" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Feq-W4-8WZ"/>
-                            <constraint firstAttribute="bottom" secondItem="qwi-bq-PVU" secondAttribute="bottom" id="O29-VO-Uo8"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="qwi-bq-PVU" secondAttribute="trailing" id="t9n-00-chJ"/>
-                            <constraint firstItem="qwi-bq-PVU" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="vVD-QS-yBx"/>
+                            <constraint firstItem="Cf6-dg-wRA" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="4I3-EB-kFW"/>
+                            <constraint firstItem="Cf6-dg-wRA" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="L2B-al-ZFR"/>
+                            <constraint firstAttribute="bottom" secondItem="Cf6-dg-wRA" secondAttribute="bottom" id="XG3-8N-eGe"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Cf6-dg-wRA" secondAttribute="trailing" id="mhx-Ch-jkv"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
