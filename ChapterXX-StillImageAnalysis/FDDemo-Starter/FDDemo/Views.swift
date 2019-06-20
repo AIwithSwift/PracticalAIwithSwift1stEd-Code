@@ -1,70 +1,71 @@
 //
 //  Views.swift
-//  ISDemo
+//  FDDemo
 //
-//  Created by Mars Geldard on 18/6/19.
+//  Created by Mars Geldard on 20/6/19.
 //  Copyright © 2019 Mars Geldard. All rights reserved.
 //
 
 import SwiftUI
 
-struct OptionalResizableImage: View {
-    private let image: UIImage?
-    private let placeholder: UIImage
+struct MainView: View {
+    private let image: UIImage
+    private let text: String
+    private let button: TwoStateButton
     
     var body: some View {
-        if let image = image {
-            return Image(uiImage: image).resizable().aspectRatio(contentMode: .fit)
-        } else {
-            return Image(uiImage: placeholder).resizable().aspectRatio(contentMode: .fit)
+        VStack {
+            Image(uiImage: image).resizable().aspectRatio(contentMode: .fit)
+            Spacer()
+            Text(text).font(.title).bold()
+            Spacer()
+            self.button
         }
     }
-}
-
-struct ButtonLabel: View {
-    private let text: String
-    private let background: Color
     
-    var body: some View {
-        HStack {
-            Spacer()
-            Text(text).font(.title).bold().color(.white)
-            Spacer()
-            }.padding().background(background).cornerRadius(10)
-    }
-    
-    init(_ text: String, background: Color) {
+    init(image: UIImage, text: String, button: () -> TwoStateButton) {
+        self.image = image
         self.text = text
-        self.background = background
+        self.button = button()
     }
 }
 
-struct ImagePickerView: View {
-    private let completion: (UIImage?) -> ()
-    private let camera: Bool
+struct TwoStateButton: View {
+    private let text: String
+    private let disabled: Bool
+    private let background: Color
+    private let action: () -> Void
     
     var body: some View {
-        ImagePickerControllerWrapper(camera: camera, completion: completion)
+        Button(action: action) {
+            HStack {
+                Spacer()
+                Text(text).font(.title).bold().color(.white)
+                Spacer()
+                }.padding().background(background).cornerRadius(10)
+            }.disabled(disabled)
     }
     
-    init(camera: Bool = false, completion: @escaping (UIImage?) -> ()) {
-        self.completion = completion
-        self.camera = camera
+    init(text: String, disabled: Bool, background: Color = .blue, action: @escaping () -> Void) {
+        self.text = text
+        self.disabled = disabled
+        self.background = disabled ? .gray : background
+        self.action = action
     }
 }
-
-struct ImagePickerControllerWrapper: UIViewControllerRepresentable {
+    
+struct ImagePicker: UIViewControllerRepresentable {
     typealias UIViewControllerType = UIImagePickerController
     private(set) var selectedImage: UIImage?
     private(set) var cameraSource: Bool
     private let completion: (UIImage?) -> ()
     
-    init(camera: Bool, completion: @escaping (UIImage?) -> ()) {
+    init(camera: Bool = false, completion: @escaping (UIImage?) -> ()) {
         self.cameraSource = camera
         self.completion = completion
     }
     
-    func makeCoordinator() -> ImagePickerControllerWrapper.Coordinator {
+    func makeCoordinator() -> ImagePicker.Coordinator {
         let coordinator = Coordinator(self)
         coordinator.completion = self.completion
         return coordinator
@@ -77,15 +78,13 @@ struct ImagePickerControllerWrapper: UIViewControllerRepresentable {
         return imagePickerController
     }
     
-    func updateUIViewController(_ uiViewController: UIImagePickerController, context: Context) {
-        //uiViewController.setViewControllers(?, animated: true)
-    }
+    func updateUIViewController(_ uiViewController: UIImagePickerController, context: Context) {}
     
     class Coordinator: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-        var parent: ImagePickerControllerWrapper
+        var parent: ImagePicker
         var completion: ((UIImage?) -> ())?
         
-        init(_ imagePickerControllerWrapper: ImagePickerControllerWrapper) {
+        init(_ imagePickerControllerWrapper: ImagePicker) {
             self.parent = imagePickerControllerWrapper
         }
         
@@ -111,5 +110,18 @@ extension UIImage {
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return newImage
+    }
+    
+    var cgImageOrientation: CGImagePropertyOrientation {
+        switch self.imageOrientation {
+            case .up: return .up
+            case .down: return .down
+            case .left: return .left
+            case .right: return .right
+            case .upMirrored: return .upMirrored
+            case .downMirrored: return .downMirrored
+            case .leftMirrored: return .leftMirrored
+            case .rightMirrored: return .rightMirrored
+        }
     }
 }
