@@ -9,7 +9,7 @@ Code for the book's first edition.
 |Chapter09-SentimentAnalyser | ✅ | ✅ | Needs theory at end |
 |Chapter10-ImageComparer | ✅ | ⛔️ | Completed by Mars, pending bug fixes (**SwiftUI Issues: Text() resizing on binding change, Image() views ignore aspectRatio() setting**) |
 |Chapter11-StyleTransferer | ✅ | ✴️ | Chapter in Progress with Paris; model in Progress with Paris |
-|Chapter13-Recommender| ⛔️ | ⛔️ | To be made by Mars |
+|Chapter13-Recommender| ⛔️ | ⛔️ | To be made by Mars. Potential datasets: https://grouplens.org/datasets/hetrec-2011/ |
 |Chapter14-DrawingDetector | ⛔️ | ⛔️ | To be made by Mars (if she has time). [Turi Info](https://apple.github.io/turicreate/docs/userguide/drawing_classifier/) Paris thoughts: use the image scanner thing that the camera supports to get a grayscale bitmap to infer from! |
 |Chapter15-SpeechRecognizer | ✅ | ✅ | Chapter needs extension into training custom models/augmenting with domain-specific terminology  |
 |Chapter16-SwiftForTensorflow | ✴️ | ⛔️ | Being made by Paris |
