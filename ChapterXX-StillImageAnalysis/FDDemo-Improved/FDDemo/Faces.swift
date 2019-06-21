@@ -21,6 +21,27 @@ extension UIImage {
             completion(observations)
         }
     }
+    
+    func rotatedBy(degrees: CGFloat, clockwise: Bool = false) -> UIImage? {
+        var radians = (degrees) * (.pi / 180)
+        if !clockwise { radians = -radians }
+        let transform = CGAffineTransform(rotationAngle: CGFloat(radians))
+        let newSize = CGRect(origin: CGPoint.zero, size: self.size).applying(transform).size
+        let roundedSize = CGSize(width: floor(newSize.width), height: floor(newSize.height))
+        let centredRect = CGRect(x: -self.size.width / 2, y: -self.size.height / 2, width: self.size.width, height: self.size.height)
+        
+        UIGraphicsBeginImageContextWithOptions(roundedSize, false, self.scale)
+        guard let context = UIGraphicsGetCurrentContext() else { return nil }
+        
+        context.translateBy(x: roundedSize.width / 2, y: roundedSize.height / 2)
+        context.rotate(by: radians)
+        self.draw(in: centredRect)
+        
+        let result = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return result
+    }
 
     func fixOrientation() -> UIImage? {
         UIGraphicsBeginImageContext(self.size)
@@ -51,17 +72,30 @@ extension Collection where Element == VNFaceObservation {
         guard let _ = UIGraphicsGetCurrentContext() else { return nil }
         
         image.draw(in: CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height))
-        UIColor.red.setStroke()
+        let imageSize: (width: Int, height: Int) = (Int(image.size.width), Int(image.size.height))
+        let transform = CGAffineTransform(scaleX: 1, y: -1).translatedBy(x: 0, y: -image.size.height)
+        let padding: CGFloat = 0.3
         
         for observation in self {
-            guard let features = FacialFeatures(face: observation) else { continue }
+            guard let anchor = observation.landmarks?.anchorPointInImage(image) else { continue }
+            guard let center = anchor.center?.applying(transform) else { continue }
             
-//            for feature in features.regionsIn(image: image) {
-//                feature.image.draw(in: feature.rect)
-//            }
-            let path = UIBezierPath(cgPath: features.linesIn(image: image))
-            path.lineWidth = 0.01 * image.size.width
-            path.stroke()
+            let overlayRect = VNImageRectForNormalizedRect(
+                observation.boundingBox,
+                imageSize.width,
+                imageSize.height
+            ).applying(transform).centeredOn(center)
+            let insets = (x: overlayRect.size.width * padding, y: overlayRect.size.height * padding)
+            let paddedOverlayRect = overlayRect.insetBy(dx: -insets.x, dy: -insets.y)
+            let randomEmoji = ["🙂", "😁", "😊", "🤨", "😕", "🙄", "😬", "😮", "😴"].randomElement()!
+            
+            if var overlayImage = randomEmoji.image(of: paddedOverlayRect.size) {
+                if let angle = anchor.angle, let rotatedImage = overlayImage.rotatedBy(degrees: angle) {
+                    overlayImage = rotatedImage
+                }
+                
+                overlayImage.draw(in: paddedOverlayRect)
+            }
         }
         
         let result = UIGraphicsGetImageFromCurrentImageContext()
@@ -71,102 +105,71 @@ extension Collection where Element == VNFaceObservation {
     }
 }
 
-struct FacialFeatures {
-    let leftEyePoints: VNFaceLandmarkRegion2D?
-    let rightEyePoints: VNFaceLandmarkRegion2D?
-    let nosePoints: VNFaceLandmarkRegion2D?
-    let mouthPoints: VNFaceLandmarkRegion2D?
-    
-    enum FeatureType: String {
-        case eye = "👁"
-        case nose = "👃"
-        case mouth = "👅"
-    }
-    
-    init?(face: VNFaceObservation) {
-        guard let landmarks = face.landmarks else { return nil }
-        self.leftEyePoints = landmarks.leftEye
-        self.rightEyePoints = landmarks.rightEye
-        self.nosePoints = landmarks.nose
-        self.mouthPoints = landmarks.outerLips
-    }
-    
-    func linesIn(image: UIImage) -> CGPath {
-        let path = CGMutablePath()
+extension VNFaceLandmarks2D {
+    func anchorPointInImage(_ image: UIImage) -> (center: CGPoint?, angle: CGFloat?) {
+
+        // centre each set of points that may have been detected, if present
+        let allPoints = self.allPoints?.pointsInImage(imageSize: image.size).centerPoint
+        let leftPupil = self.leftPupil?.pointsInImage(imageSize: image.size).centerPoint
+        let leftEye = self.leftEye?.pointsInImage(imageSize: image.size).centerPoint
+        let leftEyebrow = self.leftEyebrow?.pointsInImage(imageSize: image.size).centerPoint
+        let rightPupil = self.rightPupil?.pointsInImage(imageSize: image.size).centerPoint
+        let rightEye = self.rightEye?.pointsInImage(imageSize: image.size).centerPoint
+        let rightEyebrow = self.rightEyebrow?.pointsInImage(imageSize: image.size).centerPoint
+        let outerLips = self.outerLips?.pointsInImage(imageSize: image.size).centerPoint
+        let innerLips = self.innerLips?.pointsInImage(imageSize: image.size).centerPoint
         
-        for region in [leftEyePoints, rightEyePoints, nosePoints, mouthPoints] {
-            if var coordinates = region?.pointsInImage(imageSize: image.size) {
-                let transform = CGAffineTransform(scaleX: 1, y: -1).translatedBy(x: 0, y: -image.size.height)
-                coordinates = coordinates.map { point in point.applying(transform) }
-                path.addLines(between: coordinates)
-            }
+        let leftEyeCenter = leftPupil ?? leftEye ?? leftEyebrow
+        let rightEyeCenter = rightPupil ?? rightEye ?? rightEyebrow
+        let mouthCenter = innerLips ?? outerLips
+        
+        if let leftEyePoint = leftEyeCenter, let rightEyePoint = rightEyeCenter, let mouthPoint = mouthCenter {
+            let triadCenter = [leftEyePoint, rightEyePoint, mouthPoint].centerPoint
+            let eyesCenter = [leftEyePoint, rightEyePoint].centerPoint
+            return (eyesCenter, triadCenter.rotationDegreesTo(eyesCenter))
         }
         
-        return path
-    }
-    
-    func regionsIn(image: UIImage) -> [(image: UIImage, rect: CGRect)] {
-        let regions = [leftEyePoints, rightEyePoints, nosePoints, mouthPoints]
-        let types = [FeatureType.eye, .eye, .nose, .mouth]
-        let offsets: [CGFloat] = [0.2, 0.2, 0.0, 0.3]
-        let imageSize = image.size
-        
-        var normalizedRegions: [(UIImage, CGRect)] = []
-        
-        for index in 0..<regions.count {
-            if let coordinates = regions[index]?.pointsInImage(imageSize: imageSize) {
-                let type = types[index]
-                let transform = CGAffineTransform(scaleX: 1, y: -1).translatedBy(x: 0, y: -image.size.height)
-                var normalizedSquare = CGRect(points: coordinates).applying(transform).squared()
-                normalizedSquare = normalizedSquare.offsetBy(dx: 0, dy: normalizedSquare.height * offsets[index])
-                if let image = type.rawValue.image(of: normalizedSquare.size) {
-                    normalizedRegions.append((image, normalizedSquare))
-                }
-            }
-        }
-        
-        return normalizedRegions
+        // else fallback
+        return (allPoints, 0.0)
     }
 }
 
 extension CGRect {
-    init(points: [CGPoint]) {
-        let path = CGMutablePath()
-        // missing last point
-        path.addLines(between: points)
-        self = path.boundingBoxOfPath
+    func centeredOn(_ point: CGPoint) -> CGRect {
+        let size = self.size
+        let originX = point.x - (self.width / 2.0)
+        let originY = point.y - (self.height / 2.0)
+        return CGRect(x: originX, y: originY, width: size.width, height: size.height)
     }
-    
-    func squared() -> CGRect {
-        var newSize = self.size
-        
-        if self.width > self.height {
-            newSize = CGSize(width: self.width, height: self.width)
-        }
-        
-        if self.height > self.width {
-            newSize = CGSize(width: self.height, height: self.height)
-        }
-        
-        let newOffsetX = newSize.width - self.size.width
-        let newOffsetY = newSize.height - self.size.height
-        
-        return CGRect(
-            x: self.origin.x - newOffsetX,
-            y: self.origin.y - newOffsetY,
-            width: newSize.width,
-            height: newSize.height
-        )
+}
+
+extension CGPoint {
+    func rotationDegreesTo(_ otherPoint: CGPoint) -> CGFloat {
+        let originX = otherPoint.x - self.x
+        let originY = otherPoint.y - self.y
+        let degreesFromX = atan2f(Float(originY), Float(originX)) * (180 / .pi)
+        let degreesFromY = degreesFromX - 90.0
+        let normalizedDegrees = (degreesFromY + 360.0).truncatingRemainder(dividingBy: 360.0)
+        return CGFloat(normalizedDegrees)
+    }
+}
+
+extension Array where Element == CGPoint {
+    var centerPoint: CGPoint {
+        let elements = CGFloat(self.count)
+        let totalX = self.reduce(0, { $0 + $1.x })
+        let totalY = self.reduce(0, { $0 + $1.y })
+        return CGPoint(x: totalX / elements, y: totalY / elements)
     }
 }
 
 extension String {
-    func image(of size: CGSize) -> UIImage? {
+    func image(of size: CGSize, scale: CGFloat = 0.94) -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(size, false, 0)
         UIColor.clear.set()
         let rect = CGRect(origin: .zero, size: size)
         UIRectFill(CGRect(origin: .zero, size: size))
-        (self as AnyObject).draw(in: rect, withAttributes: [.font: UIFont.systemFont(ofSize: size.height)])
+        (self as AnyObject).draw(in: rect, withAttributes: [.font: UIFont.systemFont(ofSize: size.height * scale)])
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return image

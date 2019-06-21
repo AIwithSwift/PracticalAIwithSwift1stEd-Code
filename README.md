@@ -5,9 +5,9 @@ Code for the book's first edition.
 |:---|:---:|:---:|:---|
 |Chapter06-ImageClassifier | ✅ | ✅ | Chapter needs theory at end, and maybe roll in Object Detection |
 |Chapter07-ActivityClassifier | ✴️ | ⛔️ | Being made by Mars (Speech Synthesis to say classifications?) |
-|Chapter08-SoundClassifier | ✅ | ✅ | Chapter needs theory at end, and app needs functionality to request permission to record (init request and plist values), needs constraints adjustment on tiles |
-|Chapter09-SentimentAnalyser | ✅ | ✅ | Needs theory at end |
-|Chapter10-ImageComparer | ✅ | ⛔️ | Completed by Mars, pending bug fixes (**SwiftUI Issues: Text() resizing on binding change, Image() views ignore aspectRatio() setting**) |
+|Chapter08-SoundClassifier | ✅ | ✅ | Chapter needs theory at end, and app needs functionality to request permission to record (init request and plist values), needs constraints adjustment on CollectionView tiles |
+|Chapter09-SentimentAnalyser | ✅ | ✅ | Chapter needs theory at end |
+|Chapter10-ImageComparer | ✅ | ⛔️ | Ready for writing with Paris. App needs bug fixes (**SwiftUI Issues: Text() resizing on binding change, Image() views ignore aspectRatio() setting**) |
 |Chapter11-StyleTransferer | ✅ | ✴️ | Chapter in Progress with Paris; model in Progress with Paris |
 |Chapter13-Recommender| ⛔️ | ⛔️ | To be made by Mars. Potential datasets: https://grouplens.org/datasets/hetrec-2011/ |
 |Chapter14-DrawingDetector | ✴️ | ⛔️ | Being made by Mars. [Turi Info](https://apple.github.io/turicreate/docs/userguide/drawing_classifier/) Paris thoughts: use the image scanner thing that the camera supports to get a grayscale bitmap to infer from! |
