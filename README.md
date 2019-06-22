@@ -18,10 +18,10 @@ Code for the book's first edition.
 |Chapter17-Other| - | - | Detecting Text, [Cropping with Saliency](https://developer.apple.com/documentation/vision/cropping_images_using_saliency)? |
 | ? (video analysis) | - | - | ARKit? Still image analysis correlation between frames (VNTrackingRequest)? [Face Tracking](https://developer.apple.com/documentation/vision/tracking_the_user_s_face_in_real_time) |
 | ChapterXX-NaturalLanguage ) | ⛔️ | ⛔️ | To be made by Paris. Suggestions: [detecting people, places, organisations](https://developer.apple.com/documentation/naturallanguage/identifying_people_places_and_organizations), and [parts of speech](https://developer.apple.com/documentation/naturallanguage/identifying_parts_of_speech), [determining what language text is](https://developer.apple.com/documentation/naturallanguage/nllanguagerecognizer), [tokenizing sentences](https://developer.apple.com/documentation/naturallanguage/tokenizing_natural_language_text) (MAYBE this one isn't AI so we could skip and just mention it in the text?), [word embedding](https://developer.apple.com/documentation/createml/mlwordembedding) ([and NLEmbedding](https://developer.apple.com/documentation/naturallanguage/nlembedding))(interesting, but maybe too esoteric to cover? definitely AI though and even uses CreateML classes.. interesting from the perspective of [calculating the distance between strings](https://developer.apple.com/documentation/naturallanguage/nlembedding/3200310-distance))  |
-| ? (coremltools Task) | - | - | To be made by Mars. |
-| ? (Retraining on device Task) | - | - | [This seems quite fiddly](https://developer.apple.com/documentation/coreml/mlupdatetask) |
+| ? (coremltools Task) | - | - | To be made by Paris. |
 
 
-## Other things to look at
 
-* TBD
+## Other things to mention but not cover in detail
+
+* Retraining on device — [This seems quite fiddly](https://developer.apple.com/documentation/coreml/mlupdatetask) 
