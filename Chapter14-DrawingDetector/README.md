@@ -1,8 +1,8 @@
-# DDDemo
+# DCDemo
 
 | Category | Details |
 |:---|:---|
-| Input Data |  |
+| Input Data | [The Quick, Draw! Dataset](https://github.com/googlecreativelab/quickdraw-dataset) |
 | Training |  |
 | App UI |  |
 | Assets |  |

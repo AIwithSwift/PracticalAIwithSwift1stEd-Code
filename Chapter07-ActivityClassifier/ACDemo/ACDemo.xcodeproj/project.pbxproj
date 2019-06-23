@@ -13,6 +13,7 @@
 		412742C422B7665A00A9C39E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 412742C322B7665A00A9C39E /* Assets.xcassets */; };
 		412742C722B7665A00A9C39E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 412742C622B7665A00A9C39E /* Preview Assets.xcassets */; };
 		412742CA22B7665A00A9C39E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 412742C822B7665A00A9C39E /* LaunchScreen.storyboard */; };
+		41E9DD2E22BCBBCD0095D976 /* Speech.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E9DD2D22BCBBCD0095D976 /* Speech.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		412742C622B7665A00A9C39E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		412742C922B7665A00A9C39E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		412742CB22B7665A00A9C39E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		41E9DD2D22BCBBCD0095D976 /* Speech.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Speech.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				412742BD22B7665800A9C39E /* AppDelegate.swift */,
 				412742BF22B7665800A9C39E /* SceneDelegate.swift */,
 				412742C122B7665800A9C39E /* ContentView.swift */,
+				41E9DD2D22BCBBCD0095D976 /* Speech.swift */,
 				412742C322B7665A00A9C39E /* Assets.xcassets */,
 				412742C822B7665A00A9C39E /* LaunchScreen.storyboard */,
 				412742CB22B7665A00A9C39E /* Info.plist */,
@@ -148,6 +151,7 @@
 			files = (
 				412742BE22B7665800A9C39E /* AppDelegate.swift in Sources */,
 				412742C022B7665800A9C39E /* SceneDelegate.swift in Sources */,
+				41E9DD2E22BCBBCD0095D976 /* Speech.swift in Sources */,
 				412742C222B7665800A9C39E /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
