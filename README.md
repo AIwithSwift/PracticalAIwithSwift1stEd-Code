@@ -20,11 +20,6 @@ Code for the book's first edition.
 | ? (coremltools Task) | - | - | To be made by Mars. |
 | ? (Retraining on device Task) | - | - | [This seems quite fiddly](https://developer.apple.com/documentation/coreml/mlupdatetask) |
 
-
-## Other things to look at
-
-* TBD
-
 ## TODO
 
 * **All SwiftUI apps** need bugfixes for: randomly resizing Text() elements, and aspectRatio(contentMode:)-ignoring Image() elements
