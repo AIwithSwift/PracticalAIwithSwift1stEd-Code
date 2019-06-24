@@ -6,6 +6,7 @@
 //  Copyright © 2019 Mars and Paris. All rights reserved.
 //
 
+// BEGIN NST_complete_stylemodelswift
 import UIKit
 import CoreML
 
@@ -32,3 +33,4 @@ enum StyleModel: String, CaseIterable {
     var styleIndex: Int { return StyleModel.styles.firstIndex(of: self)! }
     var styleArray: MLMultiArray { return MLMultiArray(size: StyleModel.allCases.count, selecting: self.styleIndex) }
 }
+// END NST_complete_stylemodelswift

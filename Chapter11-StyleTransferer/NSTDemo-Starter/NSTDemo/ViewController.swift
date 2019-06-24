@@ -75,7 +75,7 @@ class ViewController: UIViewController {
     // END NST_starter_refresh
     
     // MARK: Functionality
-    
+    // BEGIN NST_starter_pstfunc
     private func performStyleTransfer() {
         outputImage = inputImage?.styled(with: modelSelection)
         
@@ -85,8 +85,10 @@ class ViewController: UIViewController {
         
         refresh()
     }
+    // END NST_starter_pstfunc
 }
 
+// BEGIN NST_starter_ext_uincd
 extension ViewController: UINavigationControllerDelegate {
     private func summonShareSheet() {
         guard let outputImage = outputImage else {
@@ -109,7 +111,9 @@ extension ViewController: UINavigationControllerDelegate {
         present(alertController, animated: true)
     }
 }
+// END NST_starter_ext_uincd
 
+// BEGIN NST_starter_ext_uiipcd
 extension ViewController: UIImagePickerControllerDelegate {
     private func summonImagePicker() {
         let imagePicker = UIImagePickerController()
@@ -131,7 +135,9 @@ extension ViewController: UIImagePickerControllerDelegate {
         }
     }
 }
+// END NST_starter_ext_uiipcd
 
+// BEGIN NST_starter_ext_uipvd
 extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -145,3 +151,4 @@ extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource {
         return StyleModel(index: row).name
     }
 }
+// END NST_starter_ext_uipvd
