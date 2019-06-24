@@ -6,8 +6,11 @@
 //  Copyright © 2019 Mars Geldard. All rights reserved.
 //
 
+// BEGIN IS_views_import
 import SwiftUI
+// END IS_views_import
 
+// BEGIN IS_views_ori
 struct OptionalResizableImage: View {
     private let image: UIImage?
     private let placeholder: UIImage
@@ -20,7 +23,9 @@ struct OptionalResizableImage: View {
         }
     }
 }
+// END IS_views_ori
 
+// BEGIN IS_views_bl
 struct ButtonLabel: View {
     private let text: String
     private let background: Color
@@ -38,7 +43,9 @@ struct ButtonLabel: View {
         self.background = background
     }
 }
+// END IS_views_bl
 
+// BEGIN IS_views_ipv
 struct ImagePickerView: View {
     private let completion: (UIImage?) -> ()
     private let camera: Bool
@@ -52,7 +59,9 @@ struct ImagePickerView: View {
         self.camera = camera
     }
 }
+// END IS_views_ipv
 
+// BEGIN IS_views_ipcw
 struct ImagePickerControllerWrapper: UIViewControllerRepresentable {
     typealias UIViewControllerType = UIImagePickerController
     private(set) var selectedImage: UIImage?
@@ -103,7 +112,9 @@ struct ImagePickerControllerWrapper: UIViewControllerRepresentable {
         }
     }
 }
+// END IS_views_ipcw
 
+// BEGIN IS_views_uii
 extension UIImage {
     func fixOrientation() -> UIImage? {
         UIGraphicsBeginImageContext(self.size)
@@ -113,3 +124,4 @@ extension UIImage {
         return newImage
     }
 }
+// END IS_views_uii

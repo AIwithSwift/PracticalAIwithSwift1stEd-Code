@@ -9,18 +9,24 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    // BEGIN IS_cv_states
     @State private var imagePickerOpen: Bool = false
     @State private var cameraOpen: Bool = false
     
     @State private var firstImage: UIImage? = nil
     @State private var secondImage: UIImage? = nil
     @State private var similarity: Int = -1
+    // END IS_cv_states
     
+    // BEGIN IS_cv_at
     private let placeholderImage = UIImage(named: "placeholder")!
     private var cameraEnabled: Bool { UIImagePickerController.isSourceTypeAvailable(.camera) }
     private var selectEnabled: Bool { secondImage == nil }
     private var comparisonEnabled: Bool { secondImage != nil && similarity < 0 }
+    // END IS_cv_at
     
+    // BEGIN IS_cv_bodview
     var body: some View {
         if imagePickerOpen {
             return  AnyView(ImagePickerView { result in
@@ -60,13 +66,17 @@ struct ContentView: View {
             })
         }
     }
+    // END IS_cv_bodview
     
+    // BEGIN IS_cv_ci
     private func clearImages() {
         firstImage = nil
         secondImage = nil
         similarity = -1
     }
+    // END IS_cv_ci
     
+    // BEGIN IS_cv_gs
     private func getSimilarity() {
         print("Getting similarity...")
         if let firstImage = firstImage, let secondImage = secondImage,
@@ -77,7 +87,9 @@ struct ContentView: View {
         }
         print("Similarity: \(similarity)%")
     }
+    // END IS_cv_gs
     
+    // BEGIN IS_cv_cr
     private func controlReturned(image: UIImage?) {
         print("Image return \(image == nil ? "failure" : "success")...")
         if firstImage == nil {
@@ -86,16 +98,21 @@ struct ContentView: View {
             secondImage = image?.fixOrientation()
         }
     }
+    // END IS_cv_cr
     
+    // BEGIN IS_cv_sip
     private func summonImagePicker() {
         print("Summoning ImagePicker...")
         imagePickerOpen = true
     }
+    // END BEGIN IS_cv_sip
     
+    // BEGIN IS_cv_scam
     private func summonCamera() {
         print("Summoning camera...")
         cameraOpen = true
     }
+    // END IS_cv_scam
 }
 
 #if DEBUG

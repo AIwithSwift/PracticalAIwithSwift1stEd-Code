@@ -32,7 +32,7 @@ struct ContentView : View {
         }
     }
     
-    private func textChanged() {
+    private func    () {
         //print("text changed!")
         tagger.string = text
         

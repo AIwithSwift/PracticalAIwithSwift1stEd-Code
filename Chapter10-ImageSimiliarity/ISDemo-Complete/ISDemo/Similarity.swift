@@ -6,10 +6,14 @@
 //  Copyright © 2019 Mars Geldard. All rights reserved.
 //
 
+// BEGIN IS_similarity_imports
 import UIKit
 import Vision
+// END IS_similarity_imports
 
+// BEGIN IS_similarity_uii
 extension UIImage {
+    // BEGIN IS_similarity_uii1
     func similarity(to image: UIImage) -> Float? {
         var similarity: Float = 0
         guard let firstImageFPO = self.featurePrintObservation(),
@@ -20,7 +24,9 @@ extension UIImage {
         
         return similarity
     }
+    // END IS_similarity_uii1
     
+    // BEGIN IS_similarity_uii2
     private func featurePrintObservation() -> VNFeaturePrintObservation? {
         guard let cgImage = self.cgImage else { return nil }
         
@@ -32,8 +38,11 @@ extension UIImage {
         
         return nil
     }
+    // END IS_similarity_uii2
 }
+// END IS_similarity_uii
 
+// BEGIN IS_similarity_uii_b
 extension UIImage {
     var cgImageOrientation: CGImagePropertyOrientation {
         switch self.imageOrientation {
@@ -48,3 +57,4 @@ extension UIImage {
         }
     }
 }
+// END IS_similarity_uii_b
