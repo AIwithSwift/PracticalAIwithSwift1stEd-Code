@@ -20,6 +20,7 @@ extension UIImage{
     
     /// Attempts Neural Style Transfer upon UIImage with given .mlmodel and input options
     /// - parameter modelSelection: StyleModel enum case selected to pass as .mlmodel option
+    // BEGIN NST_complete_imageswift
     func styled(with modelSelection: StyleModel) -> UIImage? {
         guard let inputPixelBuffer = self.pixelBuffer() else { return nil }
 
@@ -34,6 +35,7 @@ extension UIImage{
 
         return outputImage
     }
+    // END NST_complete_imageswift
     
     /// Returns copy of image .aspectFill-ed to given size with excess cropped,
     /// which maintains as much of original image as possible

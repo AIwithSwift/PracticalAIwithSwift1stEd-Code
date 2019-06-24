@@ -110,7 +110,7 @@ extension ViewController: UIImagePickerControllerDelegate {
         imagePicker.mediaTypes = [kUTTypeImage as String]
         present(imagePicker, animated: true)
     }
-    
+    // BEGIN NST_complete_impickcon
     @objc func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         let rawImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
         inputImage = rawImage?.aspectFilled(to: modelSelection.constraints)
@@ -123,6 +123,7 @@ extension ViewController: UIImagePickerControllerDelegate {
             summonAlertView(message: "Image was malformed.")
         }
     }
+    // END NST_complete_impickcon
 }
 
 extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource {

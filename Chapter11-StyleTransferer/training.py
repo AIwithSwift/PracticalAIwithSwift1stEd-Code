@@ -1,3 +1,4 @@
+// BEGIN NST_training_1
 import turicreate as tc
 
 # Configure as required
@@ -18,3 +19,4 @@ model = tc.style_transfer.create(styles, content,
 # Export for use in Core ML
 model.export_coreml(output_model_filename + '.mlmodel',
     image_shape=output_image_constraints)
+// END NST_training_1
