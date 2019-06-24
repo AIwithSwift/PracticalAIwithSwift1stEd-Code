@@ -15,11 +15,16 @@ Code for the book's first edition.
 |Chapter16-SwiftForTensorflow | ✴️ | ⛔️ | Being made by Paris |
 |Chapter17-FaceDetector | ✅ | ✴️ | Chapter in progress with Paris, possibly rolled in with other Still Image tasks. Writeup should mention other types of detectors Apple has, such as [animals](https://developer.apple.com/documentation/vision/vnanimaldetector) and [whole human figures](https://developer.apple.com/documentation/vision/vndetecthumanrectanglesrequest). Apple's overview of what is possible is [here](https://developer.apple.com/documentation/vision/detecting_objects_in_still_images), which should be referenced when talking about detecting rectangles or barcodes.  |
 |Chapter17-Other Code Snippets | ✴️| - | Code snippets needed for examples from above. [Cropping with Saliency](https://developer.apple.com/documentation/vision/cropping_images_using_saliency). For barcodes: mention [possible supportedSymbologies values](https://developer.apple.com/documentation/vision/vnbarcodesymbology) and possible uses of the resulting [payloadStringValue](https://developer.apple.com/documentation/vision/vnbarcodeobservation/2923485-payloadstringvalue) for each detection.  |
-| ? (video analysis) | - | - | ARKit? Still image analysis correlation between frames (VNTrackingRequest)? [Face Tracking](https://developer.apple.com/documentation/vision/tracking_the_user_s_face_in_real_time) |
 | ChapterXX-NaturalLanguage ) | ✴️ | ⛔️ | Code in progress with Paris. Suggestions: **Detecting Text in images using Vision** (tie back into Ch17), [detecting people, places, organisations](https://developer.apple.com/documentation/naturallanguage/identifying_people_places_and_organizations), and [parts of speech](https://developer.apple.com/documentation/naturallanguage/identifying_parts_of_speech), [determining what language text is](https://developer.apple.com/documentation/naturallanguage/nllanguagerecognizer), [tokenizing sentences](https://developer.apple.com/documentation/naturallanguage/tokenizing_natural_language_text) (MAYBE this one isn't AI so we could skip and just mention it in the text?), [word embedding](https://developer.apple.com/documentation/createml/mlwordembedding) ([and NLEmbedding](https://developer.apple.com/documentation/naturallanguage/nlembedding))(interesting, but maybe too esoteric to cover? definitely AI though and even uses CreateML classes.. interesting from the perspective of [calculating the distance between strings](https://developer.apple.com/documentation/naturallanguage/nlembedding/3200310-distance))  |
-| ? (coremltools Task) | - | - | To be made by Mars. |
-| ? (Retraining on device Task) | - | - | [This seems quite fiddly](https://developer.apple.com/documentation/coreml/mlupdatetask) |
+| ? (coremltools Task) | - | - | To be made by Paris. |
 
 ## TODO
 
 * **All SwiftUI apps** need bugfixes for: randomly resizing Text() elements, and aspectRatio(contentMode:)-ignoring Image() elements
+
+## CUT (for now)
+
+| Directory | App | Chapter | Notes |
+|:---|:---:|:---:|:---|
+| ? (video analysis) | - | - | ARKit? Still image analysis correlation between frames (VNTrackingRequest)? [Face Tracking](https://developer.apple.com/documentation/vision/tracking_the_user_s_face_in_real_time) |
+| ? (Retraining on device Task) | - | - | [This seems quite fiddly](https://developer.apple.com/documentation/coreml/mlupdatetask) |
