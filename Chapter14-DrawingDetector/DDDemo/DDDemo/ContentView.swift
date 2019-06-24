@@ -13,12 +13,11 @@ struct ContentView: View {
     @State private var imagePickerOpen: Bool = false
     @State private var cameraOpen: Bool = false
     @State private var image: UIImage? = nil
-    @State private var rectangles: [VNRectangleObservation]? = nil
+    @State private var classification: String? = nil
     
-    private var rectangleCount: Int { return rectangles?.count ?? 0 }
     private let placeholderImage = UIImage(named: "placeholder")!
     private var cameraEnabled: Bool { UIImagePickerController.isSourceTypeAvailable(.camera) }
-    private var detectionEnabled: Bool { image != nil && rectangles == nil }
+    private var classificationEnabled: Bool { image != nil && classification == nil }
     
     var body: some View {
         if imagePickerOpen { return imagePickerView() }
@@ -26,22 +25,22 @@ struct ContentView: View {
         return mainView()
     }
     
-    private func getFaces() {
-        print("Getting faces...")
-        self.rectangles = []
-        self.image?.detectRectangles { result in
-            self.rectangles = result
-            
-            if let image = self.image, let annotatedImage = result?.drawnOn(image) {
-                self.image =  annotatedImage
-            }
-        }
+    private func classify() {
+        print("Analysing drawing...")
+//        self.image?.detectRectangles { result in
+//            self.rectangles = result
+//            
+//            if let image = self.image, let annotatedImage = result?.drawnOn(image) {
+//                self.image =  annotatedImage
+//            }
+//        }
     }
     
     private func controlReturned(image: UIImage?) {
         print("Image return \(image == nil ? "failure" : "success")...")
-        self.image = image?.fixOrientation()
-        self.rectangles = nil
+        
+        // turn image right side up and black-and-white
+        self.image = image?.fixOrientation()?.applying(filter: CIFilter.noir)
     }
     
     private func summonImagePicker() {
@@ -58,8 +57,8 @@ struct ContentView: View {
 extension ContentView {
     private func mainView() -> AnyView {
         return AnyView(NavigationView {
-            MainView(image: image ?? placeholderImage, text: "\(rectangleCount) document\(rectangleCount == 1 ? "" : "s")") {
-                TwoStateButton(text: "Detect Documents", disabled: !detectionEnabled, action: getFaces)
+            MainView(image: image ?? placeholderImage, text: "\(classification ?? "Nothing detected")") {
+                TwoStateButton(text: "Classify", disabled: !classificationEnabled, action: classify)
                 }.padding().navigationBarTitle(Text("DDDemo"), displayMode: .inline)
                 .navigationBarItems(leading: Button(action: summonImagePicker) { Text("Select") },
                                     trailing: Button(action: summonCamera) { Image(systemName: "camera") }.disabled(!cameraEnabled))
