@@ -6,6 +6,7 @@
 //  Copyright © 2019 Mars and Paris. All rights reserved.
 //
 
+// BEGIN NST_starter_uie
 import UIKit
 
 // MARK: UIImage Extensions
@@ -16,6 +17,7 @@ extension UIImage{
     
     /// Attempts Neural Style Transfer upon UIImage with given .mlmodel and input options
     /// - parameter modelSelection: StyleModel enum case selected to pass as .mlmodel option
+    // BEGIN NST_starter_uie1
     func styled(with modelSelection: StyleModel) -> UIImage? {
         guard let cgImage = self.cgImage else { return nil }
         
@@ -29,10 +31,12 @@ extension UIImage{
         
         return UIImage(cgImage: cgImage, scale: self.scale, orientation: orientation)
     }
+    // END NST_starter_uie1
     
     /// Returns copy of image .aspectFill-ed to given size with excess cropped,
     /// which maintains as much of original image as possible
     /// - parameter size: Size to fit new image into
+    // BEGIN NST_starter_uie2
     func aspectFilled(to size: CGSize) -> UIImage? {
         if self.size == size { return self }
         
@@ -48,9 +52,11 @@ extension UIImage{
 
         return self.resized(to: intermediateSize)?.cropped(to: size)
     }
+    // END NST_starter_uie2
     
     /// Returns copy of image resized to given size
     /// - parameter size: Size to fit new image into
+    // BEGIN NST_starter_uie3
     func resized(to size: CGSize) -> UIImage? {
         let newRect = CGRect(origin: CGPoint.zero, size: size)
         
@@ -61,9 +67,11 @@ extension UIImage{
         
         return newImage
     }
+    // END NST_starter_uie3
     
     /// Returns copy of image cropped to given size
     /// - parameter size: Size to fit new image into
+    // BEGIN NST_starter_uie4
     func cropped(to size: CGSize) -> UIImage? {
         guard let cgImage = self.cgImage else { return nil }
         
@@ -88,8 +96,10 @@ extension UIImage{
     
         return croppedImage
     }
+    // END NST_starter_uie4
     
     /// Creates and returns CVPixelBuffer for given image, size and attributes
+    // BEGIN NST_starter_uie5
     func pixelBuffer() -> CVPixelBuffer? {
         guard let image = self.cgImage else { return nil }
         let dimensions: (height: Int, width: Int) = (Int(self.size.width), Int(self.size.height))
@@ -115,4 +125,6 @@ extension UIImage{
         
         return populatedPixelBuffer
     }
+    // END NST_starter_uie5
 }
+// END NST_starter_uie

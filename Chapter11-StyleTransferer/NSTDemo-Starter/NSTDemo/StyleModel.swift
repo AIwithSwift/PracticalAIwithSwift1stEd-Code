@@ -6,6 +6,7 @@
 //  Copyright © 2019 Mars and Paris. All rights reserved.
 //
 
+// BEGIN NST_starter_stylemodel
 import UIKit
 import CoreML
 
@@ -22,3 +23,4 @@ enum StyleModel: String, CaseIterable {
     var name: String { return self.rawValue }
     var styleIndex: Int { return StyleModel.styles.firstIndex(of: self)! }
 }
+// END NST_starter_stylemodel
