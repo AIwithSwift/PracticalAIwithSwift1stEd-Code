@@ -4,8 +4,8 @@ import turicreate as tc
 # Configure as required
 output_model_filename = 'DrawingClassifierModel'
 this_directory = os.path.dirname(os.path.realpath(__file__))
-bitmap_sframe_path = this_directory + '/quickdraw/bitmap/bitmaps.sframe'
-strokes_sframe_path = this_directory + '/quickdraw/strokes/strokes.sframe'
+bitmap_sframe_path = this_directory + '/quickdraw/bitmaps.sframe'
+strokes_sframe_path = this_directory + '/quickdraw/strokes.sframe'
 
 # Load the data
 bitmap_data =  tc.load_sframe(bitmap_sframe_path)

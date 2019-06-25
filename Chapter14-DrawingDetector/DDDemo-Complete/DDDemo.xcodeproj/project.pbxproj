@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4140046222C0733B0001D4D5 /* ImageFilters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140046122C0733B0001D4D5 /* ImageFilters.swift */; };
+		4140046222C0733B0001D4D5 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140046122C0733B0001D4D5 /* Image.swift */; };
 		41E9DD3C22BDF2B80095D976 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E9DD3B22BDF2B80095D976 /* AppDelegate.swift */; };
 		41E9DD4022BDF2B80095D976 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E9DD3F22BDF2B80095D976 /* ContentView.swift */; };
 		41E9DD4222BDF2BA0095D976 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 41E9DD4122BDF2BA0095D976 /* Assets.xcassets */; };
@@ -18,7 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		4140046122C0733B0001D4D5 /* ImageFilters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFilters.swift; sourceTree = "<group>"; };
+		4140046122C0733B0001D4D5 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		41E9DD3822BDF2B80095D976 /* DDDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DDDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		41E9DD3B22BDF2B80095D976 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		41E9DD3F22BDF2B80095D976 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -64,7 +64,7 @@
 				41E9DD3F22BDF2B80095D976 /* ContentView.swift */,
 				41EA2C3422C07BC400F481C2 /* Drawing.swift */,
 				41E9DD4F22BDF45D0095D976 /* Views.swift */,
-				4140046122C0733B0001D4D5 /* ImageFilters.swift */,
+				4140046122C0733B0001D4D5 /* Image.swift */,
 				41E9DD4122BDF2BA0095D976 /* Assets.xcassets */,
 				41E9DD4622BDF2BA0095D976 /* LaunchScreen.storyboard */,
 				41E9DD4922BDF2BA0095D976 /* Info.plist */,
@@ -153,7 +153,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				41E9DD3C22BDF2B80095D976 /* AppDelegate.swift in Sources */,
-				4140046222C0733B0001D4D5 /* ImageFilters.swift in Sources */,
+				4140046222C0733B0001D4D5 /* Image.swift in Sources */,
 				41E9DD4022BDF2B80095D976 /* ContentView.swift in Sources */,
 				41E9DD5022BDF45D0095D976 /* Views.swift in Sources */,
 				41EA2C3522C07BC400F481C2 /* Drawing.swift in Sources */,

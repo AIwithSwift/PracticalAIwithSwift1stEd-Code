@@ -9,6 +9,48 @@
 import SwiftUI
 import Vision
 
+extension VNImageRequestHandler {
+    convenience init?(uiImage: UIImage) {
+        guard let ciImage = CIImage(image: uiImage) else { return nil }
+        let orientation = uiImage.cgImageOrientation
+        
+        self.init(ciImage: ciImage, orientation: orientation)
+    }
+}
+
+class DrawingClassifier {
+    let imageSize = CGSize(width: 28.0, height: 28.0)
+    func configure(image: UIImage?) -> UIImage? {
+        if let rotatedImage = image?.fixOrientation(),
+            let resizedImage = rotatedImage.aspectFilled(to: self.imageSize),
+            let grayscaleImage = resizedImage.applying(filter: CIFilter.noir) {
+            return grayscaleImage
+        }
+        
+        return nil
+    }
+    
+    func classify(_ image: UIImage?, completion: (Drawing?) -> ()) {
+        guard let image = image,
+            let model = try? VNCoreMLModel(for: self.model) else {
+                return completion(nil)
+        }
+        
+        let request = VNCoreMLRequest(model: model)
+            
+        DispatchQueue.global(qos: .userInitiated).async {
+            if let handler = VNImageRequestHandler(uiImage: image) {
+                try? handler.perform([request])
+                let results = request.results as? [VNClassificationObservation]
+                let highestResult = results?.max { $0.confidence > $1.confidence }
+                completion(Drawing(rawValue: highestResult?.identifier ?? ""))
+            } else {
+                completion(nil)
+            }
+        }
+    }
+}
+
 struct ContentView: View {
     @State private var imagePickerOpen: Bool = false
     @State private var cameraOpen: Bool = false
@@ -16,6 +58,7 @@ struct ContentView: View {
     @State private var classification: String? = nil
     
     private let placeholderImage = UIImage(named: "placeholder")!
+    private let classifier = DrawingClassifier()
     private var cameraEnabled: Bool { UIImagePickerController.isSourceTypeAvailable(.camera) }
     private var classificationEnabled: Bool { image != nil && classification == nil }
     
@@ -27,20 +70,16 @@ struct ContentView: View {
     
     private func classify() {
         print("Analysing drawing...")
-//        self.image?.detectRectangles { result in
-//            self.rectangles = result
-//            
-//            if let image = self.image, let annotatedImage = result?.drawnOn(image) {
-//                self.image =  annotatedImage
-//            }
-//        }
+        classifier.classify(self.image) { result in
+            self.classification = result?.icon
+        }
     }
     
     private func controlReturned(image: UIImage?) {
         print("Image return \(image == nil ? "failure" : "success")...")
         
-        // turn image right side up and black-and-white
-        self.image = image?.fixOrientation()?.applying(filter: CIFilter.noir)
+        // turn image right side up, resize it and turn it black-and-white
+        self.image = DrawingClassifier().configure(image: image)
     }
     
     private func summonImagePicker() {
