@@ -26,6 +26,7 @@ struct ContentView: View {
         return mainView()
     }
     
+    // BEGIN FD_complete_getFaces_change
     private func getFaces() {
         print("Getting faces...")
         self.faces = []
@@ -37,6 +38,7 @@ struct ContentView: View {
             }
         }
     }
+    // END FD_complete_getFaces_change
     
     private func controlReturned(image: UIImage?) {
         print("Image return \(image == nil ? "failure" : "success")...")
