@@ -8,11 +8,13 @@
 
 import SwiftUI
 
+// BEGIN FD_starter_views1
 struct MainView: View {
     private let image: UIImage
     private let text: String
     private let button: TwoStateButton
     
+    // BEGIN FD_starter_views1_a
     var body: some View {
         VStack {
             Image(uiImage: image).resizable().aspectRatio(contentMode: .fit)
@@ -22,20 +24,26 @@ struct MainView: View {
             self.button
         }
     }
+    // END FD_starter_views1_a
     
+    // BEGIN FD_starter_views1_b
     init(image: UIImage, text: String, button: () -> TwoStateButton) {
         self.image = image
         self.text = text
         self.button = button()
     }
+    // END FD_starter_views1_b
 }
+// END FD_starter_views1
 
+// BEGIN FD_starter_views2
 struct TwoStateButton: View {
     private let text: String
     private let disabled: Bool
     private let background: Color
     private let action: () -> Void
     
+    // BEGIN FD_starter_views2_a
     var body: some View {
         Button(action: action) {
             HStack {
@@ -45,15 +53,20 @@ struct TwoStateButton: View {
                 }.padding().background(background).cornerRadius(10)
             }.disabled(disabled)
     }
+    // END FD_starter_views2_a
     
+    // BEGIN FD_starter_views2_b
     init(text: String, disabled: Bool, background: Color = .blue, action: @escaping () -> Void) {
         self.text = text
         self.disabled = disabled
         self.background = disabled ? .gray : background
         self.action = action
     }
+    // END FD_starter_views2_b
 }
-    
+// END FD_starter_views2
+
+// BEGIN FD_starter_views3
 struct ImagePicker: UIViewControllerRepresentable {
     typealias UIViewControllerType = UIImagePickerController
     private(set) var selectedImage: UIImage?
@@ -102,7 +115,9 @@ struct ImagePicker: UIViewControllerRepresentable {
         }
     }
 }
+// END FD_starter_views3
 
+// BEGIN FD_starter_views4
 extension UIImage {
     func fixOrientation() -> UIImage? {
         UIGraphicsBeginImageContext(self.size)
@@ -125,3 +140,4 @@ extension UIImage {
         }
     }
 }
+// END FD_starter_views4

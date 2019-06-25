@@ -4,7 +4,7 @@ Code for the book's first edition.
 | Directory | App | Chapter | Notes |
 |:---|:---:|:---:|:---|
 |Chapter06-ImageClassifier | ✅ | ✅ | Chapter needs theory at end, and maybe roll in Object Detection |
-|Chapter07-ActivityClassifier | ✴️ | ⛔️ | Being made by Mars (Speech Synthesis to say classifications?) |
+|Chapter07-ActivityClassifier | ✴️ | ✴️ | Being made by Paris! (Speech Synthesis to say classifications?) |
 |Chapter08-SoundClassifier | ✅ | ✅ | Chapter needs theory at end, and app needs functionality to request permission to record (init request and plist values), needs constraints adjustment on CollectionView tiles |
 |Chapter09-SentimentAnalyser | ✅ | ✅ | Chapter needs theory at end |
 |Chapter10-ImageComparer | ✅ | ✅ | Chapter needs theory at end. App needs bug fixes (**SwiftUI Issues: Text() resizing on binding change, Image() views ignore aspectRatio() setting**) |
