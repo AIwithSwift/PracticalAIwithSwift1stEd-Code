@@ -25,29 +25,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
-    var contentView: ContentView? {
-        if let viewController = window?.rootViewController as? UIHostingController<ContentView>  {
-            return viewController.rootView
-        }
-        
-        return nil
-    }
+    var tracker = ActivityTracker()
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
-            window.rootViewController = UIHostingController(rootView: ContentView().environmentObject(ActivityTracker()))
+            window.rootViewController = UIHostingController(rootView: ContentView().environmentObject(tracker))
             self.window = window
             window.makeKeyAndVisible()
         }
     }
     
     func sceneDidBecomeActive(_ scene: UIScene) {
-        contentView?.startTracking()
+        tracker.startTracking()
     }
     
     func sceneWillResignActive(_ scene: UIScene) {
-        contentView?.stopTracking()
+        tracker.stopTracking()
     }
 }
 

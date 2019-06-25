@@ -17,7 +17,6 @@ extension AVSpeechSynthesizer {
 
 struct ContentView: View {
     @EnvironmentObject var tracker: ActivityTracker
-    private var lastActivity: String = "None detectable"
     private let speechSynthesiser = AVSpeechSynthesizer()
     
     var body: some View {
@@ -27,16 +26,6 @@ struct ContentView: View {
         }
         
         return Text(newActivity).font(.largeTitle)
-    }
-    
-    func startTracking() {
-        tracker.startTracking()
-        speechSynthesiser.say("Started tracking")
-    }
-    
-    func stopTracking() {
-        tracker.stopTracking()
-        speechSynthesiser.say("Stopped tracking")
     }
 }
 

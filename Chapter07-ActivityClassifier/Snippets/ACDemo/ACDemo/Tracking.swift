@@ -16,7 +16,7 @@ final class ActivityTracker: BindableObject {
     private let tracker = CMMotionActivityManager()
     private(set) var currentActivity: String = "None detectable" {
         willSet {
-            self.activityDidChange = (newValue != currentActivity)
+            activityDidChange = (newValue != currentActivity)
         }
         
         didSet {
@@ -34,10 +34,12 @@ final class ActivityTracker: BindableObject {
             }
         } catch {
             print("Error: \(error.localizedDescription)")
+            stopTracking()
         }
     }
     
     func stopTracking() {
+        currentActivity = "Not Tracking"
         tracker.stopTracking()
     }
 }
