@@ -7,27 +7,27 @@
 //
 import CoreMotion
 
-struct RuntimeError: Error {
-    let message: String
-    
-    init(_ message: String) {
-        self.message = message
-    }
-    
-    public var localizedDescription: String {
-        return message
-    }
-}
-
 // typealias CMMotionActivityHandler = (CMMotionActivity?) -> Void
 extension CMMotionActivityManager {
+    
+    enum Error: Swift.Error {
+        case notAvailable, notAuthorized
+        
+        public var localizedDescription: String {
+            switch self {
+            case .notAvailable: return "Activity Tracking not available"
+            case .notAuthorized: return "Activity Tracking not permitted"
+            }
+        }
+    }
+    
     func startTracking(handler: @escaping (CMMotionActivity?) -> Void) throws {
         if !CMMotionActivityManager.isActivityAvailable() {
-            throw RuntimeError("Activity Tracking not available")
+            throw Error.notAvailable
         }
         
         if CMMotionActivityManager.authorizationStatus() != .authorized {
-            throw RuntimeError("Activity Tracking not permitted")
+            throw Error.notAuthorized
         }
         
         self.startActivityUpdates(to: .main, withHandler: handler)

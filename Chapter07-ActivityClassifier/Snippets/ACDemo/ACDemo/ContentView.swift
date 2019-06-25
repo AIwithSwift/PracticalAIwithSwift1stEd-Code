@@ -37,8 +37,7 @@ struct ContentView: View {
                 }
             }
         } catch {
-            print("Error: \(error.localizedDescription)")
-            speechSynthesiser.say("Something went wrong")
+            speechSynthesiser.say("Error: \(error.localizedDescription)")
         }
     }
     
