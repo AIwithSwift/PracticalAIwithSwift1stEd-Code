@@ -36,16 +36,20 @@ struct ContentView: View {
         Text("\(activity?.description ?? "None detectable")")
             .font(.largeTitle)
     }
+    
+    private func updateActivity(_ activity: CMMotionActivity?) {
+        if let activity = activity?.name {
+             self.activity = activity
+        } else {
+            self.activity = nil
+        }
+    }
    
     func startTracking() {
         speechSynthesiser.say("Started tracking")
         do {
             try activityTracker.startTracking { result in
-                if let activity = result {
-                    self.activity = activity.name
-                    print("New activity detected: \(activity.name)")
-                    self.speechSynthesiser.say(activity.name)
-                }
+                self.updateActivity(result)
             }
         } catch {
             speechSynthesiser.say("Error: \(error.localizedDescription)")

@@ -15,7 +15,7 @@ bitmap_directory = this_directory + '/quickdraw/bitmap/'
 strokes_directory = this_directory + '/quickdraw/strokes/'
 bitmap_sframe_path = this_directory + '/quickdraw/bitmaps.sframe'
 strokes_sframe_path = this_directory + '/quickdraw/strokes.sframe'
-samples = 10000
+samples = 100
 
 random_state = np.random.RandomState(100)
 
