@@ -32,23 +32,23 @@ extension VNRequest {
 
 extension UIImage {
     
-    func detectRectangles(completion: @escaping ([VNRectangleObservation]?) -> ()) {
+    func detectRectangles(completion: @escaping ([VNRectangleObservation]) -> ()) {
         let request = VNDetectRectanglesRequest()
         request.minimumConfidence = 0.8
         request.minimumAspectRatio = 0.3
         request.maximumObservations = 3
         
         request.queueFor(image: self) { result in
-            completion(result as? [VNRectangleObservation])
+            completion(result as? [VNRectangleObservation] ?? [])
         }
     }
     
-    func detectBarcodes(completion: @escaping ([VNBarcodeObservation]?) ->()) {
+    func detectBarcodes(completion: @escaping ([VNBarcodeObservation]) ->()) {
         let request = VNDetectBarcodesRequest()
         request.symbologies = [.QR]
         
         request.queueFor(image: self) { result in
-            completion(result as? [VNBarcodeObservation])
+            completion(result as? [VNBarcodeObservation] ?? [])
         }
     }
     
@@ -91,10 +91,7 @@ extension UIImage {
 // we included a test image in the playground Resources
 let testImage = UIImage(named: "test.jpg")!
 
-testImage.detectBarcodes { result in
-    print("\(result?.count ?? 0) barcodes found.")
-    guard let barcodes = result else { return }
-    
+testImage.detectBarcodes { barcodes in
     for barcode in barcodes {
         print("Barcode data: \(barcode.payloadStringValue ?? "None")")
     }
