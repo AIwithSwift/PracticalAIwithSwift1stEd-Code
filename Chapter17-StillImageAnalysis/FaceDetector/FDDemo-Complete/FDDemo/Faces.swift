@@ -21,30 +21,12 @@ extension UIImage {
             completion(observations)
         }
     }
-
-    func fixOrientation() -> UIImage? {
-        UIGraphicsBeginImageContext(self.size)
-        self.draw(at: .zero)
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return newImage
-    }
-    
-    var cgImageOrientation: CGImagePropertyOrientation {
-        switch self.imageOrientation {
-            case .up: return .up
-            case .down: return .down
-            case .left: return .left
-            case .right: return .right
-            case .upMirrored: return .upMirrored
-            case .downMirrored: return .downMirrored
-            case .leftMirrored: return .leftMirrored
-            case .rightMirrored: return .rightMirrored
-        }
-    }
 }
 
+// BEGIN FD_complete_ext_col
 extension Collection where Element == VNFaceObservation {
+    
+    // BEGIN FD_complete_ext_col_1
     func drawnOn(_ image: UIImage) -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(image.size, false, 1.0)
         guard let context = UIGraphicsGetCurrentContext() else { return nil }
@@ -66,4 +48,6 @@ extension Collection where Element == VNFaceObservation {
         
         return result
     }
+    // END FD_complete_ext_col_1
 }
+// END FD_complete_ext_col

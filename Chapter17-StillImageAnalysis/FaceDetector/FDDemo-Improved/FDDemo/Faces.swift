@@ -21,7 +21,7 @@ extension UIImage {
             completion(observations)
         }
     }
-    
+    // BEGIN FD_improved_rotatedBy
     func rotatedBy(degrees: CGFloat, clockwise: Bool = false) -> UIImage? {
         var radians = (degrees) * (.pi / 180)
         if !clockwise { radians = -radians }
@@ -42,7 +42,8 @@ extension UIImage {
         
         return result
     }
-
+    // END FD_improved_rotatedBy
+    
     func fixOrientation() -> UIImage? {
         UIGraphicsBeginImageContext(self.size)
         self.draw(at: .zero)
@@ -65,6 +66,7 @@ extension UIImage {
     }
 }
 
+// BEGIN FD_improved_newCollectionExtension
 extension Collection where Element == VNFaceObservation {
     func drawnOn(_ image: UIImage) -> UIImage? {
         
@@ -104,7 +106,9 @@ extension Collection where Element == VNFaceObservation {
         return result
     }
 }
+// END FD_improved_newCollectionExtension
 
+// BEGIN FD_improved_VNfl
 extension VNFaceLandmarks2D {
     func anchorPointInImage(_ image: UIImage) -> (center: CGPoint?, angle: CGFloat?) {
 
@@ -133,7 +137,9 @@ extension VNFaceLandmarks2D {
         return (allPoints, 0.0)
     }
 }
+// END FD_improved_VNfl
 
+// BEGIN FD_improved_cgrectext
 extension CGRect {
     func centeredOn(_ point: CGPoint) -> CGRect {
         let size = self.size
@@ -142,7 +148,9 @@ extension CGRect {
         return CGRect(x: originX, y: originY, width: size.width, height: size.height)
     }
 }
+// END FD_improved_cgrectext
 
+// BEGIN FD_improved_cgpoint
 extension CGPoint {
     func rotationDegreesTo(_ otherPoint: CGPoint) -> CGFloat {
         let originX = otherPoint.x - self.x
@@ -153,7 +161,9 @@ extension CGPoint {
         return CGFloat(normalizedDegrees)
     }
 }
+// END FD_improved_cgpoint
 
+// BEGIN FD_improved_array
 extension Array where Element == CGPoint {
     var centerPoint: CGPoint {
         let elements = CGFloat(self.count)
@@ -162,7 +172,9 @@ extension Array where Element == CGPoint {
         return CGPoint(x: totalX / elements, y: totalY / elements)
     }
 }
+// END FD_improved_array
 
+// BEGIN FD_improved_string
 extension String {
     func image(of size: CGSize, scale: CGFloat = 0.94) -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(size, false, 0)
@@ -175,3 +187,4 @@ extension String {
         return image
     }
 }
+// END FD_improved_string
