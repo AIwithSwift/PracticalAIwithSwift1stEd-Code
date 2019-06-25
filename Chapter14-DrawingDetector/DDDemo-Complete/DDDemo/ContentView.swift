@@ -18,8 +18,9 @@ extension VNImageRequestHandler {
     }
 }
 
-class DrawingClassifier {
-    let imageSize = CGSize(width: 28.0, height: 28.0)
+extension DrawingClassifierModelBitmap {
+    var imageSize: CGSize { return CGSize(width: 28.0, height: 28.0) }
+    
     func configure(image: UIImage?) -> UIImage? {
         if let rotatedImage = image?.fixOrientation(),
             let resizedImage = rotatedImage.aspectFilled(to: self.imageSize),
@@ -30,7 +31,7 @@ class DrawingClassifier {
         return nil
     }
     
-    func classify(_ image: UIImage?, completion: (Drawing?) -> ()) {
+    func classify(_ image: UIImage?, completion: @escaping (Drawing?) -> ()) {
         guard let image = image,
             let model = try? VNCoreMLModel(for: self.model) else {
                 return completion(nil)
@@ -58,7 +59,7 @@ struct ContentView: View {
     @State private var classification: String? = nil
     
     private let placeholderImage = UIImage(named: "placeholder")!
-    private let classifier = DrawingClassifier()
+    private let classifier = DrawingClassifierModelBitmap()
     private var cameraEnabled: Bool { UIImagePickerController.isSourceTypeAvailable(.camera) }
     private var classificationEnabled: Bool { image != nil && classification == nil }
     
@@ -79,7 +80,7 @@ struct ContentView: View {
         print("Image return \(image == nil ? "failure" : "success")...")
         
         // turn image right side up, resize it and turn it black-and-white
-        self.image = DrawingClassifier().configure(image: image)
+        self.image = classifier.configure(image: image)
     }
     
     private func summonImagePicker() {
@@ -106,6 +107,7 @@ extension ContentView {
     
     private func imagePickerView() -> AnyView {
         return  AnyView(ImagePicker { result in
+            self.classification = nil
             self.controlReturned(image: result)
             self.imagePickerOpen = false
         })
@@ -113,6 +115,7 @@ extension ContentView {
     
     private func cameraView() -> AnyView {
         return  AnyView(ImagePicker(camera: true) { result in
+            self.classification = nil
             self.controlReturned(image: result)
             self.cameraOpen = false
         })

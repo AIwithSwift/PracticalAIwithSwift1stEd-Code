@@ -7,9 +7,20 @@
 //
 import CoreMotion
 
+extension CMMotionActivity {
+    var name: String {
+        if walking { return "Walking" }
+        if running { return "Running" }
+        if automotive { return "Driving" }
+        if cycling { return "Cycling" }
+        if stationary { return "Stationary" }
+        return "Unknown"
+    }
+}
+
 // typealias CMMotionActivityHandler = (CMMotionActivity?) -> Void
 extension CMMotionActivityManager {
-    
+
     enum Error: Swift.Error {
         case notAvailable, notAuthorized
         

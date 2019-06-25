@@ -13,6 +13,7 @@
 		4127289122C1D08000A0362C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4127289022C1D08000A0362C /* Preview Assets.xcassets */; };
 		4127289422C1D08000A0362C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4127289222C1D08000A0362C /* LaunchScreen.storyboard */; };
 		4127289C22C1D0F000A0362C /* Motion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4127289B22C1D0F000A0362C /* Motion.swift */; };
+		412728A022C1F42700A0362C /* Tracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4127289F22C1F42700A0362C /* Tracking.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		4127289322C1D08000A0362C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4127289522C1D08000A0362C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4127289B22C1D0F000A0362C /* Motion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Motion.swift; sourceTree = "<group>"; };
+		4127289F22C1F42700A0362C /* Tracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tracking.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				4127288722C1D07E00A0362C /* AppDelegate.swift */,
 				4127288B22C1D07E00A0362C /* ContentView.swift */,
 				4127289B22C1D0F000A0362C /* Motion.swift */,
+				4127289F22C1F42700A0362C /* Tracking.swift */,
 				4127288D22C1D08000A0362C /* Assets.xcassets */,
 				4127289222C1D08000A0362C /* LaunchScreen.storyboard */,
 				4127289522C1D08000A0362C /* Info.plist */,
@@ -146,6 +149,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				412728A022C1F42700A0362C /* Tracking.swift in Sources */,
 				4127288822C1D07E00A0362C /* AppDelegate.swift in Sources */,
 				4127289C22C1D0F000A0362C /* Motion.swift in Sources */,
 				4127288C22C1D07E00A0362C /* ContentView.swift in Sources */,
