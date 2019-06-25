@@ -16,8 +16,19 @@ extension AVSpeechSynthesizer {
     }
 }
 
+extension CMMotionActivity {
+    var name: String {
+        if walking { return "Walking" }
+        if running { return "Running" }
+        if automotive { return "Driving" }
+        if cycling { return "Cycling" }
+        if stationary { return "Stationary" }
+        return "Unknown"
+    }
+}
+
 struct ContentView: View {
-    @State var activity: CMMotionActivity? = nil
+    @State var activity: String? = nil
     let activityTracker = CMMotionActivityManager()
     let speechSynthesiser = AVSpeechSynthesizer()
     
@@ -31,9 +42,9 @@ struct ContentView: View {
         do {
             try activityTracker.startTracking { result in
                 if let activity = result {
-                    let activityName = activity.description
-                    print("New activity detected: \(activityName)")
-                    self.speechSynthesiser.say(activityName)
+                    self.activity = activity.name
+                    print("New activity detected: \(activity.name)")
+                    self.speechSynthesiser.say(activity.name)
                 }
             }
         } catch {
