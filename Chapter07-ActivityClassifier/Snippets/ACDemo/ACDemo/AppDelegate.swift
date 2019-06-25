@@ -33,6 +33,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             window.rootViewController = UIHostingController(rootView: ContentView().environmentObject(tracker))
             self.window = window
             window.makeKeyAndVisible()
+            tracker.startTracking()
         }
     }
     
