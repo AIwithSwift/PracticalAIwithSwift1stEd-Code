@@ -30,6 +30,24 @@ extension VNRequest {
     }
 }
 
+extension CGRect {
+    func scale(to size: CGSize) -> CGRect {
+        let horizontalInsets = (self.width - size.width) / 2.0
+        let verticalInsets = (self.height - size.height) / 2.0
+        let edgeInsets = UIEdgeInsets(
+            top: verticalInsets,
+            left: horizontalInsets,
+            bottom: verticalInsets,
+            right: horizontalInsets
+        )
+        
+        let leftOffset = min(self.origin.x + horizontalInsets, 0)
+        let upOffset = min(self.origin.y + verticalInsets, 0)
+        
+        return self.inset(by: edgeInsets).offsetBy(dx: -leftOffset, dy: -upOffset)
+    }
+}
+
 extension UIImage {
     
     func detectRectangles(completion: @escaping ([VNRectangleObservation]) -> ()) {
@@ -43,9 +61,9 @@ extension UIImage {
         }
     }
     
-    func detectBarcodes(completion: @escaping ([VNBarcodeObservation]) ->()) {
+    func detectBarcodes(types symbologies: [VNBarcodeSymbology] = [.QR], completion: @escaping ([VNBarcodeObservation]) ->()) {
         let request = VNDetectBarcodesRequest()
-        request.symbologies = [.QR]
+        request.symbologies = symbologies
         
         request.queueFor(image: self) { result in
             completion(result as? [VNBarcodeObservation] ?? [])
@@ -66,47 +84,68 @@ extension UIImage {
         }
     }
     
-    func croppedWithSaliency(to size: CGSize, prioritising saliencyType: SaliencyType = .attentionBased) -> UIImage? {
-        if self.size.width < size.width || self.size.height < size.height { return nil }
-        guard let cgImage = self.cgImage, let handler = VNImageRequestHandler(uiImage: self) else {
-            return self
-        }
-        
+    func detectSalientRegions(prioritising saliencyType: SaliencyType = .attentionBased, completion: @escaping (VNSaliencyImageObservation?) -> ()) {
         let request = saliencyType.request
+        
         request.queueFor(image: self) { results in
-            if let result = request.results?.first as? VNSaliencyImageObservation {
-                
-            }
+            completion(results?.first as? VNSaliencyImageObservation)
+        }
+    }
+    
+    func cropped(with saliencyObservation: VNSaliencyImageObservation?, to size: CGSize? = nil) -> UIImage? {
+        guard let saliencyMap = saliencyObservation,
+            let salientObjects = saliencyMap.salientObjects else { return nil }
+        
+        // merge all detected salient objects into one big rect of the overaching 'salient region'
+        let salientRect = salientObjects.reduce(into: CGRect.zero) { rect, object in rect = rect.union(object.boundingBox)  }
+        let normalizedSalientRect = VNImageRectForNormalizedRect(salientRect, Int(self.size.width), Int(self.size.height))
+        
+        var croppingRect = normalizedSalientRect
+        
+        // transform normalized salient rect based on larger or smaller than desired size
+        if let desiredSize = size {
+            if self.size.width < desiredSize.width || self.size.height < desiredSize.height { return nil }
+            print("Size was \(croppingRect.width) * \(croppingRect.height)")
+            croppingRect = croppingRect.scale(to: desiredSize)
+            print("Size now \(croppingRect.width) * \(croppingRect.height)")
         }
         
-        //var unionOfSalientRegions = CGRect(x: 0, y: 0, width: 0, height: 0)
-        //let errorPointer = NSErrorPointer(nilLiteral: ())
-        //let salientObjects = saliencyObservation.salientObjectsAndReturnError(errorPointer)
-        //for salientObject in salientObjects {
-        //    unionOfSalientRegions = unionOfSalientRegions.union(salientObject.boundingBox)
-        //}
-        //self.salientRect = VNImageRectForNormalizedRect(unionOfSalientRegions,
-        //                                                originalImage.extent.size.width,
-        //                                                originalImage.extent.size.height)
-        //
-        //public func createHeatMapMask(from observation: VNSaliencyImageObservation) -> CGImage? {
-        //    let pixelBuffer = observation.pixelBuffer
-        //    let ciImage = CIImage(cvPixelBuffer: pixelBuffer)
-        //    let vector = CIVector(x: 0, y: 0, z: 0, w: 1)
-        //    let saliencyImage = ciImage.applyingFilter("CIColorMatrix", parameters: ["inputBVector": vector])
-        //    return CIContext().createCGImage(saliencyImage, from: saliencyImage.extent)
-        //}
+        print("Image was \(self.size.width) * \(self.size.height)")
+        guard let croppedImage = self.cropped(to: croppingRect) else { return nil }
+        print("Image now \(croppedImage.size.width) * \(croppedImage.size.height)")
+        return croppedImage
+    }
+    
+    func cropped(to rect: CGRect) -> UIImage? {
+        let croppingRect = CGRect(
+            x: rect.origin.x * self.scale,
+            y: rect.origin.y * self.scale,
+            width: rect.size.width * self.scale,
+            height: rect.size.height * self.scale
+        )
         
+        guard let cgImage = self.cgImage,
+            let croppedImage = cgImage.cropping(to: croppingRect) else { return nil }
+        return UIImage(cgImage: croppedImage)
         
-        // TODO
-        // get salientRect, modify to Size
+        // PREVENT SIZE ROUNDING TO NEAREST ODD NUMBER HERE
         
-        DispatchQueue.global(qos: .userInitiated).async {
-            let croppedImage = ciImage.cropped(to: salientRect)
-            return UIImage(ciImage: croppedImage)
-        }
-        
-        return nil
+//        guard let croppedImage = self.cgImage?.cropping(to: croppingRect) else { return nil }
+//        return UIImage(cgImage: croppedImage, scale: self.scale * (self.scale / 1.0), orientation: self.imageOrientation)
+//        UIGraphicsBeginImageContextWithOptions(self.size, false, 0);
+//        guard let cgImage = self.cgImage,
+//            let context = UIGraphicsGetCurrentContext() else { return nil }
+//
+//        let imageRect = CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height)
+//        context.translateBy(x: 0.0, y: self.size.height)
+//        context.scaleBy(x: 1.0, y: -1.0)
+//        context.draw(cgImage, in: imageRect, byTiling: false)
+//        context.clip(to: [croppingRect])
+//
+//        let croppedImage = UIGraphicsGetImageFromCurrentImageContext()
+//        UIGraphicsEndImageContext()
+//
+//        return croppedImage
     }
     
     var cgImageOrientation: CGImagePropertyOrientation {
@@ -132,7 +171,13 @@ barcodeTestImage.detectBarcodes { barcodes in
     }
 }
 
-let saliencyTestImage = UIImage(named: "test2.jpg")!
+let saliencyTestImage = UIImage(named: "test.jpg")!
 let thumbnailSize = CGSize(width: 400, height: 400)
-let attentionRegionImage = saliencyTestImage.croppedWithSaliency(to: thumbnailSize, prioritising: .attentionBased)
-let objectsRegionImage = saliencyTestImage.croppedWithSaliency(to: thumbnailSize, prioritising: .objectnessBased)
+
+saliencyTestImage.detectSalientRegions(prioritising: .attentionBased) { result in
+    let attentionCrop = saliencyTestImage.cropped(with: result, to: thumbnailSize)
+}
+
+saliencyTestImage.detectSalientRegions(prioritising: .objectnessBased) { result in
+    let objectsCrop = saliencyTestImage.cropped(with: result, to: thumbnailSize)
+}
