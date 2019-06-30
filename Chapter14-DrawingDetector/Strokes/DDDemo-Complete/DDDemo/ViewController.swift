@@ -10,17 +10,28 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    @IBOutlet weak var clearButton: UIBarButtonItem!
     @IBOutlet weak var undoButton: UIBarButtonItem!
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var classLabel: UILabel!
+    @IBOutlet weak var classifyButton: UIButton!
     
-    @IBAction func undoButtonPressed(_ sender: Any) {
-        self.undo()
-    }
+    @IBAction func clearButtonPressed(_ sender: Any) { clear() }
+    @IBAction func undoButtonPressed(_ sender: Any) { undo() }
+    @IBAction func classifyButtonPressed(_ sender: Any) { classify() }
     
+    var classification: String? = nil
     private var strokes: [CGMutablePath] = []
     private var currentStroke: CGMutablePath? { return strokes.last }
-    private var imageViewSize: CGSize { return self.imageView.frame.size }
+    private var imageViewSize: CGSize { return imageView.frame.size }
+    private let classifier = DrawingClassifierModelStrokes()
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        undoButton.disable()
+        classifyButton.disable()
+    }
     
     // new stroke started
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -28,8 +39,8 @@ class ViewController: UIViewController {
         
         let newStroke = CGMutablePath()
         newStroke.move(to: touch.location(in: imageView))
-        self.strokes.append(newStroke)
-        self.refresh()
+        strokes.append(newStroke)
+        refresh()
     }
     
     // stroke moved
@@ -37,7 +48,7 @@ class ViewController: UIViewController {
         guard let touch = touches.first, let currentStroke = self.currentStroke else { return }
         
         currentStroke.addLine(to: touch.location(in: imageView))
-        self.refresh()
+        refresh()
     }
     
     
@@ -46,13 +57,20 @@ class ViewController: UIViewController {
         guard let touch = touches.first, let currentStroke = self.currentStroke else { return }
         
         currentStroke.addLine(to: touch.location(in: imageView))
-        self.refresh()
+        refresh()
     }
     
     // undo last stroke
     func undo() {
-        let _ = self.strokes.removeLast()
-        self.refresh()
+        let _ = strokes.removeLast()
+        refresh()
+    }
+    
+    // clear all strokes
+    func clear() {
+        strokes = []
+        classification = nil
+        refresh()
     }
     
     // refresh view to reflect paths
@@ -61,13 +79,27 @@ class ViewController: UIViewController {
         
         let drawing = makeImage(from: self.strokes)
         self.imageView.image = drawing
-        self.undoButton.isEnabled = !self.strokes.isEmpty
+        
+        if classification != nil {
+            undoButton.disable()
+            clearButton.enable()
+            classifyButton.disable()
+        } else if !strokes.isEmpty {
+            undoButton.enable()
+            clearButton.enable()
+            classifyButton.enable()
+        } else {
+            undoButton.disable()
+            clearButton.disable()
+            classifyButton.disable()
+        }
+        
+        classLabel.text = classification ?? ""
     }
     
     // draw strokes on image
     func makeImage(from strokes: [CGMutablePath]) -> UIImage? {
         let image = CGContext.create(size: imageViewSize) { context in
-            context.setFillColor(UIColor.white.cgColor)
             context.setStrokeColor(UIColor.black.cgColor)
             context.setLineWidth(8.0)
             context.setLineJoin(.round)
@@ -82,16 +114,12 @@ class ViewController: UIViewController {
 
         return image
     }
-}
-
-extension CGContext {
-    static func create(size: CGSize, action: (inout CGContext) -> ()) -> UIImage? {
-        UIGraphicsBeginImageContextWithOptions(size, false, 1.0)
-        guard var context = UIGraphicsGetCurrentContext() else { return nil }
-        action(&context)
-        let result = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return result
+    
+    func classify() {
+        classifier.classify(self.image) { result in
+            self.classification = result?.icon
+            self.refresh()
+        }
     }
 }
 

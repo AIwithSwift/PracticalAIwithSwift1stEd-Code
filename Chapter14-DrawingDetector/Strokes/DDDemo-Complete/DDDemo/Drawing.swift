@@ -2,7 +2,7 @@
 //  Drawing.swift
 //  DDDemo
 //
-//  Created by Mars Geldard on 24/6/19.
+//  Created by Mars Geldard on 30/6/19.
 //  Copyright © 2019 Mars Geldard. All rights reserved.
 //
 
@@ -20,39 +20,39 @@ enum Drawing: String, CaseIterable {
             self = match
         } else {
             switch rawValue {
-                case "coffee cup":  self = .coffee
-                case "hot dog":     self = .hotdog
-                case "ice cream":   self = .icecream
-                default: return nil
+            case "coffee cup":  self = .coffee
+            case "hot dog":     self = .hotdog
+            case "ice cream":   self = .icecream
+            default: return nil
             }
         }
     }
     
     var icon: String {
         switch self {
-            case .apple: return "🍎"
-            case .banana: return "🍌"
-            case .bread: return "🍞"
-            case .broccoli: return "🥦"
-            case .cake: return "🎂"
-            case .carrot: return "🥕"
-            case .coffee: return "☕️"
-            case .cookie: return "🍪"
-            case .donut: return "🍩"
-            case .grapes: return "🍇"
-            case .hotdog: return "🌭"
-            case .icecream: return "🍦"
-            case .lollipop: return "🍭"
-            case .mushroom: return "🍄"
-            case .peanut: return "🥜"
-            case .pear: return "🍐"
-            case .pineapple: return "🍍"
-            case .pizza: return "🍕"
-            case .potato: return "🥔"
-            case .sandwich: return "🥪"
-            case .steak: return "🥩"
-            case .strawberry: return "🍓"
-            case .watermelon: return "🍉"
+        case .apple: return "🍎"
+        case .banana: return "🍌"
+        case .bread: return "🍞"
+        case .broccoli: return "🥦"
+        case .cake: return "🎂"
+        case .carrot: return "🥕"
+        case .coffee: return "☕️"
+        case .cookie: return "🍪"
+        case .donut: return "🍩"
+        case .grapes: return "🍇"
+        case .hotdog: return "🌭"
+        case .icecream: return "🍦"
+        case .lollipop: return "🍭"
+        case .mushroom: return "🍄"
+        case .peanut: return "🥜"
+        case .pear: return "🍐"
+        case .pineapple: return "🍍"
+        case .pizza: return "🍕"
+        case .potato: return "🥔"
+        case .sandwich: return "🥪"
+        case .steak: return "🥩"
+        case .strawberry: return "🍓"
+        case .watermelon: return "🍉"
         }
     }
 }
@@ -66,7 +66,7 @@ extension VNImageRequestHandler {
     }
 }
 
-extension DrawingClassifierModelBitmap {
+extension DrawingClassifierModelStrokes {
     func configure(image: UIImage?) -> UIImage? {
         if let rotatedImage = image?.fixOrientation(),
             let grayscaleImage = rotatedImage.applying(filter: CIFilter.noir) {
@@ -107,3 +107,4 @@ extension Collection where Element == VNClassificationObservation {
         return string
     }
 }
+

@@ -9,49 +9,6 @@
 import SwiftUI
 import Vision
 
-extension VNImageRequestHandler {
-    convenience init?(uiImage: UIImage) {
-        guard let ciImage = CIImage(image: uiImage) else { return nil }
-        let orientation = uiImage.cgImageOrientation
-        
-        self.init(ciImage: ciImage, orientation: orientation)
-    }
-}
-
-extension DrawingClassifierModelBitmap {
-    var imageSize: CGSize { return CGSize(width: 28.0, height: 28.0) }
-    
-    func configure(image: UIImage?) -> UIImage? {
-        if let rotatedImage = image?.fixOrientation(),
-            let resizedImage = rotatedImage.aspectFilled(to: self.imageSize),
-            let grayscaleImage = resizedImage.applying(filter: CIFilter.noir) {
-            return grayscaleImage
-        }
-        
-        return nil
-    }
-    
-    func classify(_ image: UIImage?, completion: @escaping (Drawing?) -> ()) {
-        guard let image = image,
-            let model = try? VNCoreMLModel(for: self.model) else {
-                return completion(nil)
-        }
-        
-        let request = VNCoreMLRequest(model: model)
-            
-        DispatchQueue.global(qos: .userInitiated).async {
-            if let handler = VNImageRequestHandler(uiImage: image) {
-                try? handler.perform([request])
-                let results = request.results as? [VNClassificationObservation]
-                let highestResult = results?.max { $0.confidence > $1.confidence }
-                completion(Drawing(rawValue: highestResult?.identifier ?? ""))
-            } else {
-                completion(nil)
-            }
-        }
-    }
-}
-
 struct ContentView: View {
     @State private var imagePickerOpen: Bool = false
     @State private var cameraOpen: Bool = false
