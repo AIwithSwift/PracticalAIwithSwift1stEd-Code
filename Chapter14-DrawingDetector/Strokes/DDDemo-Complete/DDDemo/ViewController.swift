@@ -116,7 +116,7 @@ class ViewController: UIViewController {
     }
     
     func classify() {
-        classifier.classify(self.image) { result in
+        classifier.classify(self.imageView.image) { result in
             self.classification = result?.icon
             self.refresh()
         }

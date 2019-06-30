@@ -6,7 +6,8 @@
 //  Copyright © 2019 Mars Geldard. All rights reserved.
 //
 
-import Foundation
+import UIKit
+import Vision
 
 enum Drawing: String, CaseIterable {
     /// These only include those the model was trained on
@@ -66,16 +67,7 @@ extension VNImageRequestHandler {
     }
 }
 
-extension DrawingClassifierModelStrokes {
-    func configure(image: UIImage?) -> UIImage? {
-        if let rotatedImage = image?.fixOrientation(),
-            let grayscaleImage = rotatedImage.applying(filter: CIFilter.noir) {
-            return grayscaleImage
-        }
-        
-        return nil
-    }
-    
+extension DrawingClassifierModelStrokes {    
     func classify(_ image: UIImage?, completion: @escaping (Drawing?) -> ()) {
         guard let image = image,
             let model = try? VNCoreMLModel(for: self.model) else {

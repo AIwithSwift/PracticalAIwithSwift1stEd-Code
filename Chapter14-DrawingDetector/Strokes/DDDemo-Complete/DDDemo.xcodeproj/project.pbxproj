@@ -12,7 +12,7 @@
 		4104A9E622C834F30056BC83 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4104A9E422C834F30056BC83 /* Main.storyboard */; };
 		4104A9E822C834F50056BC83 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4104A9E722C834F50056BC83 /* Assets.xcassets */; };
 		4104A9EB22C834F50056BC83 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4104A9E922C834F50056BC83 /* LaunchScreen.storyboard */; };
-		4104A9F322C86AF80056BC83 /* Extenstions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4104A9F222C86AF80056BC83 /* Extenstions.swift */; };
+		4104A9F322C86AF80056BC83 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4104A9F222C86AF80056BC83 /* Extensions.swift */; };
 		4104A9F522C872C40056BC83 /* Drawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4104A9F422C872C40056BC83 /* Drawing.swift */; };
 /* End PBXBuildFile section */
 
@@ -24,7 +24,7 @@
 		4104A9E722C834F50056BC83 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4104A9EA22C834F50056BC83 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4104A9EC22C834F50056BC83 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4104A9F222C86AF80056BC83 /* Extenstions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extenstions.swift; sourceTree = "<group>"; };
+		4104A9F222C86AF80056BC83 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		4104A9F422C872C40056BC83 /* Drawing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Drawing.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -64,7 +64,7 @@
 				4104A9E722C834F50056BC83 /* Assets.xcassets */,
 				4104A9E922C834F50056BC83 /* LaunchScreen.storyboard */,
 				4104A9EC22C834F50056BC83 /* Info.plist */,
-				4104A9F222C86AF80056BC83 /* Extenstions.swift */,
+				4104A9F222C86AF80056BC83 /* Extensions.swift */,
 				4104A9F422C872C40056BC83 /* Drawing.swift */,
 			);
 			path = DDDemo;
@@ -143,7 +143,7 @@
 			files = (
 				4104A9F522C872C40056BC83 /* Drawing.swift in Sources */,
 				4104A9E322C834F30056BC83 /* ViewController.swift in Sources */,
-				4104A9F322C86AF80056BC83 /* Extenstions.swift in Sources */,
+				4104A9F322C86AF80056BC83 /* Extensions.swift in Sources */,
 				4104A9DF22C834F30056BC83 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
