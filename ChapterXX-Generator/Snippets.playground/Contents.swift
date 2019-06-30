@@ -81,7 +81,7 @@ class MarkovChain {
         // this is going to be a useless chain
         if startWords.isEmpty { return nil }
         
-        print("Model initiated successfully!")
+        print("Model initialised successfully!")
     }
 
     func clear() {
@@ -110,7 +110,7 @@ class MarkovChain {
     func generate(wordCount: Int = 100) -> String {
         // get n words, put them together
         for _ in 0..<wordCount { let _ = self.nextWord() }
-        return self.sequence.joined(separator: " ").replacingOccurrences(of: " .", with: ".")
+        return self.sequence.joined(separator: " ").replacingOccurrences(of: " .", with: ".") + " ..."
     }
 }
 

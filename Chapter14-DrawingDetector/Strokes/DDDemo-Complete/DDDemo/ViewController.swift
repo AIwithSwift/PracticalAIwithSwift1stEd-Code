@@ -116,9 +116,15 @@ class ViewController: UIViewController {
     }
     
     func classify() {
-        classifier.classify(self.imageView.image) { result in
+        guard let grayscaleImage = imageView.image?.applying(filter: .noir) else { return }
+        
+        classifyButton.disable()
+        classifier.classify(grayscaleImage) { result in
             self.classification = result?.icon
-            self.refresh()
+            
+            DispatchQueue.main.async {
+                self.refresh()
+            }
         }
     }
 }
