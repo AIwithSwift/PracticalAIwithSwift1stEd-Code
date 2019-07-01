@@ -6,6 +6,8 @@
 //  Copyright © 2019 Mars Geldard. All rights reserved.
 //
 
+import UIKit
+import Vision
 import Foundation
 
 enum Drawing: String, CaseIterable {
