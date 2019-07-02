@@ -67,3 +67,5 @@ fastlane/Preview.html
 fastlane/screenshots/**/*.png
 fastlane/test_output
 .DS_Store
+Chapter10-Beyond/coremltools_example/twitter_finetuned_test4_iter_180.caffemodel
+Chapter10-Beyond/coremltools_example/VisualSentiment.mlmodel
