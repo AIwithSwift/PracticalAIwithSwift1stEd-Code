@@ -9,12 +9,15 @@
 import UIKit
 
 /// see [here](https://developer.apple.com/library/archive/documentation/GraphicsImaging/Reference/CoreImageFilterReference/index.html#//apple_ref/doc/uid/TP30000136-SW55) for full list of inbuilt CIFilters, else you can make your own
+// BEGIN DDDemo_cifilter
 extension CIFilter {
     static let mono = CIFilter(name: "CIPhotoEffectMono")!
     static let noir = CIFilter(name: "CIPhotoEffectNoir")!
     static let tonal = CIFilter(name: "CIPhotoEffectTonal")!
 }
+// END DDDemo_cifilter
 
+// BEGIN DDDdemo_uiimage_ext
 extension UIImage {
     func applying(filter: CIFilter) -> UIImage? {
         filter.setValue(CIImage(image: self), forKey: kCIInputImageKey)
@@ -49,3 +52,4 @@ extension UIImage {
         }
     }
 }
+// END DDDdemo_uiimage_ext

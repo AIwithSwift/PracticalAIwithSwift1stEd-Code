@@ -8,6 +8,7 @@
 
 import SwiftUI
 
+// BEGIN ddd_views_mainview
 struct MainView: View {
     private let image: UIImage
     private let text: String
@@ -29,7 +30,9 @@ struct MainView: View {
         self.button = button()
     }
 }
+// END ddd_views_mainview
 
+// BEGIN ddd_views_tsb
 struct TwoStateButton: View {
     private let text: String
     private let disabled: Bool
@@ -53,7 +56,9 @@ struct TwoStateButton: View {
         self.action = action
     }
 }
+// END ddd_views_tsb
 
+// BEGIN ddd_views_imagepicker
 struct ImagePicker: UIViewControllerRepresentable {
     typealias UIViewControllerType = UIImagePickerController
     private(set) var selectedImage: UIImage?
@@ -103,4 +108,5 @@ struct ImagePicker: UIViewControllerRepresentable {
         }
     }
 }
+/// END ddd_views_imagepicker
 
