@@ -1,6 +1,8 @@
+// BEGIN nlp_pg_imports
 import NaturalLanguage
 import Foundation
 import CoreML
+// END nlp_pg_imports
 
 //"My hovercraft is full of eels" // English
 //"Mijn hovercraft zit vol palingen" // Afrikaans
@@ -11,6 +13,21 @@ import CoreML
 //"Mi aerodeslizador está lleno de anguilas" // Spanish
 //"Mein Luftkissenfahrzeug ist voller Aale" // German
 
+// Language Identification
+// BEGIN nlp_pg_li_ext
+extension String {
+    func predictLanguage() -> String {
+        let locale = Locale(identifier: "es")
+        let recognizer = NLLanguageRecognizer()
+        recognizer.processString(self)
+        let language = recognizer.dominantLanguage
+        return locale.localizedString(forLanguageCode: language!.rawValue) ?? "unknown"
+    }
+}
+// END nlp_pg_li_ext
+
+print("### Language Identification Demo ###")
+// BEGIN nlp_pg_li_string
 let text = ["My hovercraft is full of eels",
             "Mijn hovercraft zit vol palingen",
             "我的氣墊船裝滿了鱔魚 [我的气垫船装满了鳝鱼]",
@@ -19,24 +36,16 @@ let text = ["My hovercraft is full of eels",
             "제 호버크래프트가 장어로 가득해요",
             "Mi aerodeslizador está lleno de anguilas",
             "Mein Luftkissenfahrzeug ist voller Aale"]
+// END nlp_pg_li_string
 
-// Language Identification
-extension String {
-    func predictLanguage() -> String {
-        let locale = Locale(identifier: "en_US")
-        let recognizer = NLLanguageRecognizer()
-        recognizer.processString(self)
-        let language = recognizer.dominantLanguage
-        return locale.localizedString(forLanguageCode: language!.rawValue) ?? "unknown"
-    }
-}
-
-print("### Language Identification Demo ###")
+// BEGIN nlp_pg_li_test
 for string in text {
-    print(string.predictLanguage())
+    print("\(string) is in \(string.predictLanguage())")
 }
+// END nlp_pg_li_test
 
 // Named Entity Recognition
+// BEGIN ner_pg_ext
 extension String {
     func printNamedEntities() {
         let tagger = NSLinguisticTagger(tagSchemes: [.nameType], options: 0)
@@ -55,9 +64,14 @@ extension String {
         }
     }
 }
+// END ner_pg_ext
 print("### Named Entity Recognition Demo ###")
+// BEGIN ner_pg_sentence
 let sentence = "Marina, Jon, and Tim write books for O'Reilly Media and live in Tasmania, Australia."
+// END ner_pg_sentence
+// BEGIN ner_pg_testner
 sentence.printNamedEntities()
+// END ner_pg_testner
 
 // Tokenization
 extension String {
