@@ -16,7 +16,7 @@ struct ContentView: View {
     @State private var classification: String? = nil
     
     private let placeholderImage = UIImage(named: "placeholder")!
-    private let classifier = DrawingClassifierModelBitmap()
+    private let classifier = DrawingClassifierModel()
     private var cameraEnabled: Bool { UIImagePickerController.isSourceTypeAvailable(.camera) }
     private var classificationEnabled: Bool { image != nil && classification == nil }
     

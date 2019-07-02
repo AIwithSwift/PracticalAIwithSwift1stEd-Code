@@ -67,7 +67,7 @@ extension VNImageRequestHandler {
     }
 }
 
-extension DrawingClassifierModelStrokes {    
+extension DrawingClassifierModel {    
     func classify(_ image: UIImage?, completion: @escaping (Drawing?) -> ()) {
         guard let image = image,
             let model = try? VNCoreMLModel(for: self.model) else {

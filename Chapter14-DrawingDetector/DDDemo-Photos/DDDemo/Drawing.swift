@@ -68,11 +68,14 @@ extension VNImageRequestHandler {
     }
 }
 
-extension DrawingClassifierModelBitmap {
+extension DrawingClassifierModel {
     func configure(image: UIImage?) -> UIImage? {
         if let rotatedImage = image?.fixOrientation(),
-            let grayscaleImage = rotatedImage.applying(filter: CIFilter.noir) {
-            return grayscaleImage
+            let grayscaleImage = rotatedImage.applying(filter: CIFilter.noir),
+            // account for paper photography making everything dark :/
+            let brightenedImage = grayscaleImage.applying(filter: CIFilter.brighten(amount: 0.4)),
+            let contrastedImage = brightenedImage.applying(filter: CIFilter.contrast(amount: 10.0)) {
+            return contrastedImage
         }
         
         return nil

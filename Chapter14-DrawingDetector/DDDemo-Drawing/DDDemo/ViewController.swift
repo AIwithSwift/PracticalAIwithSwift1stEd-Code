@@ -24,7 +24,7 @@ class ViewController: UIViewController {
     private var strokes: [CGMutablePath] = []
     private var currentStroke: CGMutablePath? { return strokes.last }
     private var imageViewSize: CGSize { return imageView.frame.size }
-    private let classifier = DrawingClassifierModelStrokes()
+    private let classifier = DrawingClassifierModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()

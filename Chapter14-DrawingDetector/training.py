@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import os
 import json
 import requests
@@ -16,8 +18,8 @@ this_directory = os.path.dirname(os.path.realpath(__file__))
 quickdraw_directory = this_directory + '/quickdraw'
 bitmap_directory = quickdraw_directory + '/bitmap'
 bitmap_sframe_path = quickdraw_directory + '/bitmaps.sframe'
-output_model_filename = 'DrawingClassifierModel'
-training_samples = 100
+output_model_filename = this_directory + '/DrawingClassifierModel'
+training_samples = 10000
 
 # MAKE SOME FOLDERS TO PUT TRAINING DATA IN
 def make_directory(path):
@@ -48,12 +50,12 @@ random_state = np.random.RandomState(100)
 def get_bitmap_sframe():
     labels, drawings = [], []
     for category in categories:
-        data = np.load(bitmap_directory + '/' + category + '.npy')
+        data = np.load(bitmap_directory + '/' + category + '.npy', allow_pickle=True)
         random_state.shuffle(data)
         sampled_data = data[:training_samples]
         transformed_data = sampled_data.reshape(sampled_data.shape[0], 28, 28, 1)
         for pixel_data in transformed_data:
-            image = tc.Image(_image_data=pixel_data.tobytes(),
+            image = tc.Image(_image_data=np.invert(pixel_data).tobytes(),
                  _width=pixel_data.shape[1],
                  _height=pixel_data.shape[0],
                  _channels=pixel_data.shape[2],
@@ -68,16 +70,14 @@ def get_bitmap_sframe():
 # Save intermediate bitmap SFrame to file
 bitmap_sframe = get_bitmap_sframe()
 bitmap_sframe.save(bitmap_sframe_path)
+bitmap_sframe.explore()
 
 # BITMAP MODEL
-
-# Load the data
-bitmap_data =  tc.load_sframe(bitmap_sframe_path)
 
 # Create a model
 # (in a production model you would do a training/testing data split)
 # (but we don't mind how inaccurate it is for a demonstration)
-bitmap_model = tc.drawing_classifier.create(bitmap_data, 'label')
+bitmap_model = tc.drawing_classifier.create(bitmap_sframe, 'label', max_iterations=1000)
 
 # Export for use in Core ML
-bitmap_model.export_coreml(output_model_filename + 'Bitmap.mlmodel')
+bitmap_model.export_coreml(output_model_filename + '.mlmodel')
