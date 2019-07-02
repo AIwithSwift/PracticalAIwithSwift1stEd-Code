@@ -6,10 +6,13 @@
 //  Copyright © 2019 Mars Geldard. All rights reserved.
 //
 
+// BEGIN ddd_drawing_imports
 import UIKit
 import Vision
 import Foundation
+// END ddd_drawing_imports
 
+/// BEGIN ddd_drawing_enum
 enum Drawing: String, CaseIterable {
     /// These only include those the model was trained on
     /// For others that can be included in the training phase, see the [full list of categories in the dataset](https://raw.githubusercontent.com/googlecreativelab/quickdraw-dataset/master/categories.txt)
@@ -58,7 +61,9 @@ enum Drawing: String, CaseIterable {
         }
     }
 }
+// END ddd_drawing_enum
 
+// BEGIN ddd_drawing_vnirh
 extension VNImageRequestHandler {
     convenience init?(uiImage: UIImage) {
         guard let ciImage = CIImage(image: uiImage) else { return nil }
@@ -67,7 +72,9 @@ extension VNImageRequestHandler {
         self.init(ciImage: ciImage, orientation: orientation)
     }
 }
+// END ddd_drawing_vnirh
 
+// BEGIN ddd_drawing_ext_dcmb
 extension DrawingClassifierModel {
     func configure(image: UIImage?) -> UIImage? {
         if let rotatedImage = image?.fixOrientation(),
@@ -102,7 +109,9 @@ extension DrawingClassifierModel {
         }
     }
 }
+// END ddd_drawing_ext_dcmb
 
+// BEGIN ddd_drawing_ext_col_el
 extension Collection where Element == VNClassificationObservation {
     var list: String {
         var string = ""
@@ -112,3 +121,4 @@ extension Collection where Element == VNClassificationObservation {
         return string
     }
 }
+// END ddd_drawing_ext_col_el
