@@ -16,7 +16,7 @@ Code for the book's first edition.
 |Chapter17-ObjectDetector| ✅ | ✴️ | Chapter in progress with Paris. Chapter should cover both specific FaceDetector example and general Still Image tasks/inbuilt capabilities of Vision. Writeup should mention other types of detectors Apple has, such as [animals](https://developer.apple.com/documentation/vision/vnanimaldetector) and [whole human figures](https://developer.apple.com/documentation/vision/vndetecthumanrectanglesrequest). Apple's overview of what is possible is [here](https://developer.apple.com/documentation/vision/detecting_objects_in_still_images), which should be referenced when talking about detecting rectangles or barcodes. Part of chapter with above. Documentation to refer to in discussion (at least): [Cropping with Saliency](https://developer.apple.com/documentation/vision/cropping_images_using_saliency), [VNBarcodeObservation supportedSymbologies](https://developer.apple.com/documentation/vision/vnbarcodesymbology),  [VNBarcodeObservation payloadStringValue](https://developer.apple.com/documentation/vision/vnbarcodeobservation/2923485-payloadstringvalue). |
 | ChapterXX-VideoAnalyser | ✴️ | ⛔️ | Paris looking at. ARKit + still image analysis correlation between frames (VNTrackingRequest). See: [Face Tracking](https://developer.apple.com/documentation/vision/tracking_the_user_s_face_in_real_time). |
 | ChapterXX-NaturalLanguage ) | ✴️ | ⛔️ | Code in progress with Paris. Suggestions: **Detecting Text in images using Vision** (tie back into Ch17), [detecting people, places, organisations](https://developer.apple.com/documentation/naturallanguage/identifying_people_places_and_organizations), and [parts of speech](https://developer.apple.com/documentation/naturallanguage/identifying_parts_of_speech), [determining what language text is](https://developer.apple.com/documentation/naturallanguage/nllanguagerecognizer), [tokenizing sentences](https://developer.apple.com/documentation/naturallanguage/tokenizing_natural_language_text) (MAYBE this one isn't AI so we could skip and just mention it in the text?), [word embedding](https://developer.apple.com/documentation/createml/mlwordembedding) ([and NLEmbedding](https://developer.apple.com/documentation/naturallanguage/nlembedding))(interesting, but maybe too esoteric to cover? definitely AI though and even uses CreateML classes.. interesting from the perspective of [calculating the distance between strings](https://developer.apple.com/documentation/naturallanguage/nlembedding/3200310-distance))  |
-| ChapterXX-Generator | ✴️ | ⛔️ | Markov Chain example complete. GAN example being made by Mars. |
+| ChapterXX-Generator | ✴️ | ⛔️ | Markov Chain example complete. GAN example being made by Mars. Mars also thinks there should be an MLRegressor example. |
 
 ## TODO (not preventing tech review)
 
@@ -26,4 +26,6 @@ Code for the book's first edition.
 * **NSTDemo apps** need a better model.
 * **SCDemo apps** need constraints adjustments on CollectionView tiles.
 * Restructure directories to match book!
+* App Icons, launch screens, nice demo names!
+* Credits for all assets!
 * Code consistency, documentation and polish!
