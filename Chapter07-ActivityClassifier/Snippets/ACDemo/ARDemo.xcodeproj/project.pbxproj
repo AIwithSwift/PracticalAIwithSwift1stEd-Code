@@ -14,10 +14,11 @@
 		4127289422C1D08000A0362C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4127289222C1D08000A0362C /* LaunchScreen.storyboard */; };
 		4127289C22C1D0F000A0362C /* Motion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4127289B22C1D0F000A0362C /* Motion.swift */; };
 		412728A022C1F42700A0362C /* Tracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4127289F22C1F42700A0362C /* Tracking.swift */; };
+		6CC653B422D0841300137664 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CC653B322D0841300137664 /* Default-568h@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		4127288422C1D07E00A0362C /* ACDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ACDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4127288422C1D07E00A0362C /* ARDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4127288722C1D07E00A0362C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4127288B22C1D07E00A0362C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		4127288D22C1D08000A0362C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -26,6 +27,7 @@
 		4127289522C1D08000A0362C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4127289B22C1D0F000A0362C /* Motion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Motion.swift; sourceTree = "<group>"; };
 		4127289F22C1F42700A0362C /* Tracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tracking.swift; sourceTree = "<group>"; };
+		6CC653B322D0841300137664 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,7 +44,8 @@
 		4127287B22C1D07E00A0362C = {
 			isa = PBXGroup;
 			children = (
-				4127288622C1D07E00A0362C /* ACDemo */,
+				6CC653B322D0841300137664 /* Default-568h@2x.png */,
+				4127288622C1D07E00A0362C /* ARDemo */,
 				4127288522C1D07E00A0362C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -50,12 +53,12 @@
 		4127288522C1D07E00A0362C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				4127288422C1D07E00A0362C /* ACDemo.app */,
+				4127288422C1D07E00A0362C /* ARDemo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		4127288622C1D07E00A0362C /* ACDemo */ = {
+		4127288622C1D07E00A0362C /* ARDemo */ = {
 			isa = PBXGroup;
 			children = (
 				4127288722C1D07E00A0362C /* AppDelegate.swift */,
@@ -67,7 +70,7 @@
 				4127289522C1D08000A0362C /* Info.plist */,
 				4127288F22C1D08000A0362C /* Preview Content */,
 			);
-			path = ACDemo;
+			path = ARDemo;
 			sourceTree = "<group>";
 		};
 		4127288F22C1D08000A0362C /* Preview Content */ = {
@@ -81,9 +84,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		4127288322C1D07E00A0362C /* ACDemo */ = {
+		4127288322C1D07E00A0362C /* ARDemo */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4127289822C1D08000A0362C /* Build configuration list for PBXNativeTarget "ACDemo" */;
+			buildConfigurationList = 4127289822C1D08000A0362C /* Build configuration list for PBXNativeTarget "ARDemo" */;
 			buildPhases = (
 				4127288022C1D07E00A0362C /* Sources */,
 				4127288122C1D07E00A0362C /* Frameworks */,
@@ -93,9 +96,9 @@
 			);
 			dependencies = (
 			);
-			name = ACDemo;
+			name = ARDemo;
 			productName = ACDemo;
-			productReference = 4127288422C1D07E00A0362C /* ACDemo.app */;
+			productReference = 4127288422C1D07E00A0362C /* ARDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -113,7 +116,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 4127287F22C1D07E00A0362C /* Build configuration list for PBXProject "ACDemo" */;
+			buildConfigurationList = 4127287F22C1D07E00A0362C /* Build configuration list for PBXProject "ARDemo" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -126,7 +129,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				4127288322C1D07E00A0362C /* ACDemo */,
+				4127288322C1D07E00A0362C /* ARDemo */,
 			);
 		};
 /* End PBXProject section */
@@ -137,6 +140,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4127289422C1D08000A0362C /* LaunchScreen.storyboard in Resources */,
+				6CC653B422D0841300137664 /* Default-568h@2x.png in Resources */,
 				4127289122C1D08000A0362C /* Preview Assets.xcassets in Resources */,
 				4127288E22C1D08000A0362C /* Assets.xcassets in Resources */,
 			);
@@ -289,10 +293,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "ACDemo/Preview\\ Content";
+				DEVELOPMENT_ASSET_PATHS = "ARDemo/Preview\\ Content";
 				DEVELOPMENT_TEAM = 5V2A4389PA;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = ACDemo/Info.plist;
+				INFOPLIST_FILE = ARDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -309,10 +313,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "ACDemo/Preview\\ Content";
+				DEVELOPMENT_ASSET_PATHS = "ARDemo/Preview\\ Content";
 				DEVELOPMENT_TEAM = 5V2A4389PA;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = ACDemo/Info.plist;
+				INFOPLIST_FILE = ARDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -327,7 +331,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		4127287F22C1D07E00A0362C /* Build configuration list for PBXProject "ACDemo" */ = {
+		4127287F22C1D07E00A0362C /* Build configuration list for PBXProject "ARDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4127289622C1D08000A0362C /* Debug */,
@@ -336,7 +340,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4127289822C1D08000A0362C /* Build configuration list for PBXNativeTarget "ACDemo" */ = {
+		4127289822C1D08000A0362C /* Build configuration list for PBXNativeTarget "ARDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4127289922C1D08000A0362C /* Debug */,
