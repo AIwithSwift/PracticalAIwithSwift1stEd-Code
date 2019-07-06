@@ -75,6 +75,7 @@ sentence.printNamedEntities()
 
 // Tokenization
 extension String {
+    // BEGIN nlp_print_words_func
     func printWords() {
         let tagger = NSLinguisticTagger(tagSchemes:[.tokenType], options: 0)
         let options: NSLinguisticTagger.Options = [.omitPunctuation, .omitWhitespace, .joinNames]
@@ -86,32 +87,46 @@ extension String {
             print(word)
         }
     }
+    // END nlp_print_words_func
 }
 print("### Tokenization Demo ###")
+// BEGIN nlp_speech
 let speech = "Space, the final frontier. These are the voyages of the Starship Enterprise. Its continuing mission to explore strange new worlds, to seek out new life and new civilization, to boldly go where no one has gone before!"
+// END nlp_speech
+// BEGIN nlp_running_tokenization_for_print_words
 speech.printWords()
+// END nlp_running_tokenization_for_print_words
 
 // Parts of Speech
 extension String {
+    // BEGIN nlp_func_ppos
     func printPartsOfSpeech() {
+        // BEGIN nlp_func_ppos1
         let tagger = NSLinguisticTagger(tagSchemes:[.lexicalClass], options: 0)
         let options: NSLinguisticTagger.Options = [.omitPunctuation, .omitWhitespace, .joinNames]
         
         tagger.string = self
         let range = NSRange(location: 0, length: self.utf16.count)
+        // BEGIN nlp_func_ppos1
         
+        // BEGIN nlp_func_ppos2
         tagger.enumerateTags(in: range, unit: .word, scheme: .lexicalClass, options: options) { tag, tokenRange, _ in
             if let tag = tag {
                 let word = (self as NSString).substring(with: tokenRange)
                 print("\(word) is a \(tag.rawValue)")
             }
         }
+        // END nlp_func_ppos2
     }
+    // END nlp_func_ppos
 }
 print("### Parts of Speech Demo ###")
+// BEGIN nlp_running_parts_of_speech
 speech.printPartsOfSpeech()
+// END nlp_running_parts_of_speech
 
 //Lemmatization
+// BEGIN nlp_string_ext_lemma
 extension String {
     func printLemmas() {
         let tagger = NSLinguisticTagger(tagSchemes:[.lemma], options: 0)
@@ -125,8 +140,11 @@ extension String {
         }
     }
 }
+// END nlp_string_ext_lemma
 print("### Lemmatization Demo ###")
-speech.printLemmas()    
+// BEGIN nlp_calling_print_lemmas
+speech.printLemmas()
+// END nlp_calling_print_lemmas
 
 // Custom Tagger
 
