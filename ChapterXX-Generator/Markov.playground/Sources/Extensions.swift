@@ -1,18 +1,23 @@
 import Foundation
 
+// BEGIN markov_ext1
 public extension Collection {
     func randomIndex() -> Int? {
         if self.isEmpty { return nil }
         return Int(arc4random_uniform(UInt32(self.count)))
     }
 }
+// END markov_ext1
 
+// BEGIN markov_ext2
 public extension NSRegularExpression {
     func matches(in text: String) -> [NSTextCheckingResult] {
         return self.matches(in: text, range: NSRange(text.startIndex..., in: text))
     }
 }
+// END markov_ext2
 
+// BEGIN markov_ext3
 public extension String {
     func matches(regex pattern: String) throws -> [String] {
         do {
@@ -24,7 +29,9 @@ public extension String {
         }
     }
 }
+// END markov_ext3
 
+// BEGIN markov_ext4
 public extension String {
     static let sentenceEnd: String = "."
     
@@ -45,4 +52,4 @@ public extension String {
         return tokens
     }
 }
-
+// END markov_ext4

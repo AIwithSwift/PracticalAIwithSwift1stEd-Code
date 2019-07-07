@@ -1,12 +1,15 @@
 import Foundation
 
+// BEGIN markov_class
 class MarkovChain {
-
+    // BEGIN markov1
     private let startWords: [String]
     private let links: [String: [Link]]
 
     private(set) var sequence: [String] = []
+    // END markov1
 
+    // BEGIN markov2
     enum Link: Equatable {
         case end
         case word(options: [String])
@@ -18,7 +21,9 @@ class MarkovChain {
             }
         }
     }
+    // END markov2
 
+    // BEGIN markov3
     init?(with inputFilepath: String) {
         guard let filePath = Bundle.main.path(forResource: inputFilepath, ofType: ".txt"),
             let inputFile = FileManager.default.contents(atPath: filePath),
@@ -83,11 +88,15 @@ class MarkovChain {
         
         print("Model initialised successfully!")
     }
+    // END markov3
 
+    // BEGIN markov4
     func clear() {
         self.sequence = []
     }
+    // END markov4
 
+    // BEGIN markov5
     func nextWord() -> String {
         let newWord: String
         
@@ -106,14 +115,19 @@ class MarkovChain {
         self.sequence.append(newWord)
         return newWord
     }
+    // END markov5
     
+    // BEGIN markov6
     func generate(wordCount: Int = 100) -> String {
         // get n words, put them together
         for _ in 0..<wordCount { let _ = self.nextWord() }
         return self.sequence.joined(separator: " ").replacingOccurrences(of: " .", with: ".") + " ..."
     }
+    // END markov6
 }
+// END markov_class
 
+// BEGIN markov_using
 let file = "wonderland"
 if let markovChain = MarkovChain(with: file) {
     print("\n BEGIN TEXT\n==========\n")
@@ -122,3 +136,4 @@ if let markovChain = MarkovChain(with: file) {
 } else {
     print("Failure")
 }
+// END markov_using
