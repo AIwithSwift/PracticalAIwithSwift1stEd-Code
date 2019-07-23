@@ -1,0 +1,395 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		416EA01822DBB7F400D11197 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416EA01722DBB7F400D11197 /* AppDelegate.swift */; };
+		416EA01C22DBB7F400D11197 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416EA01B22DBB7F400D11197 /* ViewController.swift */; };
+		416EA01F22DBB7F400D11197 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 416EA01D22DBB7F400D11197 /* Main.storyboard */; };
+		416EA02122DBB7F500D11197 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 416EA02022DBB7F500D11197 /* Assets.xcassets */; };
+		416EA02422DBB7F500D11197 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 416EA02222DBB7F500D11197 /* LaunchScreen.storyboard */; };
+		416EA03522DBB82900D11197 /* MnistGan2.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 416EA02B22DBB81A00D11197 /* MnistGan2.mlmodel */; };
+		416EA03622DBB82900D11197 /* MnistGan8.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 416EA02C22DBB81C00D11197 /* MnistGan8.mlmodel */; };
+		416EA03722DBB82900D11197 /* MnistGan3.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 416EA02D22DBB81D00D11197 /* MnistGan3.mlmodel */; };
+		416EA03822DBB82900D11197 /* MnistGan5.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 416EA02E22DBB81F00D11197 /* MnistGan5.mlmodel */; };
+		416EA03922DBB82900D11197 /* MnistGan6.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 416EA02F22DBB82000D11197 /* MnistGan6.mlmodel */; };
+		416EA03A22DBB82900D11197 /* MnistGan1.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 416EA03022DBB82200D11197 /* MnistGan1.mlmodel */; };
+		416EA03B22DBB82900D11197 /* MnistGan0.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 416EA03122DBB82400D11197 /* MnistGan0.mlmodel */; };
+		416EA03C22DBB82900D11197 /* MnistGan4.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 416EA03222DBB82500D11197 /* MnistGan4.mlmodel */; };
+		416EA03D22DBB82900D11197 /* MnistGan7.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 416EA03322DBB82700D11197 /* MnistGan7.mlmodel */; };
+		416EA03E22DBB82900D11197 /* MnistGan9.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 416EA03422DBB82800D11197 /* MnistGan9.mlmodel */; };
+		416EA04122DCE11000D11197 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416EA04022DCE11000D11197 /* Utils.swift */; };
+		41EC42EF22DFA4360003E618 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EC42EE22DFA4360003E618 /* Models.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		416EA01422DBB7F400D11197 /* GANDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GANDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		416EA01722DBB7F400D11197 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		416EA01B22DBB7F400D11197 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		416EA01E22DBB7F400D11197 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		416EA02022DBB7F500D11197 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		416EA02322DBB7F500D11197 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		416EA02522DBB7F500D11197 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		416EA02B22DBB81A00D11197 /* MnistGan2.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MnistGan2.mlmodel; sourceTree = "<group>"; };
+		416EA02C22DBB81C00D11197 /* MnistGan8.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MnistGan8.mlmodel; sourceTree = "<group>"; };
+		416EA02D22DBB81D00D11197 /* MnistGan3.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MnistGan3.mlmodel; sourceTree = "<group>"; };
+		416EA02E22DBB81F00D11197 /* MnistGan5.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MnistGan5.mlmodel; sourceTree = "<group>"; };
+		416EA02F22DBB82000D11197 /* MnistGan6.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MnistGan6.mlmodel; sourceTree = "<group>"; };
+		416EA03022DBB82200D11197 /* MnistGan1.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MnistGan1.mlmodel; sourceTree = "<group>"; };
+		416EA03122DBB82400D11197 /* MnistGan0.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MnistGan0.mlmodel; sourceTree = "<group>"; };
+		416EA03222DBB82500D11197 /* MnistGan4.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MnistGan4.mlmodel; sourceTree = "<group>"; };
+		416EA03322DBB82700D11197 /* MnistGan7.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MnistGan7.mlmodel; sourceTree = "<group>"; };
+		416EA03422DBB82800D11197 /* MnistGan9.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MnistGan9.mlmodel; sourceTree = "<group>"; };
+		416EA04022DCE11000D11197 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		41EC42EE22DFA4360003E618 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		416EA01122DBB7F400D11197 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		416EA00B22DBB7F400D11197 = {
+			isa = PBXGroup;
+			children = (
+				416EA03F22DBB83C00D11197 /* Models */,
+				416EA01622DBB7F400D11197 /* GANDemo */,
+				416EA01522DBB7F400D11197 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		416EA01522DBB7F400D11197 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				416EA01422DBB7F400D11197 /* GANDemo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		416EA01622DBB7F400D11197 /* GANDemo */ = {
+			isa = PBXGroup;
+			children = (
+				416EA01722DBB7F400D11197 /* AppDelegate.swift */,
+				416EA01B22DBB7F400D11197 /* ViewController.swift */,
+				416EA01D22DBB7F400D11197 /* Main.storyboard */,
+				416EA02022DBB7F500D11197 /* Assets.xcassets */,
+				416EA02222DBB7F500D11197 /* LaunchScreen.storyboard */,
+				416EA02522DBB7F500D11197 /* Info.plist */,
+				416EA04022DCE11000D11197 /* Utils.swift */,
+				41EC42EE22DFA4360003E618 /* Models.swift */,
+			);
+			path = GANDemo;
+			sourceTree = "<group>";
+		};
+		416EA03F22DBB83C00D11197 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				416EA03122DBB82400D11197 /* MnistGan0.mlmodel */,
+				416EA03022DBB82200D11197 /* MnistGan1.mlmodel */,
+				416EA02B22DBB81A00D11197 /* MnistGan2.mlmodel */,
+				416EA02D22DBB81D00D11197 /* MnistGan3.mlmodel */,
+				416EA03222DBB82500D11197 /* MnistGan4.mlmodel */,
+				416EA02E22DBB81F00D11197 /* MnistGan5.mlmodel */,
+				416EA02F22DBB82000D11197 /* MnistGan6.mlmodel */,
+				416EA03322DBB82700D11197 /* MnistGan7.mlmodel */,
+				416EA02C22DBB81C00D11197 /* MnistGan8.mlmodel */,
+				416EA03422DBB82800D11197 /* MnistGan9.mlmodel */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		416EA01322DBB7F400D11197 /* GANDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 416EA02822DBB7F500D11197 /* Build configuration list for PBXNativeTarget "GANDemo" */;
+			buildPhases = (
+				416EA01022DBB7F400D11197 /* Sources */,
+				416EA01122DBB7F400D11197 /* Frameworks */,
+				416EA01222DBB7F400D11197 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GANDemo;
+			productName = GANDemo;
+			productReference = 416EA01422DBB7F400D11197 /* GANDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		416EA00C22DBB7F400D11197 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1100;
+				LastUpgradeCheck = 1100;
+				ORGANIZATIONNAME = "Mars Geldard";
+				TargetAttributes = {
+					416EA01322DBB7F400D11197 = {
+						CreatedOnToolsVersion = 11.0;
+					};
+				};
+			};
+			buildConfigurationList = 416EA00F22DBB7F400D11197 /* Build configuration list for PBXProject "GANDemo" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 416EA00B22DBB7F400D11197;
+			productRefGroup = 416EA01522DBB7F400D11197 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				416EA01322DBB7F400D11197 /* GANDemo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		416EA01222DBB7F400D11197 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				416EA02422DBB7F500D11197 /* LaunchScreen.storyboard in Resources */,
+				416EA02122DBB7F500D11197 /* Assets.xcassets in Resources */,
+				416EA01F22DBB7F400D11197 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		416EA01022DBB7F400D11197 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				416EA03C22DBB82900D11197 /* MnistGan4.mlmodel in Sources */,
+				416EA03D22DBB82900D11197 /* MnistGan7.mlmodel in Sources */,
+				416EA03922DBB82900D11197 /* MnistGan6.mlmodel in Sources */,
+				416EA03622DBB82900D11197 /* MnistGan8.mlmodel in Sources */,
+				416EA03722DBB82900D11197 /* MnistGan3.mlmodel in Sources */,
+				416EA04122DCE11000D11197 /* Utils.swift in Sources */,
+				416EA03822DBB82900D11197 /* MnistGan5.mlmodel in Sources */,
+				416EA03B22DBB82900D11197 /* MnistGan0.mlmodel in Sources */,
+				416EA03A22DBB82900D11197 /* MnistGan1.mlmodel in Sources */,
+				416EA03522DBB82900D11197 /* MnistGan2.mlmodel in Sources */,
+				416EA03E22DBB82900D11197 /* MnistGan9.mlmodel in Sources */,
+				416EA01C22DBB7F400D11197 /* ViewController.swift in Sources */,
+				416EA01822DBB7F400D11197 /* AppDelegate.swift in Sources */,
+				41EC42EF22DFA4360003E618 /* Models.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		416EA01D22DBB7F400D11197 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				416EA01E22DBB7F400D11197 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		416EA02222DBB7F500D11197 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				416EA02322DBB7F500D11197 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		416EA02622DBB7F500D11197 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		416EA02722DBB7F500D11197 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		416EA02922DBB7F500D11197 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5V2A4389PA;
+				INFOPLIST_FILE = GANDemo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = au.com.secretlab.GANDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		416EA02A22DBB7F500D11197 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5V2A4389PA;
+				INFOPLIST_FILE = GANDemo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = au.com.secretlab.GANDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		416EA00F22DBB7F400D11197 /* Build configuration list for PBXProject "GANDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				416EA02622DBB7F500D11197 /* Debug */,
+				416EA02722DBB7F500D11197 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		416EA02822DBB7F500D11197 /* Build configuration list for PBXNativeTarget "GANDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				416EA02922DBB7F500D11197 /* Debug */,
+				416EA02A22DBB7F500D11197 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 416EA00C22DBB7F400D11197 /* Project object */;
+}
