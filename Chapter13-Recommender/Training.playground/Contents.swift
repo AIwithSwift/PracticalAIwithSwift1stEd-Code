@@ -28,11 +28,12 @@ import CoreML
  from Netflix.
  */
 
-let csvFile = Bundle.main.url(forResource: "netflix-priza-data", withExtension: "csv")!
+let csvFile = Bundle.main.url(forResource: nil, withExtension: "csv")!
 let userColumn = "CustomerID"
-let itemColumn = "Movie"
+let itemColumn = "MovieID"
 let ratingColumn = "Rating"
-let outputFilepath = "/Users/mars/Desktop/recommender.mlmodel"
+let titleColumn = "Movie"
+let outputFilepath = URL(string: "~/recommender.mlmodel")!
 
 let metadata = MLModelMetadata(
     author: "Mars Geldard",
@@ -46,8 +47,6 @@ if #available(OSX 10.15, *), let dataTable = try? MLDataTable(contentsOf: csvFil
     
     print("Got data!")
     
-    let (evaluationData, trainingData) = dataTable.randomSplit(by: 0.20, seed: 5)
-
     // =DEFAULT VALUES=
     // let parameters = MLRecommender.ModelParameters(
     //     algorithm: .itemSimilarity(SimilarityType.jaccard),
@@ -60,30 +59,82 @@ if #available(OSX 10.15, *), let dataTable = try? MLDataTable(contentsOf: csvFil
     
     print("Configured setup!")
     
-    let model = try? MLRecommender(
-        trainingData: trainingData,
-        userColumn: userColumn,
-        itemColumn: itemColumn,
-        ratingColumn: ratingColumn,
-        parameters: parameters
-    )
     
-    print("Trained model!")
+    var model: MLRecommender? = nil
     
-    let testItems: [MLIdentifier] = [
-        "Les Miserables in Concert"
-    ]
+    do {
+        model = try MLRecommender(
+            trainingData: dataTable,//trainingData,
+            userColumn: userColumn,
+            itemColumn: itemColumn,
+            ratingColumn: ratingColumn,
+            parameters: parameters
+        )
+    } catch let error as MLCreateError {
+        switch error {
+            case .io(let reason): print("IO error: \(reason)")
+            case .type(let reason): print("Type error: \(reason)")
+            case .generic(let reason): print("Generic error: \(reason)")
+        }
+    } catch {
+        print("Error training model: \(error.localizedDescription)")
+    }
     
-    if let filepath = URL(string: outputFilepath), let recommender = model {
-        try? recommender.write(to: filepath, metadata: metadata)
+    
+    if let recommender = model {
         
-        let metrics = recommender.evaluation(on: evaluationData, userColumn: userColumn, itemColumn: itemColumn, ratingColumn: ratingColumn)
-        print(metrics)
+        print("Trained model!")
         
-        if let similarItemsColumn = try? recommender.getSimilarItems(fromItems: testItems)[itemColumn] {
-            let similarItems = Array(similarItemsColumn).enumerated()
-            let itemList = similarItems.map { tuple in "Item \(testItems[tuple.offset]): \(tuple.element)\n"}
-            print("Similar items\n===============\n\(itemList)")
+        try? recommender.write(to: outputFilepath, metadata: metadata)
+        
+        let userIdColumnValues: MLDataColumn<Int> = dataTable[userColumn]
+        let movieIdColumnValues: MLDataColumn<Int> = dataTable[itemColumn]
+        let ratingsColumnValues: MLDataColumn<Int> = dataTable[ratingColumn]
+        let movieColumnValues: MLDataColumn<String> = dataTable[titleColumn]
+        
+        let testUsers: [Int] = [
+            0, 1, 2, 3, 100, 324, 500
+        ]
+        
+        let threshold = 0.75
+        
+        if let userRecommendations = try? recommender.recommendations(fromUsers: testUsers as [MLIdentifier]) {
+            let recsUserColumnValues: MLDataColumn<Int> = userRecommendations[userColumn]
+            let recsMovieColumnValues: MLDataColumn<Int> = userRecommendations[itemColumn]
+            let recsScoreColumnValues: MLDataColumn<Double> = userRecommendations["score"]
+            print(userRecommendations)
+            
+            for user in testUsers {
+                print("\nUser \(user) likes:")
+                
+                // get current ratings
+                let userMask = (userIdColumnValues == user)
+                let currentTitles = Array(movieColumnValues[userMask])
+                let currentRatings = Array(ratingsColumnValues[userMask])
+                let userRatings = zip(currentTitles, currentRatings)
+                
+                userRatings.forEach { title, rating in
+                    print(" -  \(title) (\(rating) stars)")
+                }
+                
+                print("\nRecommendations for User \(user):")
+                
+                let recsUserMask  = (recsUserColumnValues == user)
+                let recommendedMovies = Array(recsMovieColumnValues[recsUserMask])
+                let recommendedScores = Array(recsScoreColumnValues[recsUserMask])
+                let recommendations = zip(recommendedMovies, recommendedScores)
+
+                recommendations.forEach { movieId, score in
+                    if score > threshold {
+                        
+                        // get title
+                        let movieMask = (movieIdColumnValues == movieId)
+                        let title = Array(movieColumnValues[movieMask]).first ?? "<Unknown Title>"
+                        
+                        print(" - \(title)")
+                    }
+                }
+            }
         }
     }
 }
