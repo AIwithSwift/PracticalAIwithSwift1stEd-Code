@@ -11,16 +11,6 @@ import CoreML
 
 import Foundation
 
-class TargetDeviceInformation {
-    static var isTargetingSimulator: Bool {
-        #if targetEnvironment(simulator)
-        return true
-        #else
-        return false
-        #endif
-    }
-}
-
 extension MLMultiArray {
     static func getRandomNoise(length: NSNumber = 100) -> MLMultiArray? {
         guard let input = try? MLMultiArray(shape: [length], dataType: .double) else {
@@ -33,41 +23,6 @@ extension MLMultiArray {
         
         return input
     }
-    
-    func convert() -> [UInt8] {
-        var byteData: [UInt8] = []
-        
-        for i in 0..<self.count {
-            let floatOut = self[i] as! Float32
-            
-            if TargetDeviceInformation.isTargetingSimulator {
-                let bytesOut = UInt8.makeByteArray(from: (floatOut + 1.0) / 2.0)
-                byteData.append(contentsOf: bytesOut)
-            } else {
-                let byteOut: UInt8 = UInt8((floatOut * 127.5) + 127.5)
-                byteData.append(byteOut)
-            }
-        }
-        
-        return byteData
-    }
-}
-
-extension UIImage {
-//    static func generatedImage(with ganModel: ImageGenerator) -> UIImage? {
-//        guard let noiseArray = MLMultiArray.getRandomNoise(),
-//            let output = try? ganModel.prediction(noiseArray: noiseArray),
-//            let outputFeatureProvider = output.featureValue(for: "generatedImage"),
-//            let outputImageData = outputFeatureProvider as? MLMultiArray
-//            else {
-//                return nil
-//        }
-//        
-//        let byteData = outputImageData.convert()
-//        let image = createImage(data: byteData, width: 28, height: 28, components: 1)
-//        
-//        return image
-//    }
 }
 
 extension UInt8 {
@@ -78,15 +33,35 @@ extension UInt8 {
 }
 
 extension UIImage {
-    convenience init?(data: [UInt8], width: Int, height: Int, components: Int) {
-        let bitsPerComponent = TargetDeviceInformation.isTargetingSimulator ? 32 : 8
-        let dataSize = (width * height * components * bitsPerComponent)
-        guard let cfData = CFDataCreate(nil, data, dataSize / 8),
-            let provider = CGDataProvider(data: cfData) else {
-            return nil
-        }
+    convenience init?(data: MLMultiArray) {
+        assert(data.shape.count == 3)
+        assert(data.shape[0] == 1)
+
+        let height = data.shape[1].intValue
+        let width = data.shape[2].intValue
+
+        var byteData: [UInt8] = []
         
-        guard let cgImage = CGImage.makeFrom(dataProvider: provider, width: width, height: height, components: components) else {
+        for xIndex in 0..<width {
+            for yIndex in 0..<height {
+                let pixelValue = Float32(truncating: data[xIndex * height + yIndex])
+                let byteOut: UInt8 = UInt8((pixelValue * 127.5) + 127.5)
+                byteData.append(byteOut)
+            }
+        }
+
+        self.init(data: byteData, width: width, height: height, components: 1)
+    }
+    
+    convenience init?(data: [UInt8], width: Int, height: Int, components: Int) {
+        let dataSize = (width * height * components * 8)
+        guard let cfData = CFDataCreate(nil, data, dataSize / 8),
+            let provider = CGDataProvider(data: cfData),
+            let cgImage = CGImage.makeFrom(
+                dataProvider: provider,
+                width: width,
+                height: height,
+                components: components) else {
             return nil
         }
         
@@ -98,9 +73,8 @@ extension CGImage {
     static func makeFrom(dataProvider: CGDataProvider, width: Int, height: Int, components: Int) -> CGImage? {
         if components != 1 && components != 3 { return nil }
         
-        let simulator = TargetDeviceInformation.isTargetingSimulator
-        let bitMapInfo: CGBitmapInfo = simulator ? .floatComponents : .byteOrder16Little
-        let bitsPerComponent = simulator ? 32 : 8
+        let bitMapInfo: CGBitmapInfo = .byteOrder16Little
+        let bitsPerComponent = 8
         
         let colorSpace: CGColorSpace = (components == 1) ?
             CGColorSpaceCreateDeviceGray() : CGColorSpaceCreateDeviceRGB()

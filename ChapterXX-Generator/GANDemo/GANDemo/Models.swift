@@ -16,10 +16,8 @@ public protocol ImageGenerator {
 extension MnistGan0: ImageGenerator {
     func prediction() -> UIImage? {
         if let noiseArray = MLMultiArray.getRandomNoise(),
-            let output = try? model.prediction(from: MnistGan0Input(noiseArray: noiseArray) as MLFeatureProvider) as? MnistGan0Output {
-            let outputFeatureProvider = output.generatedImage as MLMultiArray
-            let byteData = outputFeatureProvider.convert()
-            return UIImage(data: byteData, width: 28, height: 28, components: 1)
+            let output = try? self.prediction(input: MnistGan0Input(input1: noiseArray)) {
+            return UIImage(data: output.output1)
         }
         
         return nil
@@ -29,10 +27,8 @@ extension MnistGan0: ImageGenerator {
 extension MnistGan1: ImageGenerator {
     func prediction() -> UIImage? {
         if let noiseArray = MLMultiArray.getRandomNoise(),
-            let output = try? model.prediction(from: MnistGan1Input(noiseArray: noiseArray) as MLFeatureProvider) as? MnistGan1Output {
-            let outputFeatureProvider = output.generatedImage as MLMultiArray
-            let byteData = outputFeatureProvider.convert()
-            return UIImage(data: byteData, width: 28, height: 28, components: 1)
+            let output = try? self.prediction(input: MnistGan1Input(input1: noiseArray)) {
+            return UIImage(data: output.output1)
         }
         
         return nil
@@ -42,10 +38,8 @@ extension MnistGan1: ImageGenerator {
 extension MnistGan2: ImageGenerator {
     func prediction() -> UIImage? {
         if let noiseArray = MLMultiArray.getRandomNoise(),
-            let output = try? model.prediction(from: MnistGan2Input(noiseArray: noiseArray) as MLFeatureProvider) as? MnistGan2Output {
-            let outputFeatureProvider = output.generatedImage as MLMultiArray
-            let byteData = outputFeatureProvider.convert()
-            return UIImage(data: byteData, width: 28, height: 28, components: 1)
+            let output = try? self.prediction(input: MnistGan2Input(input1: noiseArray)) {
+            return UIImage(data: output.output1)
         }
         
         return nil
@@ -55,10 +49,8 @@ extension MnistGan2: ImageGenerator {
 extension MnistGan3: ImageGenerator {
     func prediction() -> UIImage? {
         if let noiseArray = MLMultiArray.getRandomNoise(),
-            let output = try? model.prediction(from: MnistGan3Input(noiseArray: noiseArray) as MLFeatureProvider) as? MnistGan3Output {
-            let outputFeatureProvider = output.generatedImage as MLMultiArray
-            let byteData = outputFeatureProvider.convert()
-            return UIImage(data: byteData, width: 28, height: 28, components: 1)
+            let output = try? self.prediction(input: MnistGan3Input(input1: noiseArray)) {
+            return UIImage(data: output.output1)
         }
         
         return nil
@@ -68,10 +60,8 @@ extension MnistGan3: ImageGenerator {
 extension MnistGan4: ImageGenerator {
     func prediction() -> UIImage? {
         if let noiseArray = MLMultiArray.getRandomNoise(),
-            let output = try? model.prediction(from: MnistGan4Input(noiseArray: noiseArray) as MLFeatureProvider) as? MnistGan4Output {
-            let outputFeatureProvider = output.generatedImage as MLMultiArray
-            let byteData = outputFeatureProvider.convert()
-            return UIImage(data: byteData, width: 28, height: 28, components: 1)
+            let output = try? self.prediction(input: MnistGan4Input(input1: noiseArray)) {
+            return UIImage(data: output.output1)
         }
         
         return nil
@@ -81,10 +71,8 @@ extension MnistGan4: ImageGenerator {
 extension MnistGan5: ImageGenerator {
     func prediction() -> UIImage? {
         if let noiseArray = MLMultiArray.getRandomNoise(),
-            let output = try? model.prediction(from: MnistGan5Input(noiseArray: noiseArray) as MLFeatureProvider) as? MnistGan5Output {
-            let outputFeatureProvider = output.generatedImage as MLMultiArray
-            let byteData = outputFeatureProvider.convert()
-            return UIImage(data: byteData, width: 28, height: 28, components: 1)
+            let output = try? self.prediction(input: MnistGan5Input(input1: noiseArray)) {
+            return UIImage(data: output.output1)
         }
         
         return nil
@@ -94,10 +82,8 @@ extension MnistGan5: ImageGenerator {
 extension MnistGan6: ImageGenerator {
     func prediction() -> UIImage? {
         if let noiseArray = MLMultiArray.getRandomNoise(),
-            let output = try? model.prediction(from: MnistGan6Input(noiseArray: noiseArray) as MLFeatureProvider) as? MnistGan6Output {
-            let outputFeatureProvider = output.generatedImage as MLMultiArray
-            let byteData = outputFeatureProvider.convert()
-            return UIImage(data: byteData, width: 28, height: 28, components: 1)
+            let output = try? self.prediction(input: MnistGan6Input(input1: noiseArray)) {
+            return UIImage(data: output.output1)
         }
         
         return nil
@@ -107,10 +93,8 @@ extension MnistGan6: ImageGenerator {
 extension MnistGan7: ImageGenerator {
     func prediction() -> UIImage? {
         if let noiseArray = MLMultiArray.getRandomNoise(),
-            let output = try? model.prediction(from: MnistGan7Input(noiseArray: noiseArray) as MLFeatureProvider) as? MnistGan7Output {
-            let outputFeatureProvider = output.generatedImage as MLMultiArray
-            let byteData = outputFeatureProvider.convert()
-            return UIImage(data: byteData, width: 28, height: 28, components: 1)
+            let output = try? self.prediction(input: MnistGan7Input(input1: noiseArray)) {
+            return UIImage(data: output.output1)
         }
         
         return nil
@@ -120,10 +104,8 @@ extension MnistGan7: ImageGenerator {
 extension MnistGan8: ImageGenerator {
     func prediction() -> UIImage? {
         if let noiseArray = MLMultiArray.getRandomNoise(),
-            let output = try? model.prediction(from: MnistGan8Input(noiseArray: noiseArray) as MLFeatureProvider) as? MnistGan8Output {
-            let outputFeatureProvider = output.generatedImage as MLMultiArray
-            let byteData = outputFeatureProvider.convert()
-            return UIImage(data: byteData, width: 28, height: 28, components: 1)
+            let output = try? self.prediction(input: MnistGan8Input(input1: noiseArray)) {
+            return UIImage(data: output.output1)
         }
         
         return nil
@@ -133,10 +115,8 @@ extension MnistGan8: ImageGenerator {
 extension MnistGan9: ImageGenerator {
     func prediction() -> UIImage? {
         if let noiseArray = MLMultiArray.getRandomNoise(),
-            let output = try? model.prediction(from: MnistGan9Input(noiseArray: noiseArray) as MLFeatureProvider) as? MnistGan9Output {
-            let outputFeatureProvider = output.generatedImage as MLMultiArray
-            let byteData = outputFeatureProvider.convert()
-            return UIImage(data: byteData, width: 28, height: 28, components: 1)
+            let output = try? self.prediction(input: MnistGan9Input(input1: noiseArray)) {
+            return UIImage(data: output.output1)
         }
         
         return nil

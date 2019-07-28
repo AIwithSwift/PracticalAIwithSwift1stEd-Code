@@ -7,26 +7,36 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4112EBA522EC1A6000CFA25A /* MnistGan5.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 4112EB9B22EC1A5000CFA25A /* MnistGan5.mlmodel */; };
+		4112EBA622EC1A6000CFA25A /* MnistGan3.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 4112EB9C22EC1A5200CFA25A /* MnistGan3.mlmodel */; };
+		4112EBA722EC1A6000CFA25A /* MnistGan7.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 4112EB9D22EC1A5400CFA25A /* MnistGan7.mlmodel */; };
+		4112EBA822EC1A6000CFA25A /* MnistGan9.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 4112EB9E22EC1A5500CFA25A /* MnistGan9.mlmodel */; };
+		4112EBA922EC1A6000CFA25A /* MnistGan6.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 4112EB9F22EC1A5700CFA25A /* MnistGan6.mlmodel */; };
+		4112EBAA22EC1A6000CFA25A /* MnistGan4.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 4112EBA022EC1A5900CFA25A /* MnistGan4.mlmodel */; };
+		4112EBAB22EC1A6000CFA25A /* MnistGan2.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 4112EBA122EC1A5B00CFA25A /* MnistGan2.mlmodel */; };
+		4112EBAC22EC1A6000CFA25A /* MnistGan8.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 4112EBA222EC1A5C00CFA25A /* MnistGan8.mlmodel */; };
+		4112EBAD22EC1A6000CFA25A /* MnistGan0.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 4112EBA322EC1A5E00CFA25A /* MnistGan0.mlmodel */; };
+		4112EBAE22EC1A6000CFA25A /* MnistGan1.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 4112EBA422EC1A6000CFA25A /* MnistGan1.mlmodel */; };
 		416EA01822DBB7F400D11197 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416EA01722DBB7F400D11197 /* AppDelegate.swift */; };
 		416EA01C22DBB7F400D11197 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416EA01B22DBB7F400D11197 /* ViewController.swift */; };
 		416EA01F22DBB7F400D11197 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 416EA01D22DBB7F400D11197 /* Main.storyboard */; };
 		416EA02122DBB7F500D11197 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 416EA02022DBB7F500D11197 /* Assets.xcassets */; };
 		416EA02422DBB7F500D11197 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 416EA02222DBB7F500D11197 /* LaunchScreen.storyboard */; };
-		416EA03522DBB82900D11197 /* MnistGan2.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 416EA02B22DBB81A00D11197 /* MnistGan2.mlmodel */; };
-		416EA03622DBB82900D11197 /* MnistGan8.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 416EA02C22DBB81C00D11197 /* MnistGan8.mlmodel */; };
-		416EA03722DBB82900D11197 /* MnistGan3.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 416EA02D22DBB81D00D11197 /* MnistGan3.mlmodel */; };
-		416EA03822DBB82900D11197 /* MnistGan5.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 416EA02E22DBB81F00D11197 /* MnistGan5.mlmodel */; };
-		416EA03922DBB82900D11197 /* MnistGan6.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 416EA02F22DBB82000D11197 /* MnistGan6.mlmodel */; };
-		416EA03A22DBB82900D11197 /* MnistGan1.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 416EA03022DBB82200D11197 /* MnistGan1.mlmodel */; };
-		416EA03B22DBB82900D11197 /* MnistGan0.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 416EA03122DBB82400D11197 /* MnistGan0.mlmodel */; };
-		416EA03C22DBB82900D11197 /* MnistGan4.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 416EA03222DBB82500D11197 /* MnistGan4.mlmodel */; };
-		416EA03D22DBB82900D11197 /* MnistGan7.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 416EA03322DBB82700D11197 /* MnistGan7.mlmodel */; };
-		416EA03E22DBB82900D11197 /* MnistGan9.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 416EA03422DBB82800D11197 /* MnistGan9.mlmodel */; };
 		416EA04122DCE11000D11197 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416EA04022DCE11000D11197 /* Utils.swift */; };
 		41EC42EF22DFA4360003E618 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EC42EE22DFA4360003E618 /* Models.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4112EB9B22EC1A5000CFA25A /* MnistGan5.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MnistGan5.mlmodel; sourceTree = "<group>"; };
+		4112EB9C22EC1A5200CFA25A /* MnistGan3.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MnistGan3.mlmodel; sourceTree = "<group>"; };
+		4112EB9D22EC1A5400CFA25A /* MnistGan7.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MnistGan7.mlmodel; sourceTree = "<group>"; };
+		4112EB9E22EC1A5500CFA25A /* MnistGan9.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MnistGan9.mlmodel; sourceTree = "<group>"; };
+		4112EB9F22EC1A5700CFA25A /* MnistGan6.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MnistGan6.mlmodel; sourceTree = "<group>"; };
+		4112EBA022EC1A5900CFA25A /* MnistGan4.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MnistGan4.mlmodel; sourceTree = "<group>"; };
+		4112EBA122EC1A5B00CFA25A /* MnistGan2.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MnistGan2.mlmodel; sourceTree = "<group>"; };
+		4112EBA222EC1A5C00CFA25A /* MnistGan8.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MnistGan8.mlmodel; sourceTree = "<group>"; };
+		4112EBA322EC1A5E00CFA25A /* MnistGan0.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MnistGan0.mlmodel; sourceTree = "<group>"; };
+		4112EBA422EC1A6000CFA25A /* MnistGan1.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MnistGan1.mlmodel; sourceTree = "<group>"; };
 		416EA01422DBB7F400D11197 /* GANDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GANDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		416EA01722DBB7F400D11197 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		416EA01B22DBB7F400D11197 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -34,16 +44,6 @@
 		416EA02022DBB7F500D11197 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		416EA02322DBB7F500D11197 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		416EA02522DBB7F500D11197 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		416EA02B22DBB81A00D11197 /* MnistGan2.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MnistGan2.mlmodel; sourceTree = "<group>"; };
-		416EA02C22DBB81C00D11197 /* MnistGan8.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MnistGan8.mlmodel; sourceTree = "<group>"; };
-		416EA02D22DBB81D00D11197 /* MnistGan3.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MnistGan3.mlmodel; sourceTree = "<group>"; };
-		416EA02E22DBB81F00D11197 /* MnistGan5.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MnistGan5.mlmodel; sourceTree = "<group>"; };
-		416EA02F22DBB82000D11197 /* MnistGan6.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MnistGan6.mlmodel; sourceTree = "<group>"; };
-		416EA03022DBB82200D11197 /* MnistGan1.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MnistGan1.mlmodel; sourceTree = "<group>"; };
-		416EA03122DBB82400D11197 /* MnistGan0.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MnistGan0.mlmodel; sourceTree = "<group>"; };
-		416EA03222DBB82500D11197 /* MnistGan4.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MnistGan4.mlmodel; sourceTree = "<group>"; };
-		416EA03322DBB82700D11197 /* MnistGan7.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MnistGan7.mlmodel; sourceTree = "<group>"; };
-		416EA03422DBB82800D11197 /* MnistGan9.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MnistGan9.mlmodel; sourceTree = "<group>"; };
 		416EA04022DCE11000D11197 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		41EC42EE22DFA4360003E618 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -94,16 +94,16 @@
 		416EA03F22DBB83C00D11197 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				416EA03122DBB82400D11197 /* MnistGan0.mlmodel */,
-				416EA03022DBB82200D11197 /* MnistGan1.mlmodel */,
-				416EA02B22DBB81A00D11197 /* MnistGan2.mlmodel */,
-				416EA02D22DBB81D00D11197 /* MnistGan3.mlmodel */,
-				416EA03222DBB82500D11197 /* MnistGan4.mlmodel */,
-				416EA02E22DBB81F00D11197 /* MnistGan5.mlmodel */,
-				416EA02F22DBB82000D11197 /* MnistGan6.mlmodel */,
-				416EA03322DBB82700D11197 /* MnistGan7.mlmodel */,
-				416EA02C22DBB81C00D11197 /* MnistGan8.mlmodel */,
-				416EA03422DBB82800D11197 /* MnistGan9.mlmodel */,
+				4112EBA322EC1A5E00CFA25A /* MnistGan0.mlmodel */,
+				4112EBA422EC1A6000CFA25A /* MnistGan1.mlmodel */,
+				4112EBA122EC1A5B00CFA25A /* MnistGan2.mlmodel */,
+				4112EB9C22EC1A5200CFA25A /* MnistGan3.mlmodel */,
+				4112EBA022EC1A5900CFA25A /* MnistGan4.mlmodel */,
+				4112EB9B22EC1A5000CFA25A /* MnistGan5.mlmodel */,
+				4112EB9F22EC1A5700CFA25A /* MnistGan6.mlmodel */,
+				4112EB9D22EC1A5400CFA25A /* MnistGan7.mlmodel */,
+				4112EBA222EC1A5C00CFA25A /* MnistGan8.mlmodel */,
+				4112EB9E22EC1A5500CFA25A /* MnistGan9.mlmodel */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -179,20 +179,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				416EA03C22DBB82900D11197 /* MnistGan4.mlmodel in Sources */,
-				416EA03D22DBB82900D11197 /* MnistGan7.mlmodel in Sources */,
-				416EA03922DBB82900D11197 /* MnistGan6.mlmodel in Sources */,
-				416EA03622DBB82900D11197 /* MnistGan8.mlmodel in Sources */,
-				416EA03722DBB82900D11197 /* MnistGan3.mlmodel in Sources */,
 				416EA04122DCE11000D11197 /* Utils.swift in Sources */,
-				416EA03822DBB82900D11197 /* MnistGan5.mlmodel in Sources */,
-				416EA03B22DBB82900D11197 /* MnistGan0.mlmodel in Sources */,
-				416EA03A22DBB82900D11197 /* MnistGan1.mlmodel in Sources */,
-				416EA03522DBB82900D11197 /* MnistGan2.mlmodel in Sources */,
-				416EA03E22DBB82900D11197 /* MnistGan9.mlmodel in Sources */,
+				4112EBAE22EC1A6000CFA25A /* MnistGan1.mlmodel in Sources */,
+				4112EBA622EC1A6000CFA25A /* MnistGan3.mlmodel in Sources */,
 				416EA01C22DBB7F400D11197 /* ViewController.swift in Sources */,
+				4112EBA822EC1A6000CFA25A /* MnistGan9.mlmodel in Sources */,
+				4112EBAA22EC1A6000CFA25A /* MnistGan4.mlmodel in Sources */,
+				4112EBA522EC1A6000CFA25A /* MnistGan5.mlmodel in Sources */,
+				4112EBAC22EC1A6000CFA25A /* MnistGan8.mlmodel in Sources */,
+				4112EBA922EC1A6000CFA25A /* MnistGan6.mlmodel in Sources */,
+				4112EBAB22EC1A6000CFA25A /* MnistGan2.mlmodel in Sources */,
 				416EA01822DBB7F400D11197 /* AppDelegate.swift in Sources */,
+				4112EBAD22EC1A6000CFA25A /* MnistGan0.mlmodel in Sources */,
 				41EC42EF22DFA4360003E618 /* Models.swift in Sources */,
+				4112EBA722EC1A6000CFA25A /* MnistGan7.mlmodel in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,6 +339,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5V2A4389PA;
 				INFOPLIST_FILE = GANDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -357,6 +358,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5V2A4389PA;
 				INFOPLIST_FILE = GANDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -30,7 +30,10 @@ class ViewController: UIViewController {
     
     
     private var imageViews: [UIImageView] = []
-    private var ganModels: [ImageGenerator] = []
+    private var ganModels: [ImageGenerator] = [
+        MnistGan0(), MnistGan1(), MnistGan2(), MnistGan3(), MnistGan4(),
+        MnistGan5(), MnistGan6(), MnistGan7(), MnistGan8(), MnistGan9()
+    ]
     
     
     override func viewDidLoad() {
@@ -41,41 +44,18 @@ class ViewController: UIViewController {
             imageViewFour, imageViewFive, imageViewSix, imageViewSeven,
             imageViewEight, imageViewNine,
         ]
-        
-        self.ganModels = [
-            MnistGan0(), MnistGan1(), MnistGan2(), MnistGan3(), MnistGan4(),
-            MnistGan5(), MnistGan6(), MnistGan7(), MnistGan8(), MnistGan9()
-        ]
+
+        generateNewImages()
     }
     
     private func generateNewImages() {
-//        for index in 0..<10 {
-//            let ganModel = ganModels[index]
-//
-//            DispatchQueue.main.async {
-//                self.imageViews[index].image = ganModel.prediction()
-//            }
-//        }
-        let model1 = MnistGan1()
-        let imageView1: UIImageView = self.imageViewOne
-        imageView1.image = nil
-            
-        if let noiseArray = MLMultiArray.getRandomNoise(),
-            let output = try? model1.prediction(noiseArray: noiseArray) {
-            let outputFeatureProvider = output.generatedImage as MLMultiArray
-            let byteData = outputFeatureProvider.convert()
-            imageView1.image = UIImage(data: byteData, width: 28, height: 28, components: 1)
-        }
-        
-        let model2 = MnistGan2()
-        let imageView2: UIImageView = self.imageViewTwo
-        imageView2.image = nil
-        
-        if let noiseArray = MLMultiArray.getRandomNoise(),
-            let output = try? model2.prediction(noiseArray: noiseArray) {
-            let outputFeatureProvider = output.generatedImage as MLMultiArray
-            let byteData = outputFeatureProvider.convert()
-            imageView2.image = UIImage(data: byteData, width: 28, height: 28, components: 1)
+        for index in 0..<10 {
+            let ganModel = ganModels[index]
+
+            DispatchQueue.main.async {
+                let generatedImage = ganModel.prediction()
+                self.imageViews[index].image = generatedImage
+            }
         }
     }
 }
