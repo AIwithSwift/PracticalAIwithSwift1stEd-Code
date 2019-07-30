@@ -1,5 +1,5 @@
 # PracticalAIwithSwift1stEd-Code
-Code for the book's first edition.
+Code for the book's first edition!
 
 | Directory | App | Chapter | Notes |
 |:---|:---:|:---:|:---|
