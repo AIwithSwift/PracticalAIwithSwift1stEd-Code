@@ -1,8 +1,11 @@
+// BEGIN bc_sal_imports
 import UIKit
 import Vision
+// END bc_sal_imports
 
 // DETECTING OBJECTS
 
+// BEGIN bc_sal_vnic
 extension VNImageRequestHandler {
     convenience init?(uiImage: UIImage) {
         guard let cgImage = uiImage.cgImage else { return nil }
@@ -11,7 +14,9 @@ extension VNImageRequestHandler {
         self.init(cgImage: cgImage, orientation: orientation)
     }
 }
+// END bc_sal_vnic
 
+// BEGIN bc_cal_vnr_qf
 extension VNRequest {
     func queueFor(image: UIImage,  completion: @escaping ([Any]?) -> ()) {
         DispatchQueue.global().async {
@@ -24,7 +29,9 @@ extension VNRequest {
         }
     }
 }
+// END bc_cal_vnr_qf
 
+// BEGIN bc_cal_ui_dr_dbc
 extension UIImage {
     func detectRectangles(completion: @escaping ([VNRectangleObservation]) -> ()) {
         let request = VNDetectRectanglesRequest()
@@ -49,8 +56,11 @@ extension UIImage {
     // can also detect human figures, animals, the horizon, all sorts of things
     // with inbuilt Vision functions
 }
+// END bc_cal_ui_dr_dbc
 
+// BEGIN saliency
 extension UIImage {
+    // BEGIN saliency1
     enum SaliencyType {
         case objectnessBased, attentionBased
         
@@ -61,7 +71,9 @@ extension UIImage {
             }
         }
     }
+    // END saliency1
     
+    // BEGIN saliency2
     func detectSalientRegions(prioritising saliencyType: SaliencyType = .attentionBased, completion: @escaping (VNSaliencyImageObservation?) -> ()) {
         let request = saliencyType.request
         
@@ -69,7 +81,9 @@ extension UIImage {
             completion(results?.first as? VNSaliencyImageObservation)
         }
     }
+    // END saliency2
     
+    // BEGIN saliency3
     func cropped(with saliencyObservation: VNSaliencyImageObservation?, to size: CGSize? = nil) -> UIImage? {
         guard let saliencyMap = saliencyObservation,
             let salientObjects = saliencyMap.salientObjects else { return nil }
@@ -100,9 +114,12 @@ extension UIImage {
         
         return finalImage
     }
+    // END saliency3
 }
+// END saliency
 
 // we included a test image in the playground Resources
+// BEGIN finding_barcodes
 let barcodeTestImage = UIImage(named: "test.jpg")!
 
 barcodeTestImage.detectBarcodes { barcodes in
@@ -110,17 +127,22 @@ barcodeTestImage.detectBarcodes { barcodes in
         print("Barcode data: \(barcode.payloadStringValue ?? "None")")
     }
 }
+// END finding_barcodes
 
-
+// BEGIN saltest1
 let saliencyTestImage = UIImage(named: "test3.jpg")!
 let thumbnailSize = CGSize(width: 80, height: 80)
+// END saltest1
 
 // note some images may return nil, particularly for objectness,
 // if the whole image was found equally interesting
 
+// BEGIN saltest2
 var attentionCrop: UIImage?
 var objectsCrop: UIImage?
+// END saltest2
 
+// BEGIN saltest3
 saliencyTestImage.detectSalientRegions(prioritising: .attentionBased) { result in
     if result == nil { print("The entire image was found equally interesting!") }
     attentionCrop = saliencyTestImage.cropped(with: result, to: thumbnailSize)
@@ -132,4 +154,4 @@ saliencyTestImage.detectSalientRegions(prioritising: .objectnessBased) { result 
     objectsCrop = saliencyTestImage.cropped(with: result, to: thumbnailSize)
     print("Image was \(saliencyTestImage.width) * \(saliencyTestImage.height), now \(objectsCrop?.width ?? 0) * \(objectsCrop?.height ?? 0).")
 }
-
+// END saltest3

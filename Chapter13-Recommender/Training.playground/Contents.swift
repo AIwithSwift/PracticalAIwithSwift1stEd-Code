@@ -1,6 +1,8 @@
+// BEGIN rec_imports
 import Foundation
 import CreateML
 import CoreML
+// END rec_imports
 
 /*:
  # Movie Recommender
@@ -28,13 +30,19 @@ import CoreML
  from Netflix.
  */
 
+// BEGIN rec_file
 let csvFile = Bundle.main.url(forResource: nil, withExtension: "csv")!
+// END rec_file
+
+// BEGIN rec_vars
 let userColumn = "CustomerID"
 let itemColumn = "MovieID"
 let ratingColumn = "Rating"
 let titleColumn = "Movie"
 let outputFilepath = URL(string: "~/recommender.mlmodel")!
+// END rec_vars
 
+// BEGIN rec_metadata
 let metadata = MLModelMetadata(
     author: "Mars Geldard",
     shortDescription: "A recommender model trained on Netflix's Priza Dataset using CreateML, for use with CoreML.",
@@ -42,7 +50,9 @@ let metadata = MLModelMetadata(
     version: "1.0",
     additional: ["Note": "This model was created as part of an example for the book 'Practical Artificial Intelligence with Swift', published in 2019."]
 )
+// END rec_metadata
 
+// BEGIN rec_train
 if #available(OSX 10.15, *), let dataTable = try? MLDataTable(contentsOf: csvFile) {
     
     print("Got data!")
@@ -55,13 +65,17 @@ if #available(OSX 10.15, *), let dataTable = try? MLDataTable(contentsOf: csvFil
     //     nearestItems: nil,
     //     maxSimilarityIterations: 1024
     // )
+    // BEGIN rec_train1
     let parameters: MLRecommender.ModelParameters = MLRecommender.ModelParameters()
     
     print("Configured setup!")
+    // END rec_train1
     
-    
+    // BEGIN rec_train2
     var model: MLRecommender? = nil
+    // END rec_train2
     
+    // BEGIN rec_train3
     do {
         model = try MLRecommender(
             trainingData: dataTable,//trainingData,
@@ -79,8 +93,9 @@ if #available(OSX 10.15, *), let dataTable = try? MLDataTable(contentsOf: csvFil
     } catch {
         print("Error training model: \(error.localizedDescription)")
     }
+    // END rec_train3
     
-    
+    // BEGIN rec_train4
     if let recommender = model {
         
         print("Trained model!")
@@ -137,8 +152,9 @@ if #available(OSX 10.15, *), let dataTable = try? MLDataTable(contentsOf: csvFil
             }
         }
     }
+    // END rec_train4
 }
-
+// END rec_train
 
 
 
