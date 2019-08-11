@@ -1,10 +1,13 @@
 ########################################################################
 #    CONFIGURE AS REQUIRED
 ########################################################################
+# BEGIN gan_imports
 import random
 import numpy as np
 import tensorflow as tf
+# END gan_imports
 
+# BEGIN gan_config
 # seed random
 def reset_seed():
     random.seed(3)
@@ -19,10 +22,11 @@ CHECKPOINT = 10 # how often (in epochs) to save sample GAN output
 # must match OUTPUT_DIRECTORY in harness
 import os
 OUTPUT_DIRECTORY = os.path.dirname(os.path.realpath(__file__))
-
+# END gan_config
 ########################################################################
 #    ENVIRONMENT SETUP
 ########################################################################
+# BEGIN gan_config_imports2
 import matplotlib.pyplot as plt
 import pandas as pd
 from keras import utils
@@ -43,10 +47,11 @@ config = tf.ConfigProto(intra_op_parallelism_threads=0,
                         inter_op_parallelism_threads=0,
                         allow_soft_placement=True)
 session = tf.Session(config=config)
-
+# END gan_config_imports2
 ########################################################################
 #    DATA SETUP
 ########################################################################
+# BEGIN gan_setup_data
 def setup_data():
     # get mnist data
     (x_train, y_train), (x_test, y_test) = mnist.load_data()
@@ -68,16 +73,18 @@ def setup_data():
 
     images = [np.array(class_images) for class_images in images]
     return np.array(images)
-
+# END gan_setup_data
 ########################################################################
 #    SET OPTIMIZER FOR ALL MODEL COMPILATIONS
 ########################################################################
+# BEGIN gan_set_optimizer
 def get_optimizer():
     return SGD(lr=0.0005, momentum=0.9, nesterov=True)
-
+# END gan_set_optimizer
 ########################################################################
 #    TRANSFORM DATA FOR MODEL INPUT
 ########################################################################
+# BEGIN gan_transform
 def preprocess_images(images):
     images = images.reshape(images.shape[0], 28, 28, 1) # add a new axis
     # so each final-level element is instead a one-element array
@@ -85,10 +92,11 @@ def preprocess_images(images):
     images = (images - 127.5) / 127.5 # normalize grayscale values
     # to either pure black OR pure white
     return images
-
+# END gan_transform
 ########################################################################
 #    DISCRIMINATOR MODEL COMPONENT OF GAN
 ########################################################################
+# BEGIN gan_discriminator
 def get_discriminator():
     input_x = Input(shape=(28, 28, 1))
     x = input_x
@@ -104,10 +112,11 @@ def get_discriminator():
     x = Dense(1, activation='sigmoid')(x)
 
     return Model(inputs=input_x, outputs=x)
-
+# END gan_discriminator
 ########################################################################
 #    GENERATOR MODEL COMPONENT OF GAN
 ########################################################################
+# BEGIN gan_generator
 def get_generator(z_dim=100):
     input_x = Input(shape=(z_dim,))
     x = input_x
@@ -124,50 +133,56 @@ def get_generator(z_dim=100):
     x = Conv2D(1, kernel_size=(5, 5), padding='same', activation='tanh')(x)
 
     return Model(inputs=input_x, outputs=x)
-
+# END gan_generator
 ########################################################################
 #    DISCRIMINATOR MODEL MUST BE FROZEN AT CERTAIN POINTS
 ########################################################################
+# BEGIN gan_disc_trainable
 def make_trainable(model, setting):
     model.trainable = setting
     for layer in model.layers:
         layer.trainable = setting
-
+# END gan_disc_trainable
 ########################################################################
 #    GENERATE RANDOM INPUT NOISE
 ########################################################################
+# BEGIN gan_gennoise
 def generate_noise(n_samples, z_dim=100):
     random_numbers = np.random.normal(-1., 1., size=(n_samples, z_dim))
     return random_numbers.astype(np.float32)
-
+# END gan_gennoise
 ########################################################################
 #    GET RANDOM SAMPLING OF REAL DATA
 ########################################################################
+# BEGIN gan_get_real
 def get_real_input(x_train, n_samples):
     real_images = random.choices(x_train, k=n_samples)
     real_labels = np.ones((n_samples, 1))
     return real_images, real_labels
-
+# END gan_get_real
 ########################################################################
 #    GET RANDOM ASSORTMENT OF FAKE DATA
 ########################################################################
+# BEGIN gan_getfake
 def get_fake_input(generator, n_samples):
     latent_input = generate_noise(n_samples)
     generated_images = generator.predict(latent_input)
     fake_labels = np.zeros((n_samples, 1))
     return generated_images, fake_labels
-
+# END gan_getfake
 ########################################################################
 #    GET RANDOM ASSORTMENT OF NOISE DATA
 ########################################################################
+# BEGIN gan_get_noise
 def get_gan_input(n_samples):
     latent_input = generate_noise(n_samples)
     inverted_labels = np.ones((n_samples, 1))
     return latent_input, inverted_labels
-
+# END gan_get_noise
 ########################################################################
 #    PLOT HOW THE MODEL IS DOING AT CERTAIN POINTS
 ########################################################################
+# BEGIN gan_plot
 def plot_generated_images(epoch, generator, class_label):
     examples = 100
     noise= generate_noise(examples)
@@ -182,11 +197,13 @@ def plot_generated_images(epoch, generator, class_label):
     plt.tight_layout()
     plt.savefig(OUTPUT_DIRECTORY + '/%depoch_%d.png' % (class_label, epoch))
     plt.close()
-
+# END gan_plot
 ########################################################################
 #    TRAIN A GAN FOR GIVEN DATA
 ########################################################################
+# BEGIN gan_make_gan
 def make_gan(x_train, y_train, class_label):
+    # BEGIN gan_make_gan1
     print('Making discriminator model...')
     discriminator = get_discriminator()
     discriminator.compile(loss='binary_crossentropy', optimizer=get_optimizer())
@@ -210,7 +227,8 @@ def make_gan(x_train, y_train, class_label):
     generator_loss = []
 
     print('Begin training...')
-
+    # END gan_make_gan1
+    # BEGIN gan_make_gan2
     for e in range(1, GAN_EPOCHS + 1):
         discriminator_loss_epoch = []
         generator_loss_epoch = []
@@ -253,10 +271,12 @@ def make_gan(x_train, y_train, class_label):
 
     print('Complete.')
     return generator
-
+    # END gan_make_gan2
+# END gan_make_gan
 ########################################################################
 #    BEGIN EXECUTION
 ########################################################################
+# BEGIN gan_execution
 mnist_data = setup_data()
 
 for class_label in range(10):
@@ -275,3 +295,4 @@ for class_label in range(10):
     # $ xcrun coremlcompiler compile MnistGan.mlmodel MnistGan.mlmodelc
 
 print('Complete.')
+# END gan_execution

@@ -97,11 +97,12 @@ if #available(OSX 10.15, *), let dataTable = try? MLDataTable(contentsOf: csvFil
     
     // BEGIN rec_train4
     if let recommender = model {
-        
+        // BEGIN rec_train4_1
         print("Trained model!")
         
         try? recommender.write(to: outputFilepath, metadata: metadata)
-        
+        // END rec_train4_1
+        // BEGIN rec_train4_2
         let userIdColumnValues: MLDataColumn<Int> = dataTable[userColumn]
         let movieIdColumnValues: MLDataColumn<Int> = dataTable[itemColumn]
         let ratingsColumnValues: MLDataColumn<Int> = dataTable[ratingColumn]
@@ -112,7 +113,8 @@ if #available(OSX 10.15, *), let dataTable = try? MLDataTable(contentsOf: csvFil
         ]
         
         let threshold = 0.75
-        
+        // END rec_train4_2
+        // BEGIN rec_train4_3
         if let userRecommendations = try? recommender.recommendations(fromUsers: testUsers as [MLIdentifier]) {
             let recsUserColumnValues: MLDataColumn<Int> = userRecommendations[userColumn]
             let recsMovieColumnValues: MLDataColumn<Int> = userRecommendations[itemColumn]
@@ -151,6 +153,7 @@ if #available(OSX 10.15, *), let dataTable = try? MLDataTable(contentsOf: csvFil
                 }
             }
         }
+        // rec_train4_3
     }
     // END rec_train4
 }

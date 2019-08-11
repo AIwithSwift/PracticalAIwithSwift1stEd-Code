@@ -1,3 +1,4 @@
+# BEGIN ddd_python_imports
 #!/usr/bin/env python
 
 import os
@@ -5,7 +6,9 @@ import json
 import requests
 import numpy as np
 import turicreate as tc
+# END ddd_python_imports
 
+# BEGIN ddd_python_vars
 # THE CATEGORIES WE WANT TO BE ABLE TO DISTINGUISH
 categories = [
     'apple', 'banana', 'bread', 'broccoli', 'cake', 'carrot', 'coffee cup', 'cookie',
@@ -20,7 +23,9 @@ bitmap_directory = quickdraw_directory + '/bitmap'
 bitmap_sframe_path = quickdraw_directory + '/bitmaps.sframe'
 output_model_filename = this_directory + '/DrawingClassifierModel'
 training_samples = 10000
+# END ddd_python_vars
 
+# BEGIN ddd_makedir
 # MAKE SOME FOLDERS TO PUT TRAINING DATA IN
 def make_directory(path):
 	try:
@@ -31,7 +36,9 @@ def make_directory(path):
 
 make_directory(quickdraw_directory)
 make_directory(bitmap_directory)
+# END ddd_makedir
 
+# BEGIN ddd_fetch
 # FETCH SOME DATA
 bitmap_url = 'https://storage.googleapis.com/quickdraw_dataset/full/numpy_bitmap'
 total_categories = len(categories)
@@ -46,7 +53,9 @@ for index, category in enumerate(categories):
 	print('Downloaded %s drawings (category %d/%d)' % (category, index + 1, total_categories))
 
 random_state = np.random.RandomState(100)
+# END ddd_fetch
 
+# BEGIN ddd_bitmap_sframe
 def get_bitmap_sframe():
     labels, drawings = [], []
     for category in categories:
@@ -66,18 +75,25 @@ def get_bitmap_sframe():
         print('...%s bitmaps complete' % category)
     print('%d bitmaps with %d labels' % (len(drawings), len(labels)))
     return tc.SFrame({'drawing': drawings, 'label': labels})
+# END ddd_bitmap_sframe
 
+# BEGIN ddd_bitmap_sframe2
 # Save intermediate bitmap SFrame to file
 bitmap_sframe = get_bitmap_sframe()
 bitmap_sframe.save(bitmap_sframe_path)
 bitmap_sframe.explore()
+# END ddd_bitmap_sframe2
 
 # BITMAP MODEL
 
 # Create a model
 # (in a production model you would do a training/testing data split)
 # (but we don't mind how inaccurate it is for a demonstration)
+# BEGIN ddd_createmodel
 bitmap_model = tc.drawing_classifier.create(bitmap_sframe, 'label', max_iterations=1000)
+# END ddd_createmodel
 
 # Export for use in Core ML
+# BEGIN ddd_exportcoreml
 bitmap_model.export_coreml(output_model_filename + '.mlmodel')
+# END ddd_exportcoreml

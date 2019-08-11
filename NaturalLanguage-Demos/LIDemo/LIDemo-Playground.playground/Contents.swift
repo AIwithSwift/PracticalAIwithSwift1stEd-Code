@@ -107,7 +107,7 @@ extension String {
         
         tagger.string = self
         let range = NSRange(location: 0, length: self.utf16.count)
-        // BEGIN nlp_func_ppos1
+        // END nlp_func_ppos1
         
         // BEGIN nlp_func_ppos2
         tagger.enumerateTags(in: range, unit: .word, scheme: .lexicalClass, options: options) { tag, tokenRange, _ in

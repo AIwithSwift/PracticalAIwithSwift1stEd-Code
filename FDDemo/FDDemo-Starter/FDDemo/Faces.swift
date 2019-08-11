@@ -9,7 +9,7 @@
 // BEGIN FD_starter_ext_uii_imports
 import UIKit
 import Vision
-// ENC FD_starter_ext_uii_imports
+// END FD_starter_ext_uii_imports
 
 // BEGIN FD_starter_ext_uii
 extension UIImage {

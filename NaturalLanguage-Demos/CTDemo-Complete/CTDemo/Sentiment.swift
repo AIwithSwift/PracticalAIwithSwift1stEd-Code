@@ -9,6 +9,7 @@
 import UIKit
 import NaturalLanguage
 
+// BEGIN string_ext_for_ct
 extension String {
     func predictSentiment() -> Sentiment {
         if self.isEmpty { return .neutral }
@@ -16,6 +17,7 @@ extension String {
         return Sentiment(rawValue: classString)
     }
 }
+// END string_ext_for_ct
 
 enum Sentiment: String, CustomStringConvertible {
     case positive = "Positive"

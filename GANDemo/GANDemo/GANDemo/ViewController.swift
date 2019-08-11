@@ -6,11 +6,14 @@
 //  Copyright © 2019 Mars Geldard. All rights reserved.
 //
 
+// BEGIN gan_swift_imports
 import UIKit
 import CoreML
+// END gan_swift_imports
 
 class ViewController: UIViewController {
 
+    // BEGIN gan_swift_outlets
     @IBOutlet weak var generateButton: UIButton!
     
     @IBOutlet weak var imageViewOne: UIImageView!
@@ -23,19 +26,23 @@ class ViewController: UIViewController {
     @IBOutlet weak var imageViewEight: UIImageView!
     @IBOutlet weak var imageViewNine: UIImageView!
     @IBOutlet weak var imageViewZero: UIImageView!
+    // END gan_swift_outlets
     
+    // BEGIN gan_swift_actions
     @IBAction func generateButtonPressed(_ sender: Any) {
         generateNewImages()
     }
+    // END gan_swift_actions
     
-    
+    // BEGIN gan_swift_vars
     private var imageViews: [UIImageView] = []
     private var ganModels: [ImageGenerator] = [
         MnistGan0(), MnistGan1(), MnistGan2(), MnistGan3(), MnistGan4(),
         MnistGan5(), MnistGan6(), MnistGan7(), MnistGan8(), MnistGan9()
     ]
+    // END gan_swift_vars
     
-    
+    // BEGIN gan_swift_vdl
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -47,7 +54,9 @@ class ViewController: UIViewController {
 
         generateNewImages()
     }
+    // END gan_swift_vdl
     
+    // BEGIN gan_swift_gennewimages
     private func generateNewImages() {
         for index in 0..<10 {
             let ganModel = ganModels[index]
@@ -58,5 +67,6 @@ class ViewController: UIViewController {
             }
         }
     }
+    // END gan_swift_gennewimages
 }
 

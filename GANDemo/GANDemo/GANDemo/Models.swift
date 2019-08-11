@@ -6,13 +6,18 @@
 //  Copyright © 2019 Mars Geldard. All rights reserved.
 //
 
+// BEGIN gan_models_import
 import CoreML
 import UIKit
+// END gan_models_import
 
+// BEGIN gan_models_prot
 public protocol ImageGenerator {
     func prediction() -> UIImage?
 }
+// END gan_models_prot
 
+// BEGIN gan_models_1
 extension MnistGan0: ImageGenerator {
     func prediction() -> UIImage? {
         if let noiseArray = MLMultiArray.getRandomNoise(),
@@ -23,6 +28,7 @@ extension MnistGan0: ImageGenerator {
         return nil
     }
 }
+// END gan_models_1
 
 extension MnistGan1: ImageGenerator {
     func prediction() -> UIImage? {

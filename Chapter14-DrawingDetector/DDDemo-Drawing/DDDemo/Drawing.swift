@@ -6,9 +6,12 @@
 //  Copyright © 2019 Mars Geldard. All rights reserved.
 //
 
+// BEGIN ddnew_drawing_imports
 import UIKit
 import Vision
+// END ddnew_drawing_imports
 
+// BEGIN ddnew_drawing_enum
 enum Drawing: String, CaseIterable {
     /// These only include those the model was trained on
     /// For others that can be included in the training phase, see the [full list of categories in the dataset](https://raw.githubusercontent.com/googlecreativelab/quickdraw-dataset/master/categories.txt)
@@ -16,6 +19,7 @@ enum Drawing: String, CaseIterable {
     case donut, grapes, hotdog, icecream, lollipop, mushroom, peanut, pear
     case pineapple, pizza, potato, sandwich, steak, strawberry, watermelon
     
+    // BEGIN ddnew_drawing_enum0
     init?(rawValue: String) {
         if let match = Drawing.allCases.first(where: { $0.rawValue == rawValue }) {
             self = match
@@ -28,7 +32,9 @@ enum Drawing: String, CaseIterable {
             }
         }
     }
+    // END ddnew_drawing_enum0
     
+    // BEGIN ddnew_drawing_enum1
     var icon: String {
         switch self {
         case .apple: return "🍎"
@@ -56,8 +62,11 @@ enum Drawing: String, CaseIterable {
         case .watermelon: return "🍉"
         }
     }
+    // END ddnew_drawing_enum1
 }
+// END ddnew_drawing_enum
 
+// BEGIN ddnew_drawing_vnirh
 extension VNImageRequestHandler {
     convenience init?(uiImage: UIImage) {
         guard let ciImage = CIImage(image: uiImage) else { return nil }
@@ -66,7 +75,9 @@ extension VNImageRequestHandler {
         self.init(ciImage: ciImage, orientation: orientation)
     }
 }
+// END ddnew_drawing_vnirh
 
+// BEGIN ddnew_drawing_dcm
 extension DrawingClassifierModel {    
     func classify(_ image: UIImage?, completion: @escaping (Drawing?) -> ()) {
         guard let image = image,
@@ -89,7 +100,9 @@ extension DrawingClassifierModel {
         }
     }
 }
+// END ddnew_drawing_dcm
 
+// BEGIN ddnew_drawing_collection
 extension Collection where Element == VNClassificationObservation {
     var list: String {
         var string = ""
@@ -99,4 +112,4 @@ extension Collection where Element == VNClassificationObservation {
         return string
     }
 }
-
+// END ddnew_drawing_collection

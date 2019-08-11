@@ -101,7 +101,7 @@ extension CGSize: CustomStringConvertible {
         return "\(self.width) * \(self.height)"
     }
 }
-// EMD NST_starter_utils5
+// END NST_starter_utils5
 
 // MARK: UIButton/UIControl Extensions
 

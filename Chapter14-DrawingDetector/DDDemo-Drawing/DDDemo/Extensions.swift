@@ -6,8 +6,11 @@
 //  Copyright © 2019 Mars Geldard. All rights reserved.
 //
 
+// BEGIN dd_new_extensions_import
 import UIKit
+// END dd_new_extensions_import
 
+// BEGIN dd_new_extensions_cgcontext
 extension CGContext {
     static func create(size: CGSize, action: (inout CGContext) -> ()) -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(size, false, 1.0)
@@ -18,7 +21,9 @@ extension CGContext {
         return result
     }
 }
+// END dd_new_extensions_cgcontext
 
+// BEGIN dd_new_extensions_uibutton
 extension UIButton {
     func enable() {
         self.isEnabled = true
@@ -30,8 +35,11 @@ extension UIButton {
         self.backgroundColor = UIColor.lightGray
     }
 }
+// END dd_new_extensions_uibutton
 
+// BEGIN dd_new_extensions_uibarbuttonitem
 extension UIBarButtonItem {
     func enable() { self.isEnabled = true }
     func disable() { self.isEnabled = false }
 }
+// END dd_new_extensions_uibarbuttonitem

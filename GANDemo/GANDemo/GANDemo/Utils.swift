@@ -6,11 +6,13 @@
 //  Copyright © 2019 Mars Geldard. All rights reserved.
 //
 
+// BEGIN gan_utils1
 import UIKit
 import CoreML
-
 import Foundation
+// END gan_utils1
 
+// BEGIN gan_utils_mlm
 extension MLMultiArray {
     static func getRandomNoise(length: NSNumber = 100) -> MLMultiArray? {
         guard let input = try? MLMultiArray(shape: [length], dataType: .double) else {
@@ -24,15 +26,20 @@ extension MLMultiArray {
         return input
     }
 }
+// END gan_utils_mlm
 
+// BEGIN gan_utils_uint
 extension UInt8 {
     static func makeByteArray<T>(from value: T) -> [UInt8] {
         var value = value
         return withUnsafeBytes(of: &value) { Array($0) }
     }
 }
+// END gan_utils_uint
 
+// BEGIN gan_utils_uiimage
 extension UIImage {
+    // BEGIN gan_utils_uiimage1
     convenience init?(data: MLMultiArray) {
         assert(data.shape.count == 3)
         assert(data.shape[0] == 1)
@@ -52,7 +59,9 @@ extension UIImage {
 
         self.init(data: byteData, width: width, height: height, components: 1)
     }
+    // END gan_utils_uiimage1
     
+    // BEGIN gan_utils_uiimage2
     convenience init?(data: [UInt8], width: Int, height: Int, components: Int) {
         let dataSize = (width * height * components * 8)
         guard let cfData = CFDataCreate(nil, data, dataSize / 8),
@@ -67,8 +76,11 @@ extension UIImage {
         
         self.init(cgImage: cgImage)
     }
+    // END gan_utils_uiimage2
 }
+// END gan_utils_uiimage
 
+// BEGIN gan_utils_cgimage
 extension CGImage {
     static func makeFrom(dataProvider: CGDataProvider, width: Int, height: Int, components: Int) -> CGImage? {
         if components != 1 && components != 3 { return nil }
@@ -93,4 +105,4 @@ extension CGImage {
             intent: CGColorRenderingIntent.defaultIntent)
     }
 }
-
+// END gan_utils_cgimage

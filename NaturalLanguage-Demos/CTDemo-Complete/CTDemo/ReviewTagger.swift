@@ -6,16 +6,22 @@
 //  Copyright © 2019 Mars Geldard. All rights reserved.
 //
 
+// BEGIN ct_imports
 import Foundation
 import NaturalLanguage
 import CoreML
+// END ct_imports
 
+// BEGIN ct_class
 final class ReviewTagger {
+    // BEGIN ct_class1
     private static let shared = ReviewTagger()
     
     private let scheme = NLTagScheme("Review")
     private let options: NLTagger.Options = [.omitPunctuation]
+    // END ct_class1
     
+    // BEGIN ct_class2
     private lazy var tagger: NLTagger? = {
         do {
             let modelFile = Bundle.main.url(forResource: "ReviewMLTextClassifier", withExtension: "mlmodelc")!
@@ -28,9 +34,13 @@ final class ReviewTagger {
             return nil
         }
     }()
+    // END ct_class2
     
+    // BEGIN ct_class3
     private init() {}
+    // END ct_class3
     
+    // BEGIN ct_class4
     static func prediction(for text: String) -> String? {
         guard let tagger = ReviewTagger.shared.tagger else { return nil }
         print("Prediction requested for: \(text)")
@@ -47,4 +57,6 @@ final class ReviewTagger {
         }
         .first
     }
+    // END ct_class4
 }
+// END ct_class

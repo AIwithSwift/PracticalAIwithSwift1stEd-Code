@@ -11,7 +11,7 @@ import UIKit
 class ViewController: UIViewController {
 
     // MARK: Outlets
-    // START nlp_starter_outlets
+    // BEGIN nlp_starter_outlets
     @IBOutlet weak var emojiView: UILabel!
     @IBOutlet weak var labelView: UILabel!
     @IBOutlet weak var colorView: UIView!
@@ -20,18 +20,18 @@ class ViewController: UIViewController {
     
     // MARK: Actions
     
-    // START nlp_starter_actions
+    // BEGIN nlp_starter_actions
     @IBAction func analyseSentimentButtonPressed(_ sender: Any) { performSentimentAnalysis() }
-    // END nlp_starter_outlets
+    // END nlp_starter_actions
     
     // MARK: Attributes
-    // START nlp_starter_attributes
+    // BEGIN nlp_starter_attributes
     private let placeholderText = "Type something here..."
     // END nlp_starter_attributes
 
     // MARK: View Functions
     
-    // START nlp_starter_vdl
+    // BEGIN nlp_starter_vdl
     override func viewDidLoad() {
         textView.text = placeholderText
         textView.textColor = UIColor.lightGray
