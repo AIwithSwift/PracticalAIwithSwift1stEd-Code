@@ -15,7 +15,7 @@
 		4112EBAA22EC1A6000CFA25A /* MnistGan4.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 4112EBA022EC1A5900CFA25A /* MnistGan4.mlmodel */; };
 		4112EBAB22EC1A6000CFA25A /* MnistGan2.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 4112EBA122EC1A5B00CFA25A /* MnistGan2.mlmodel */; };
 		4112EBAC22EC1A6000CFA25A /* MnistGan8.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 4112EBA222EC1A5C00CFA25A /* MnistGan8.mlmodel */; };
-		4112EBAD22EC1A6000CFA25A /* MnistGan0.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 4112EBA322EC1A5E00CFA25A /* MnistGan0.mlmodel */; };
+		4112EBAD22EC1A6000CFA25A /* MnistGan.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 4112EBA322EC1A5E00CFA25A /* MnistGan.mlmodel */; };
 		4112EBAE22EC1A6000CFA25A /* MnistGan1.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 4112EBA422EC1A6000CFA25A /* MnistGan1.mlmodel */; };
 		416EA01822DBB7F400D11197 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416EA01722DBB7F400D11197 /* AppDelegate.swift */; };
 		416EA01C22DBB7F400D11197 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416EA01B22DBB7F400D11197 /* ViewController.swift */; };
@@ -35,7 +35,7 @@
 		4112EBA022EC1A5900CFA25A /* MnistGan4.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MnistGan4.mlmodel; sourceTree = "<group>"; };
 		4112EBA122EC1A5B00CFA25A /* MnistGan2.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MnistGan2.mlmodel; sourceTree = "<group>"; };
 		4112EBA222EC1A5C00CFA25A /* MnistGan8.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MnistGan8.mlmodel; sourceTree = "<group>"; };
-		4112EBA322EC1A5E00CFA25A /* MnistGan0.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MnistGan0.mlmodel; sourceTree = "<group>"; };
+		4112EBA322EC1A5E00CFA25A /* MnistGan.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MnistGan.mlmodel; sourceTree = "<group>"; };
 		4112EBA422EC1A6000CFA25A /* MnistGan1.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MnistGan1.mlmodel; sourceTree = "<group>"; };
 		416EA01422DBB7F400D11197 /* GANDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GANDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		416EA01722DBB7F400D11197 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -94,7 +94,7 @@
 		416EA03F22DBB83C00D11197 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				4112EBA322EC1A5E00CFA25A /* MnistGan0.mlmodel */,
+				4112EBA322EC1A5E00CFA25A /* MnistGan.mlmodel */,
 				4112EBA422EC1A6000CFA25A /* MnistGan1.mlmodel */,
 				4112EBA122EC1A5B00CFA25A /* MnistGan2.mlmodel */,
 				4112EB9C22EC1A5200CFA25A /* MnistGan3.mlmodel */,
@@ -190,7 +190,7 @@
 				4112EBA922EC1A6000CFA25A /* MnistGan6.mlmodel in Sources */,
 				4112EBAB22EC1A6000CFA25A /* MnistGan2.mlmodel in Sources */,
 				416EA01822DBB7F400D11197 /* AppDelegate.swift in Sources */,
-				4112EBAD22EC1A6000CFA25A /* MnistGan0.mlmodel in Sources */,
+				4112EBAD22EC1A6000CFA25A /* MnistGan.mlmodel in Sources */,
 				41EC42EF22DFA4360003E618 /* Models.swift in Sources */,
 				4112EBA722EC1A6000CFA25A /* MnistGan7.mlmodel in Sources */,
 			);

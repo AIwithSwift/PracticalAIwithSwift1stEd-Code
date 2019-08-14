@@ -1,6 +1,6 @@
 //
 //  ViewController.swift
-//  ICDemo
+//  VSDemo
 //
 //  Created by Paris BA on 12/6/19.
 //  Copyright © 2019 Paris BA. All rights reserved.
@@ -26,9 +26,9 @@ class ViewController: UIViewController {
     @IBAction func cameraButtonPressed(_ sender: Any) { getPhoto(cameraSource: true) }
     @IBAction func classifyImageButtonPressed(_ sender: Any) { classifyImage() }
     
-    // BEGIN im_class_ai_newvar
-    private let classifier = VisionClassifier(mlmodel: BananaOrApple().model)
-    // END im_class_ai_newvar
+    // BEGIN vsdemo_class_ai_newvar
+    private let classifier = VisionClassifier(mlmodel: VisualSentiment().model)
+    // END vsdemo_class_ai_newvar
     private var inputImage: UIImage?
     var classification: String?
     
@@ -40,10 +40,8 @@ class ViewController: UIViewController {
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
         imageView.contentMode = .scaleAspectFill
         imageView.image = UIImage.placeholder
-        // BEGIN im_class_ai_vdl
         classifier?.delegate = self
         refresh()
-        // END im_class_ai_vdl
     }
     
     /// Disables and enables controls based on presence of input to categorise
@@ -51,9 +49,7 @@ class ViewController: UIViewController {
         if inputImage == nil {
             classLabel.text = "Pick or take a photo!"
             imageView.image = UIImage.placeholder
-            // BEGIN im_class_ai_refresh
             classifyImageButton.disable()
-            // END im_class_ai_refresh
         } else {
             imageView.image = inputImage
             
@@ -68,14 +64,12 @@ class ViewController: UIViewController {
     }
     
     // MARK: Functionality
-    // BEGIN im_class_ai_classifyImage
     private func classifyImage() {
         if let classifier = self.classifier, let image = inputImage {
             classifier.classify(image)
             classifyImageButton.disable()
         }
     }
-    // END im_class_ai_classifyImage
 }
 
 extension ViewController: UINavigationControllerDelegate, UIPickerViewDelegate, UIImagePickerControllerDelegate {

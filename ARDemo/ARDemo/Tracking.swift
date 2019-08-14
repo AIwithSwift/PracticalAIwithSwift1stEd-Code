@@ -14,7 +14,7 @@ import CoreMotion
 // BEGIN ardemo_tracking_imports1
 final class ActivityTracker: BindableObject {
     // BEGIN ardemo_tracking_imports1_inner1
-    let didChange = PassthroughSubject<ActivityTracker, Never>()
+    let willChange = PassthroughSubject<ActivityTracker, Never>()
     
     private let tracker = CMMotionActivityManager()
     private(set) var currentActivity: String = "None detectable" {
@@ -23,7 +23,7 @@ final class ActivityTracker: BindableObject {
         }
         
         didSet {
-            didChange.send(self)
+            willChange.send(self)
         }
     }
     private(set) var activityDidChange = true

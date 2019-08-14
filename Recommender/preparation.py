@@ -11,7 +11,7 @@ data_directory = this_directory + '/netflix-prize-data'
 output_file = data_directory + '/netflix-prize-data.csv'
 
 movie_titles = {}
-with open(data_directory + '/movie_titles.csv', 'r', encoding = 'iso-8859-1') as movies_file:
+with open(data_directory + '/movie_titles.csv', 'r') as movies_file:
     for row in csv.reader(movies_file):
         movie_id = int(row[0])
         title = row[2]
