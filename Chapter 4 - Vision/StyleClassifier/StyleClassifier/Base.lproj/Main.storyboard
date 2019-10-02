@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14810.11" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14766.13"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+        <capability name="iOS 13.0 system colors" minToolsVersion="11.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="ICDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DN9-1e-a5h">
+                                <rect key="frame" x="8" y="794" width="398" height="60"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="systemBlueColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="O5Z-oI-OPM"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Classify Image">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="classifyImageButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XHd-v7-AA1"/>
+                                </connections>
+                            </button>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fEa-ae-nPD">
+                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="swt-bi-4Sy"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem title="ICDemo" id="5Yd-UG-dzC">
+                                        <barButtonItem key="leftBarButtonItem" title="Select" id="hTi-Xo-Y5E">
+                                            <connections>
+                                                <action selector="selectButtonPressed:" destination="BYZ-38-t0r" id="h0f-c9-R4a"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" enabled="NO" systemItem="camera" id="cIK-Q7-feP">
+                                            <connections>
+                                                <action selector="cameraButtonPressed:" destination="BYZ-38-t0r" id="4r0-SM-5dr"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pick or take a photo!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YKg-wr-gc3">
+                                <rect key="frame" x="8" y="510" width="398" height="276"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="7Yg-bG-rtr">
+                                <rect key="frame" x="0.0" y="88" width="414" height="414"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="7Yg-bG-rtr" secondAttribute="height" multiplier="1:1" id="2e0-4S-X2w"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="fEa-ae-nPD" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="1HO-wo-IaT"/>
+                            <constraint firstItem="DN9-1e-a5h" firstAttribute="top" secondItem="YKg-wr-gc3" secondAttribute="bottom" constant="8" id="700-36-7vK"/>
+                            <constraint firstItem="YKg-wr-gc3" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="KEo-kL-XEQ"/>
+                            <constraint firstItem="YKg-wr-gc3" firstAttribute="top" secondItem="7Yg-bG-rtr" secondAttribute="bottom" constant="8" id="Ozr-oF-pAl"/>
+                            <constraint firstItem="fEa-ae-nPD" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="WOD-Ax-8uh"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="DN9-1e-a5h" secondAttribute="trailing" constant="8" id="a8E-EN-0cR"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="DN9-1e-a5h" secondAttribute="bottom" constant="8" id="b0K-YU-Eh8"/>
+                            <constraint firstItem="7Yg-bG-rtr" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ckg-Ob-KcT"/>
+                            <constraint firstItem="DN9-1e-a5h" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="edK-qU-cQc"/>
+                            <constraint firstItem="7Yg-bG-rtr" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="hVI-Nj-pni"/>
+                            <constraint firstItem="fEa-ae-nPD" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="mPJ-fD-1pL"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="YKg-wr-gc3" secondAttribute="trailing" constant="8" id="n4d-T5-7KB"/>
+                            <constraint firstItem="7Yg-bG-rtr" firstAttribute="top" secondItem="fEa-ae-nPD" secondAttribute="bottom" id="oKI-vL-G13"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="cameraButton" destination="cIK-Q7-feP" id="QJN-QL-Prv"/>
+                        <outlet property="classLabel" destination="YKg-wr-gc3" id="ERl-p8-5gz"/>
+                        <outlet property="classifyImageButton" destination="DN9-1e-a5h" id="mX5-hG-IKo"/>
+                        <outlet property="imageView" destination="7Yg-bG-rtr" id="bHb-0u-zL2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="137.68115942028987" y="137.94642857142856"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="placeholder" width="1500" height="1500"/>
+    </resources>
+</document>
