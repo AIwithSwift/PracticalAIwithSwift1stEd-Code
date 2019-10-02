@@ -12,7 +12,7 @@ import CoreMotion
 // END ardemo_tracking_imports
 
 // BEGIN ardemo_tracking_imports1
-final class ActivityTracker: BindableObject {
+final class ActivityTracker: ObservableObject {
     // BEGIN ardemo_tracking_imports1_inner1
     let willChange = PassthroughSubject<ActivityTracker, Never>()
     

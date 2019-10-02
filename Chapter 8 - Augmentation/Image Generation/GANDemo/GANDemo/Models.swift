@@ -38,6 +38,7 @@ extension MnistGan : ImageGenerator {
 // END gan_models_1
 
 
+
 //extension MnistGan0: ImageGenerator {
 //    func prediction() -> UIImage? {
 //        if let noiseArray = MLMultiArray.getRandomNoise(),
