@@ -12,8 +12,8 @@ import SwiftUI
 
 // BEGIN IS_views_ori
 struct OptionalResizableImage: View {
-    private let image: UIImage?
-    private let placeholder: UIImage
+    let image: UIImage?
+    let placeholder: UIImage
     
     var body: some View {
         if let image = image {
@@ -33,7 +33,7 @@ struct ButtonLabel: View {
     var body: some View {
         HStack {
             Spacer()
-            Text(text).font(.title).bold().color(.white)
+            Text(text).font(.title).bold().foregroundColor(.white)
             Spacer()
             }.padding().background(background).cornerRadius(10)
     }

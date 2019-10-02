@@ -20,7 +20,7 @@ struct ButtonLabel: View {
     var body: some View {
         HStack {
             Spacer()
-            Text(title).font(.title).bold().color(.white)
+            Text(title).font(.title).bold().foregroundColor(.white)
             Spacer()
         }.padding().background(background).cornerRadius(10)
     }
@@ -47,7 +47,7 @@ struct ContentView: View {
                 if !speech.isEmpty {
                     Text(speech).font(.largeTitle).lineLimit(nil)
                 } else {
-                    Text("Speech will go here...").font(.largeTitle).color(.gray).lineLimit(nil)
+                    Text("Speech will go here...").font(.largeTitle).foregroundColor(.gray).lineLimit(nil)
                 }
 
                 Spacer()

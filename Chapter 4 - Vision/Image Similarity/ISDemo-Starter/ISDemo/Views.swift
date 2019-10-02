@@ -33,7 +33,7 @@ struct ButtonLabel: View {
     var body: some View {
         HStack {
             Spacer()
-            Text(text).font(.title).bold().color(.white)
+            Text(text).font(.title).bold().foregroundColor(.white)
             Spacer()
         }.padding().background(background).cornerRadius(10)
     }
