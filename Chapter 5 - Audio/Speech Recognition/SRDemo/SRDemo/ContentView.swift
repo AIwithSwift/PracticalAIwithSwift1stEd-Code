@@ -20,7 +20,10 @@ struct ButtonLabel: View {
     var body: some View {
         HStack {
             Spacer()
-            Text(title).font(.title).bold().foregroundColor(.white)
+            Text(title)
+                .font(.title)
+                .bold()
+                .foregroundColor(.white)
             Spacer()
         }.padding().background(background).cornerRadius(10)
     }
@@ -45,9 +48,14 @@ struct ContentView: View {
         NavigationView {
             VStack(alignment: .leading) {
                 if !speech.isEmpty {
-                    Text(speech).font(.largeTitle).lineLimit(nil)
+                    Text(speech)
+                        .font(.largeTitle)
+                        .lineLimit(nil)
                 } else {
-                    Text("Speech will go here...").font(.largeTitle).foregroundColor(.gray).lineLimit(nil)
+                    Text("Speech will go here...")
+                        .font(.largeTitle)
+                        .foregroundColor(.gray)
+                        .lineLimit(nil)
                 }
 
                 Spacer()
@@ -73,7 +81,9 @@ struct ContentView: View {
     
     // BEGIN SR_view_contentview4
     init() {
-        guard let recognizer = SpeechRecognizer() else { fatalError("Something went wrong...") }
+        guard let recognizer = SpeechRecognizer() else { 
+            fatalError("Something went wrong...")
+        }
         self.recognizer = recognizer
     }
     // END SR_view_contentview4

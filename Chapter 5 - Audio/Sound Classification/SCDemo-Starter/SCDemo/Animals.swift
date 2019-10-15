@@ -16,7 +16,8 @@ enum Animal: String, CaseIterable {
     
     // BEGIN adotswift2
     init?(rawValue: String) {
-        if let match = Self.allCases.first(where: { $0.rawValue == rawValue }) {
+        if let match = Self.allCases
+            .first(where: { $0.rawValue == rawValue }) {
             self = match
         } else if rawValue == "rooster" || rawValue == "hen" {
             self = .chicken

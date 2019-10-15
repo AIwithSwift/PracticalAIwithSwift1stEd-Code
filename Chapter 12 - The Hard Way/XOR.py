@@ -16,11 +16,24 @@ outputTrainingData = [0,1,1,0]
 outputTrainingData = np.reshape(outputTrainingData, [4,1])
 
 # making two activations for ouy layers
-hiddenNeuronsFormula = tf.sigmoid(tf.matmul(inputStream, inputWeights) + inputBiases)
-outputNeuronFormula = tf.sigmoid(tf.matmul(hiddenNeuronsFormula, outputWeights) + outputBiases)
+hiddenNeuronsFormula = tf.sigmoid(
+    tf.matmul(inputStream, inputWeights) + inputBiases
+)
 
-# the cost function for training, this is the number the training wants to minimise
-cost = tf.reduce_mean(( (outputStream * tf.log(outputNeuronFormula)) + ((1 - outputStream) * tf.log(1.0 - outputNeuronFormula)) ) * -1)
+outputNeuronFormula = tf.sigmoid(
+    tf.matmul(hiddenNeuronsFormula, outputWeights) + outputBiases
+)
+
+# the cost function for training, this is the number the training wants to
+# minimise
+cost = tf.reduce_mean(
+    ( 
+        (
+            outputStream * tf.log(outputNeuronFormula)        
+        ) + (
+            (1 - outputStream) * tf.log(1.0 - outputNeuronFormula)
+        ) 
+    ) * -1)
 
 train_step = tf.train.GradientDescentOptimizer(0.1).minimize(cost)
 init = tf.global_variables_initializer()
@@ -29,7 +42,10 @@ sess.run(init)
 
 # actually training the model
 for i in range(10000):
-    tmp_cost, _ = sess.run([cost,train_step], feed_dict={inputStream: inputTrainingData, outputStream: outputTrainingData})
+    tmp_cost, _ = sess.run([cost,train_step], feed_dict={
+        inputStream: inputTrainingData, 
+        outputStream: outputTrainingData
+    })
     if i % 500 == 0:
         print("training iteration " + str(i))
         print('loss= ' + "{:.5f}".format(tmp_cost))

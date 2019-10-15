@@ -62,9 +62,16 @@ class ViewController: UIViewController {
     // BEGIN SC_starter_attributes
     private var recordingLength: Double = 5.0
     private var classification: Animal?
-    private lazy var audioRecorder: AVAudioRecorder? = { return initialiseAudioRecorder() }()
+
+    private lazy var audioRecorder: AVAudioRecorder? = { 
+        return initialiseAudioRecorder() 
+    }()
+
     private lazy var recordedAudioFilename: URL = {
-        let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        let directory = FileManager.default.urls(
+            for: .documentDirectory, 
+            in: .userDomainMask)[0]
+
         return directory.appendingPathComponent("recording.m4a")
     }()
     // END SC_starter_attributes
@@ -84,11 +91,21 @@ class ViewController: UIViewController {
         classification = nil
         collectionView.reloadData()
         
-        recordButton.changeState(to: .inProgress(title: "Recording...", color: .systemRed))
+        recordButton.changeState(
+            to: .inProgress(
+                title: "Recording...", 
+                color: .systemRed
+            )
+        )
         progressBar.isHidden = false
         
         audioRecorder.record(forDuration: TimeInterval(recordingLength))
-        UIView.animate(withDuration: recordingLength) { self.progressBar.setProgress(Float(self.recordingLength), animated: true) }
+        UIView.animate(withDuration: recordingLength) { 
+            self.progressBar.setProgress(
+                Float(self.recordingLength), 
+                animated: true
+            ) 
+        }
     }
     // END SC_recAud
     
@@ -97,8 +114,14 @@ class ViewController: UIViewController {
         progressBar.isHidden = true
         progressBar.progress = 0
         
-        if success, let audioFile = try? AVAudioFile(forReading: recordedAudioFilename) {
-            recordButton.changeState(to: .disabled(title: "Record Sound", color: .systemGray))
+        if success, let audioFile = try? AVAudioFile(
+            forReading: recordedAudioFilename) {
+            recordButton.changeState(
+                to: .disabled(
+                    title: "Record Sound", 
+                    color: .systemGray
+                )
+            )
             classifySound(file: audioFile)
         } else {
             summonAlertView()
@@ -110,7 +133,12 @@ class ViewController: UIViewController {
     // BEGIN SC_classify_starter
     private func classify(_ animal: Animal?) {
         classification = animal
-        recordButton.changeState(to: .enabled(title: "Record Sound", color: .systemBlue))
+        recordButton.changeState(
+            to: .enabled(
+                title: "Record Sound", 
+                color: .systemBlue
+            )
+        )
         collectionView.reloadData()
     }
     // END SC_classify_starter
@@ -131,7 +159,13 @@ extension ViewController {
             preferredStyle: .alert
         )
         
-        alertController.addAction(UIAlertAction(title: "OK", style: .default))
+        alertController.addAction(
+            UIAlertAction(
+                title: "OK", 
+                style: .default
+            )
+        )
+
         present(alertController, animated: true)
     }
 }
@@ -139,7 +173,9 @@ extension ViewController {
 
 // BEGIN SC_starter_ext_AV
 extension ViewController: AVAudioRecorderDelegate {
-    func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
+    func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, 
+        successfully flag: Bool) {
+
         finishRecording(success: flag)
     }
     
@@ -151,7 +187,9 @@ extension ViewController: AVAudioRecorderDelegate {
             AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
         ]
         
-        let recorder = try? AVAudioRecorder(url: recordedAudioFilename, settings: settings)
+        let recorder = try? AVAudioRecorder(
+            url: recordedAudioFilename, settings: settings)
+
         recorder?.delegate = self
         return recorder
     }
@@ -160,19 +198,28 @@ extension ViewController: AVAudioRecorderDelegate {
 
 // BEGIN SC_starter_ext_UIC
 extension ViewController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, 
+        numberOfItemsInSection section: Int) -> Int {
+
         return Animal.allCases.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AnimalCell.identifier, for: indexPath) as? AnimalCell else {
-            return UICollectionViewCell()
+    func collectionView(_ collectionView: UICollectionView, 
+        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+
+        guard let cell = collectionView
+            .dequeueReusableCell(
+                withReuseIdentifier: AnimalCell.identifier, 
+                for: indexPath) as? AnimalCell else {
+
+                    return UICollectionViewCell()
         }
 
         let animal = Animal.allCases[indexPath.item]
         
         cell.textLabel.text = animal.icon
-        cell.backgroundColor = (animal == self.classification) ? animal.color : .systemGray
+        cell.backgroundColor = 
+            (animal == self.classification) ? animal.color : .systemGray
         
         return cell
     }

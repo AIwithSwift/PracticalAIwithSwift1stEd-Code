@@ -38,20 +38,24 @@ func buildNetwork(inputWeights: [Float],
         activation: activation)
     
     // these describe the shape of the data being passed around
-    var inputDescriptor = BNNSVectorDescriptor(size: 2,
-                                               data_type: .float,
-                                               data_scale: 0,
-                                               data_bias: 0)
+    var inputDescriptor = BNNSVectorDescriptor(
+        size: 2,
+        data_type: .float,
+        data_scale: 0,
+        data_bias: 0)
     
-    var hiddenDescriptor = BNNSVectorDescriptor(size: 2,
-                                                data_type: .float,
-                                                data_scale: 0,
-                                                data_bias: 0)
+    var hiddenDescriptor = BNNSVectorDescriptor(
+        size: 2,
+        data_type: .float,
+        data_scale: 0,
+        data_bias: 0)
     
-    inputFilter = BNNSFilterCreateFullyConnectedLayer(&inputDescriptor,
-                                                      &hiddenDescriptor,
-                                                      &inputToHiddenParameters,
-                                                      nil)
+    inputFilter = BNNSFilterCreateFullyConnectedLayer(
+        &inputDescriptor,
+        &hiddenDescriptor,
+        &inputToHiddenParameters,
+        nil)
+
     guard inputFilter != nil else
     {
         return
@@ -80,15 +84,18 @@ func buildNetwork(inputWeights: [Float],
         bias: hiddenToOutputBiasData,
         activation: activation)
     
-    var outputDescriptor = BNNSVectorDescriptor(size: 1,
-                                                data_type: .float,
-                                                data_scale: 0,
-                                                data_bias: 0)
+    var outputDescriptor = BNNSVectorDescriptor(
+        size: 1,
+        data_type: .float,
+        data_scale: 0,
+        data_bias: 0)
     
-    outputFilter = BNNSFilterCreateFullyConnectedLayer(&hiddenDescriptor,
-                                                       &outputDescriptor,
-                                                       &hiddenToOutputParams,
-                                                       nil)
+    outputFilter = BNNSFilterCreateFullyConnectedLayer(
+        &hiddenDescriptor,
+        &outputDescriptor,
+        &hiddenToOutputParams,
+        nil)
+
     guard outputFilter != nil else
     {
         print("error getting output")
@@ -135,10 +142,11 @@ func destroyNetwork()
 // END thw_functions
 
 // BEGIN thw_creation
-buildNetwork(inputWeights: [-6.344469 ,  6.5571136,  6.602744 , -6.2786956],
-             inputBiases: [3.2028756, 3.1625535],
-             outputWeights: [-7.916997 , -7.9228764],
-             outputBiases: [11.601367])
+buildNetwork(
+    inputWeights: [-6.344469 ,  6.5571136,  6.602744 , -6.2786956],
+    inputBiases: [3.2028756, 3.1625535],
+    outputWeights: [-7.916997 , -7.9228764],
+    outputBiases: [11.601367])
 // END thw_creation
 
 // BEGIN thw_run_input

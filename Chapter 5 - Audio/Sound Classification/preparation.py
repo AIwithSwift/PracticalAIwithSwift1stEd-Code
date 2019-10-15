@@ -1,16 +1,23 @@
-// BEGIN SC_python1
+#!/usr/bin/env python
+
+# BEGIN SC_python1
 import os
 import shutil
 import pandas as pd
 
-// BEGIN SC_python_inner
+# BEGIN SC_python_inner
 # Configure as required
 input_classes_filename = '/Users/mars/Desktop/ESC-50-master/meta/esc50.csv'
 sounds_directory = '/Users/mars/Desktop/ESC-50-master/audio/'
 output_directory = '/Users/mars/Desktop/ESC-50-master/classes/'
-classes_to_include = ['dog', 'rooster', 'pig', 'cow', 'frog', 'cat', 'hen', 'insects', 'sheep', 'crow']
-include_unlicensed = False # whether to use whole ESC-50 dataset or lesser-restricted ESC-10 subset
-// END SC_python_inner
+classes_to_include =  [
+    'dog', 'rooster', 'pig', 'cow', 'frog', 'cat', 'hen', 
+    'insects', 'sheep', 'crow'
+]
+
+# whether to use whole ESC-50 dataset or lesser-restricted ESC-10 subset
+include_unlicensed = False 
+# END SC_python_inner
 
 # Make output directory
 try:
@@ -29,7 +36,11 @@ for class_name in classes_to_include:
             raise
 
 # Go through CSV to sort audio into class directories
-classes_file = pd.read_csv(input_classes_filename,encoding='utf-8', header = 'infer')
+classes_file = pd.read_csv(
+    input_classes_filename,
+    encoding='utf-8',
+    header = 'infer'
+)
 
 # format: filename, fold, target, category, esc10, src_file, take
 for line in classes_file.itertuples(index = False):
@@ -44,5 +55,5 @@ for line in classes_file.itertuples(index = False):
                 shutil.copy2(file_src, file_dst)
             except IOError:
                 raise
-// END SC_python1
+# END SC_python1
 

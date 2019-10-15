@@ -68,13 +68,23 @@ class ViewController: UIViewController {
         
         if recording {
             refresh(clear: true)
-            recordButton.changeState(to: .inProgress(title: "Stop", color: .systemRed))
+            recordButton.changeState(to: 
+                .inProgress(
+                    title: "Stop", 
+                    color: .systemRed
+                )
+            )
             classifier?.beginAnalysis { result in
                 self.classify(Animal(rawValue: result ?? ""))
             }
         } else {
             refresh()
-            recordButton.changeState(to: .enabled(title: "Record Sound", color: .systemBlue))
+            recordButton.changeState(
+                to: .enabled(
+                    title: "Record Sound", 
+                    color: .systemBlue
+                )
+            )
             classifier?.stopAnalysis()
         }
     }
@@ -96,25 +106,40 @@ extension ViewController {
             preferredStyle: .alert
         )
         
-        alertController.addAction(UIAlertAction(title: "OK", style: .default))
+        alertController.addAction(
+            UIAlertAction(
+                title: "OK", 
+                style: .default
+            )
+        )
+
         present(alertController, animated: true)
     }
 }
 
 extension ViewController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, 
+        numberOfItemsInSection section: Int) -> Int {
+
         return Animal.allCases.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AnimalCell.identifier, for: indexPath) as? AnimalCell else {
-            return UICollectionViewCell()
+    func collectionView(_ collectionView: UICollectionView, 
+        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+
+        guard let cell = 
+            collectionView.dequeueReusableCell(
+                withReuseIdentifier: AnimalCell.identifier, 
+                for: indexPath) as? AnimalCell else {
+
+                return UICollectionViewCell()
         }
 
         let animal = Animal.allCases[indexPath.item]
         
         cell.textLabel.text = animal.icon
-        cell.backgroundColor = (animal == self.classification) ? animal.color : .systemGray
+        cell.backgroundColor = 
+            (animal == self.classification) ? animal.color : .systemGray
         
         return cell
     }

@@ -21,7 +21,8 @@ extension String {
         let recognizer = NLLanguageRecognizer()
         recognizer.processString(self)
         let language = recognizer.dominantLanguage
-        return locale.localizedString(forLanguageCode: language!.rawValue) ?? "unknown"
+        return locale.localizedString(
+            forLanguageCode: language!.rawValue) ?? "unknown"
     }
 }
 // END nlp_pg_li_ext
@@ -48,26 +49,41 @@ for string in text {
 // BEGIN ner_pg_ext
 extension String {
     func printNamedEntities() {
-        let tagger = NSLinguisticTagger(tagSchemes: [.nameType], options: 0)
+        let tagger = NSLinguisticTagger(
+            tagSchemes: [.nameType], 
+            options: 0)
+
         tagger.string = self
         
         let range = NSRange(location: 0, length: self.utf16.count)
         
-        let options: NSLinguisticTagger.Options = [.omitPunctuation, .omitWhitespace, .joinNames]
-        let tags: [NSLinguisticTag] = [.personalName, .placeName, .organizationName]
+        let options: NSLinguisticTagger.Options = [
+            .omitPunctuation, .omitWhitespace, .joinNames
+        ]
+        let tags: [NSLinguisticTag] = [
+            .personalName, .placeName, .organizationName
+        ]
         
-        tagger.enumerateTags(in: range, unit: .word, scheme: .nameType, options: options) { tag, tokenRange, stop in
-            if let tag = tag, tags.contains(tag) {
-                let name = (self as NSString).substring(with: tokenRange)
-                print("\(name) is a \(tag.rawValue)")
-            }
+        tagger.enumerateTags(in: range, 
+            unit: .word, 
+            scheme: .nameType, 
+            options: options) { 
+                tag, tokenRange, stop in
+                    
+                if let tag = tag, tags.contains(tag) {
+                    let name = (self as NSString)
+                        .substring(with: tokenRange)
+
+                    print("\(name) is a \(tag.rawValue)")
+                }
         }
     }
 }
 // END ner_pg_ext
 print("### Named Entity Recognition Demo ###")
 // BEGIN ner_pg_sentence
-let sentence = "Marina, Jon, and Tim write books for O'Reilly Media and live in Tasmania, Australia."
+let sentence = "Marina, Jon, and Tim write books for O'Reilly Media " +    
+    "and live in Tasmania, Australia."
 // END ner_pg_sentence
 // BEGIN ner_pg_testner
 sentence.printNamedEntities()
@@ -77,21 +93,38 @@ sentence.printNamedEntities()
 extension String {
     // BEGIN nlp_print_words_func
     func printWords() {
-        let tagger = NSLinguisticTagger(tagSchemes:[.tokenType], options: 0)
-        let options: NSLinguisticTagger.Options = [.omitPunctuation, .omitWhitespace, .joinNames]
+
+        let tagger = NSLinguisticTagger(
+            tagSchemes:[.tokenType], options: 0)
+
+        let options: NSLinguisticTagger.Options = [
+            .omitPunctuation, .omitWhitespace, .joinNames
+        ]
+
         tagger.string = self
         let range = NSRange(location: 0, length: self.utf16.count)
         
-        tagger.enumerateTags(in: range, unit: .word, scheme: .tokenType, options: options) { tag, tokenRange, stop in
-            let word = (self as NSString).substring(with: tokenRange)
-            print(word)
+        tagger.enumerateTags(
+            in: range, 
+            unit: .word, 
+            scheme: .tokenType, 
+            options: options) { 
+                tag, tokenRange, stop in
+
+                let word = (self as NSString).substring(with: tokenRange)
+                print(word)
         }
     }
     // END nlp_print_words_func
 }
 print("### Tokenization Demo ###")
 // BEGIN nlp_speech
-let speech = "Space, the final frontier. These are the voyages of the Starship Enterprise. Its continuing mission to explore strange new worlds, to seek out new life and new civilization, to boldly go where no one has gone before!"
+let speech = """
+Space, the final frontier. These are the voyages of the
+Starship Enterprise. Its continuing mission to explore strange new worlds, 
+to seek out new life and new civilization, to boldly go where no one has 
+gone before!
+"""
 // END nlp_speech
 // BEGIN nlp_running_tokenization_for_print_words
 speech.printWords()
@@ -102,19 +135,30 @@ extension String {
     // BEGIN nlp_func_ppos
     func printPartsOfSpeech() {
         // BEGIN nlp_func_ppos1
-        let tagger = NSLinguisticTagger(tagSchemes:[.lexicalClass], options: 0)
-        let options: NSLinguisticTagger.Options = [.omitPunctuation, .omitWhitespace, .joinNames]
+        let tagger = NSLinguisticTagger(
+            tagSchemes:[.lexicalClass], 
+            options: 0)
+        let options: NSLinguisticTagger.Options = [
+            .omitPunctuation, .omitWhitespace, .joinNames
+            ]
         
         tagger.string = self
         let range = NSRange(location: 0, length: self.utf16.count)
         // END nlp_func_ppos1
         
         // BEGIN nlp_func_ppos2
-        tagger.enumerateTags(in: range, unit: .word, scheme: .lexicalClass, options: options) { tag, tokenRange, _ in
-            if let tag = tag {
-                let word = (self as NSString).substring(with: tokenRange)
-                print("\(word) is a \(tag.rawValue)")
-            }
+        tagger.enumerateTags(
+            in: range, 
+            unit: .word, 
+            scheme: .lexicalClass, 
+            options: options) { 
+                tag, tokenRange, _ in
+
+                if let tag = tag {
+                    let word = (self as NSString)
+                        .substring(with: tokenRange)
+                    print("\(word) is a \(tag.rawValue)")
+                }
         }
         // END nlp_func_ppos2
     }
@@ -130,13 +174,23 @@ speech.printPartsOfSpeech()
 extension String {
     func printLemmas() {
         let tagger = NSLinguisticTagger(tagSchemes:[.lemma], options: 0)
-        let options: NSLinguisticTagger.Options = [.omitPunctuation, .omitWhitespace, .joinNames]
+        let options: NSLinguisticTagger.Options = [
+            .omitPunctuation, .omitWhitespace, .joinNames
+        ]
         
         tagger.string = self
         let range = NSRange(location: 0, length: self.utf16.count)
 
-        tagger.enumerateTags(in: range, unit: .word, scheme: .lemma, options: options) { tag, tokenRange, stop in
-            if let lemma = tag?.rawValue { print(lemma) }
+        tagger.enumerateTags(
+            in: range, 
+            unit: .word, 
+            scheme: .lemma, 
+            options: options) { 
+                tag, tokenRange, stop in
+
+                if let lemma = tag?.rawValue { 
+                    print(lemma) 
+                }
         }
     }
 }
@@ -154,11 +208,22 @@ class ReviewTagger {
     
     private lazy var tagger: NLTagger? = {
         do {
-            let modelFile = URL(fileURLWithPath: "/Users/parisba/ORM Projects/Practical AI with Swift 1st Edition/PracticalAIwithSwift1stEd-Code/ChapterXX-NaturalLanguage/ReviewMLTextClassifier.mlmodel")
-            let model = try NLModel(contentsOf: modelFile) // makes the ML model an NL model
+            let path = "/Users/parisba/ORM Projects/Practical AI " +
+            "with Swift 1st Edition/PracticalAIwithSwift1stEd-Code/" +
+            "ChapterXX-NaturalLanguage/ReviewMLTextClassifier.mlmodel"
+
+            let modelFile = URL(fileURLWithPath: path)
+            
+            // make the ML model an NL model
+            let model = try NLModel(contentsOf: modelFile) 
+
             let tagger = NLTagger(tagSchemes: [scheme])
-            tagger.setModels([model], forTagScheme: scheme) // connect model to (custom) scheme name
+            
+            // connect model to (custom) scheme name
+            tagger.setModels([model], forTagScheme: scheme) 
+
             print("Success loading model")
+
             return tagger
         } catch {
             return nil
@@ -182,9 +247,15 @@ class ReviewTagger {
 }
 
 let reviewTagger = ReviewTagger()
-let reviews = ["I hated everything.", "I loved everything, it was amazing."]
+
+let reviews = [
+    "I hated everything.", 
+    "I loved everything, it was amazing."
+]
 
 reviews.forEach { review in
-    guard let prediction = reviewTagger.prediction(for: review) else { return }
+    guard let prediction = reviewTagger.prediction(for: review) else { 
+        return
+    }
     print("\(prediction) -- \(review)")
 }

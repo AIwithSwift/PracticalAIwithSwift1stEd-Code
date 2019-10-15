@@ -21,9 +21,18 @@ struct ContentView: View {
     
     // BEGIN IS_cv_at
     private let placeholderImage = UIImage(named: "placeholder")!
-    private var cameraEnabled: Bool { UIImagePickerController.isSourceTypeAvailable(.camera) }
-    private var selectEnabled: Bool { secondImage == nil }
-    private var comparisonEnabled: Bool { secondImage != nil && similarity < 0 }
+
+    private var cameraEnabled: Bool {  
+        UIImagePickerController.isSourceTypeAvailable(.camera) 
+    }
+
+    private var selectEnabled: Bool {
+        secondImage == nil
+    }
+
+    private var comparisonEnabled: Bool {
+        secondImage != nil && similarity < 0
+    }
     // END IS_cv_at
     
     // BEGIN IS_cv_bodview
@@ -42,13 +51,22 @@ struct ContentView: View {
             return AnyView(NavigationView {
                 VStack {
                     HStack {
-                        OptionalResizableImage(image: firstImage, placeholder: placeholderImage)
-                        OptionalResizableImage(image: secondImage, placeholder: placeholderImage)
+                        OptionalResizableImage(
+                            image: firstImage, 
+                            placeholder: placeholderImage
+                        )
+                        OptionalResizableImage(
+                            image: secondImage, 
+                            placeholder: placeholderImage
+                        )
                     }
                     
                     Button(action: clearImages) { Text("Clear Images") }
                     Spacer()
-                    Text("Similarity: \(similarity > 0 ? String(similarity) : "...")%").font(.title).bold()
+                    Text(
+                        "Similarity: " + 
+                        "\(similarity > 0 ? String(similarity) : "...")%"
+                    ).font(.title).bold()
                     Spacer()
                     
                     if comparisonEnabled {
@@ -60,9 +78,16 @@ struct ContentView: View {
                             ButtonLabel("Compare", background: .gray)
                         }.disabled(!comparisonEnabled)
                     }
-                }.padding().navigationBarTitle(Text("ISDemo"), displayMode: .inline)
-                .navigationBarItems(leading: Button(action: summonImagePicker) { Text("Select") }.disabled(!selectEnabled),
-                    trailing: Button(action: summonCamera) { Image(systemName: "camera") }.disabled(!cameraEnabled))
+                }
+                .padding()
+                .navigationBarTitle(Text("ISDemo"), displayMode: .inline)
+                .navigationBarItems(
+                    leading: Button(action: summonImagePicker) { 
+                        Text("Select") 
+                    }.disabled(!selectEnabled),
+                    trailing: Button(action: summonCamera) { 
+                        Image(systemName: "camera") 
+                    }.disabled(!cameraEnabled))
             })
         }
     }
@@ -105,7 +130,7 @@ struct ContentView: View {
         print("Summoning ImagePicker...")
         imagePickerOpen = true
     }
-    // END BEGIN IS_cv_sip
+    // END IS_cv_sip
     
     // BEGIN IS_cv_scam
     private func summonCamera() {

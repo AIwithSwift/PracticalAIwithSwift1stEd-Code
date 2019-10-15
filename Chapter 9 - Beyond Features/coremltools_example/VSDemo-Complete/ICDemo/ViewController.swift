@@ -22,12 +22,19 @@ class ViewController: UIViewController {
     
     // MARK: Actions
     
-    @IBAction func selectButtonPressed(_ sender: Any) { getPhoto() }
-    @IBAction func cameraButtonPressed(_ sender: Any) { getPhoto(cameraSource: true) }
-    @IBAction func classifyImageButtonPressed(_ sender: Any) { classifyImage() }
+    @IBAction func selectButtonPressed(_: Any) {
+        getPhoto()
+    }
+
+    @IBAction func cameraButtonPressed(_: Any) {
+        getPhoto(cameraSource: true)
+    }
+
+    @IBAction func classifyImageButtonPressed(_: Any) { classifyImage() 
     
     // BEGIN vsdemo_class_ai_newvar
-    private let classifier = VisionClassifier(mlmodel: VisualSentiment().model)
+    private let classifier = 
+        VisionClassifier(mlmodel: VisualSentiment().model
     // END vsdemo_class_ai_newvar
     private var inputImage: UIImage?
     var classification: String?
@@ -37,14 +44,17 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
+        cameraButton.isEnabled = 
+            UIImagePickerController.isSourceTypeAvailable(.camera)
+            
         imageView.contentMode = .scaleAspectFill
         imageView.image = UIImage.placeholder
         classifier?.delegate = self
         refresh()
     }
     
-    /// Disables and enables controls based on presence of input to categorise
+    /// Disables and enables controls based on presence of input to
+    /// categorise
     func refresh() {
         if inputImage == nil {
             classLabel.text = "Pick or take a photo!"
@@ -72,7 +82,8 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController: UINavigationControllerDelegate, UIPickerViewDelegate, UIImagePickerControllerDelegate {
+extension ViewController: UINavigationControllerDelegate, 
+    UIPickerViewDelegate, UIImagePickerControllerDelegate {
     
     private func getPhoto(cameraSource: Bool = false) {
         let photoSource: UIImagePickerController.SourceType
@@ -85,8 +96,14 @@ extension ViewController: UINavigationControllerDelegate, UIPickerViewDelegate, 
         present(imagePicker, animated: true)
     }
     
-    @objc func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
-        inputImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
+    @objc func imagePickerController(
+        _ picker: UIImagePickerController, 
+        didFinishPickingMediaWithInfo info: 
+            [UIImagePickerController.InfoKey: Any]) {
+
+        inputImage = 
+            info[UIImagePickerController.InfoKey.originalImage] as? UIImage
+            
         classification = nil
         
         picker.dismiss(animated: true)
@@ -104,7 +121,10 @@ extension ViewController: UINavigationControllerDelegate, UIPickerViewDelegate, 
             preferredStyle: .alert
         )
         
-        alertController.addAction(UIAlertAction(title: "OK", style: .default))
+        alertController.addAction(
+            UIAlertAction(title: "OK", style: .default)
+        )
+        
         present(alertController, animated: true)
     }
 }

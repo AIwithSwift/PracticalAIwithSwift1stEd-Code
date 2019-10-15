@@ -23,7 +23,11 @@ class VisionClassifier {
     
     private let model: VNCoreMLModel
     private lazy var requests: [VNCoreMLRequest] = {
-        let request = VNCoreMLRequest(model: model, completionHandler: { [weak self] request, error in self?.handleResults(for: request, error: error)
+        let request = VNCoreMLRequest(
+            model: model, 
+            completionHandler: { 
+                [weak self] request, error in 
+                self?.handleResults(for: request, error: error)
         })
         
         request.imageCropAndScaleOption = .centerCrop
@@ -42,20 +46,29 @@ class VisionClassifier {
     
     func classify(_ image: UIImage) {
         DispatchQueue.global(qos: .userInitiated).async {
-            guard let handler = VNImageRequestHandler(uiImage: image) else { return }
+            guard let handler = 
+                VNImageRequestHandler(uiImage: image) else { 
+                    return
+            }
+            
             do {
                 try handler.perform(self.requests)
             } catch {
-                self.delegate?.summonAlertView(message: error.localizedDescription)
+                self.delegate?.summonAlertView(
+                    message: error.localizedDescription
+                )
             }
         }
     }
     
     func handleResults(for request: VNRequest, error: Error?) {
         DispatchQueue.main.async {
-            guard let results = request.results as? [VNClassificationObservation] else {
-                self.delegate?.summonAlertView(message: error?.localizedDescription)
-                return
+            guard let results = 
+                request.results as? [VNClassificationObservation] else {
+                    self.delegate?.summonAlertView(
+                        message: error?.localizedDescription
+                    )
+                    return
             }
             
             if results.isEmpty {
@@ -66,7 +79,9 @@ class VisionClassifier {
                 if result.confidence < 0.6  {
                     self.delegate?.classification = "Not quite sure..."
                 } else {
-                    self.delegate?.classification = "\(result.identifier) (\(Int(result.confidence * 100))%)"
+                    self.delegate?.classification = 
+                        "\(result.identifier) " +
+                        "(\(Int(result.confidence * 100))%)"
                 }
             }
             

@@ -14,14 +14,18 @@ import Foundation
 
 /// BEGIN ddd_drawing_enum
 enum Drawing: String, CaseIterable {
-    /// These only include those the model was trained on
-    /// For others that can be included in the training phase, see the [full list of categories in the dataset](https://raw.githubusercontent.com/googlecreativelab/quickdraw-dataset/master/categories.txt)
+    /// These only include those the model was trained on. For others that
+    /// can be included in the training phase, see the full list of
+    /// categories in the dataset:
+    /// https://raw.githubusercontent.com/googlecreativelab/
+    ///     quickdraw-dataset/master/categories.txt
     case apple, banana, bread, broccoli, cake, carrot, coffee, cookie
     case donut, grapes, hotdog, icecream, lollipop, mushroom, peanut, pear
     case pineapple, pizza, potato, sandwich, steak, strawberry, watermelon
     
     init?(rawValue: String) {
-        if let match = Drawing.allCases.first(where: { $0.rawValue == rawValue }) {
+        if let match = Drawing.allCases
+            .first(where: { $0.rawValue == rawValue }) {
             self = match
         } else {
             switch rawValue {
@@ -78,17 +82,22 @@ extension VNImageRequestHandler {
 extension DrawingClassifierModel {
     func configure(image: UIImage?) -> UIImage? {
         if let rotatedImage = image?.fixOrientation(),
-            let grayscaleImage = rotatedImage.applying(filter: CIFilter.noir),
+            let grayscaleImage = rotatedImage
+                .applying(filter: CIFilter.noir),
             // account for paper photography making everything dark :/
-            let brightenedImage = grayscaleImage.applying(filter: CIFilter.brighten(amount: 0.4)),
-            let contrastedImage = brightenedImage.applying(filter: CIFilter.contrast(amount: 10.0)) {
-            return contrastedImage
+            let brightenedImage = grayscaleImage
+                .applying(filter: CIFilter.brighten(amount: 0.4)),
+            let contrastedImage = brightenedImage
+                .applying(filter: CIFilter.contrast(amount: 10.0)) {
+
+                return contrastedImage
         }
         
         return nil
     }
     
-    func classify(_ image: UIImage?, completion: @escaping (Drawing?) -> ()) {
+    func classify(_ image: UIImage?, 
+        completion: @escaping (Drawing?) -> ()) {
         guard let image = image,
             let model = try? VNCoreMLModel(for: self.model) else {
                 return completion(nil)
@@ -99,10 +108,19 @@ extension DrawingClassifierModel {
         DispatchQueue.global(qos: .userInitiated).async {
             if let handler = VNImageRequestHandler(uiImage: image) {
                 try? handler.perform([request])
-                let results = request.results as? [VNClassificationObservation]
-                let highestResult = results?.max { $0.confidence < $1.confidence }
+                
+                let results = request.results 
+                    as? [VNClassificationObservation]
+
+                let highestResult = results?.max { 
+                        $0.confidence < $1.confidence 
+                }
+
                 print(results?.list ?? "")
-                completion(Drawing(rawValue: highestResult?.identifier ?? ""))
+                
+                completion(
+                    Drawing(rawValue: highestResult?.identifier ?? "")
+                )
             } else {
                 completion(nil)
             }
@@ -116,7 +134,8 @@ extension Collection where Element == VNClassificationObservation {
     var list: String {
         var string = ""
         for element in self {
-            string += "\(element.identifier): \(element.confidence * 100.0)%\n"
+            string += "\(element.identifier): " +
+                "\(element.confidence * 100.0)%\n"
         }
         return string
     }

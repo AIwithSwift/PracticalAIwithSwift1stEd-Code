@@ -11,9 +11,10 @@ import turicreate as tc
 # BEGIN ddd_python_vars
 # THE CATEGORIES WE WANT TO BE ABLE TO DISTINGUISH
 categories = [
-    'apple', 'banana', 'bread', 'broccoli', 'cake', 'carrot', 'coffee cup', 'cookie',
-    'donut', 'grapes', 'hot dog', 'ice cream', 'lollipop', 'mushroom', 'peanut', 'pear',
-    'pineapple', 'pizza', 'potato', 'sandwich', 'steak', 'strawberry', 'watermelon'
+    'apple', 'banana', 'bread', 'broccoli', 'cake', 'carrot', 'coffee cup',
+    'cookie', 'donut', 'grapes', 'hot dog', 'ice cream', 'lollipop',
+    'mushroom', 'peanut', 'pear', 'pineapple', 'pizza', 'potato', 
+    'sandwich', 'steak', 'strawberry', 'watermelon'
 ]
 
 # CONFIGURE AS REQUIRED
@@ -40,7 +41,10 @@ make_directory(bitmap_directory)
 
 # BEGIN ddd_fetch
 # FETCH SOME DATA
-bitmap_url = 'https://storage.googleapis.com/quickdraw_dataset/full/numpy_bitmap'
+bitmap_url = (
+    'https://storage.googleapis.com/quickdraw_dataset/full/numpy_bitmap'
+)
+
 total_categories = len(categories)
 
 for index, category in enumerate(categories):
@@ -50,7 +54,8 @@ for index, category in enumerate(categories):
 		bitmap_response = requests.get(bitmap_url + bitmap_filename)
 		bitmap_file.write(bitmap_response.content)
 
-	print('Downloaded %s drawings (category %d/%d)' % (category, index + 1, total_categories))
+	print('Downloaded %s drawings (category %d/%d)' % 
+        (category, index + 1, total_categories))
 
 random_state = np.random.RandomState(100)
 # END ddd_fetch
@@ -59,10 +64,15 @@ random_state = np.random.RandomState(100)
 def get_bitmap_sframe():
     labels, drawings = [], []
     for category in categories:
-        data = np.load(bitmap_directory + '/' + category + '.npy', allow_pickle=True)
+        data = np.load(
+            bitmap_directory + '/' + category + '.npy', 
+            allow_pickle=True
+        )
         random_state.shuffle(data)
         sampled_data = data[:training_samples]
-        transformed_data = sampled_data.reshape(sampled_data.shape[0], 28, 28, 1)
+        transformed_data = sampled_data.reshape(
+            sampled_data.shape[0], 28, 28, 1)
+
         for pixel_data in transformed_data:
             image = tc.Image(_image_data=np.invert(pixel_data).tobytes(),
                  _width=pixel_data.shape[1],
@@ -90,7 +100,8 @@ bitmap_sframe.explore()
 # (in a production model you would do a training/testing data split)
 # (but we don't mind how inaccurate it is for a demonstration)
 # BEGIN ddd_createmodel
-bitmap_model = tc.drawing_classifier.create(bitmap_sframe, 'label', max_iterations=1000)
+bitmap_model = tc.drawing_classifier.create(
+    bitmap_sframe, 'label', max_iterations=1000)
 # END ddd_createmodel
 
 # Export for use in Core ML

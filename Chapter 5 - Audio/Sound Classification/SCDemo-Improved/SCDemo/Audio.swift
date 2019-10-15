@@ -44,7 +44,8 @@ class AudioClassifier {
     private let model: MLModel
     private let request: SNClassifySoundRequest
     private let audioEngine = AVAudioEngine()
-    private let analysisQueue = DispatchQueue(label: "com.apple.AnalysisQueue")
+    private let analysisQueue = 
+        DispatchQueue(label: "com.apple.AnalysisQueue")
     private let inputFormat: AVAudioFormat
     private let analyzer: SNAudioStreamAnalyzer
     private let inputBus: AVAudioNodeBus
@@ -54,12 +55,14 @@ class AudioClassifier {
     
     // BEGIN SC_improved_AC_Class2
     init?(model: MLModel, inputBus: AVAudioNodeBus = 0) {
-        guard let request = try? SNClassifySoundRequest(mlModel: model) else { return nil }
+        guard let request = 
+            try? SNClassifySoundRequest(mlModel: model) else { return nil }
         
         self.model = model
         self.request = request
         self.inputBus = inputBus
-        self.inputFormat = audioEngine.inputNode.inputFormat(forBus: inputBus)
+        self.inputFormat = audioEngine.inputNode.inputFormat(
+            forBus: inputBus)
         self.analyzer = SNAudioStreamAnalyzer(format: inputFormat)
     }
     // END SC_improved_AC_Class2
@@ -70,13 +73,20 @@ class AudioClassifier {
         
         print("Begin recording...")
         let observer = ResultsObserver(completion: completion)
-        guard let _ = try? analyzer.add(request, withObserver: observer) else { return }
+        guard let _ = try? analyzer.add(
+            request, withObserver: observer) else { return }
+
         self.observer = observer
         
-        audioEngine.inputNode.installTap(onBus: inputBus, bufferSize: 8192, format: inputFormat) { buffer, time in
-            self.analysisQueue.async {
-                self.analyzer.analyze(buffer, atAudioFramePosition: time.sampleTime)
-            }
+        audioEngine.inputNode.installTap(
+            onBus: inputBus, 
+            bufferSize: 8192, 
+            format: inputFormat) { buffer, time in
+                self.analysisQueue.async {
+                    self.analyzer.analyze(
+                        buffer,    
+                        atAudioFramePosition: time.sampleTime)
+                }
         }
     }
     // END SC_improved_AC_Class3

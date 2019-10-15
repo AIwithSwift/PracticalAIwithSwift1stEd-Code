@@ -17,7 +17,11 @@ struct ContentView: View {
     
     private var faceCount: Int { return faces?.count ?? 0 }
     private let placeholderImage = UIImage(named: "placeholder")!
-    private var cameraEnabled: Bool { UIImagePickerController.isSourceTypeAvailable(.camera) }
+    
+    private var cameraEnabled: Bool { 
+        UIImagePickerController.isSourceTypeAvailable(.camera)     
+    }
+
     private var detectionEnabled: Bool { image != nil && faces == nil }
     
     var body: some View {
@@ -33,7 +37,8 @@ struct ContentView: View {
         self.image?.detectFaces { result in
             self.faces = result
             
-            if let image = self.image, let annotatedImage = result?.drawnOn(image) {
+            if let image = self.image, 
+            let annotatedImage = result?.drawnOn(image) {
                 self.image =  annotatedImage
             }
         }
@@ -60,11 +65,26 @@ struct ContentView: View {
 extension ContentView {
     private func mainView() -> AnyView {
         return AnyView(NavigationView {
-            MainView(image: image ?? placeholderImage, text: "\(faceCount) face\(faceCount == 1 ? "" : "s")") {
-                TwoStateButton(text: "Detect Faces", disabled: !detectionEnabled, action: getFaces)
-            }.padding().navigationBarTitle(Text("FDDemo"), displayMode: .inline)
-            .navigationBarItems(leading: Button(action: summonImagePicker) { Text("Select") },
-                                trailing: Button(action: summonCamera) { Image(systemName: "camera") }.disabled(!cameraEnabled))
+            MainView(
+                image: image ?? placeholderImage, 
+                text: "\(faceCount) face\(faceCount == 1 ? "" : "s")") {
+                    TwoStateButton(
+                        text: "Detect Faces", 
+                        disabled: !detectionEnabled, 
+                        action: getFaces
+                    )
+            }
+            .padding()
+            .navigationBarTitle(Text("FDDemo"), displayMode: .inline)
+            .navigationBarItems(
+                leading: Button(action: summonImagePicker) { 
+                    Text("Select")
+                },
+                trailing: Button(action: summonCamera) { 
+                    Image(systemName: "camera") 
+                }
+                .disabled(!cameraEnabled)
+            )
         })
     }
     

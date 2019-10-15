@@ -20,8 +20,14 @@ struct ContentView: View {
     // BEGIN ddd_cv_vars
     private let placeholderImage = UIImage(named: "placeholder")!
     private let classifier = DrawingClassifierModel()
-    private var cameraEnabled: Bool { UIImagePickerController.isSourceTypeAvailable(.camera) }
-    private var classificationEnabled: Bool { image != nil && classification == nil }
+    
+    private var cameraEnabled: Bool { 
+        UIImagePickerController.isSourceTypeAvailable(.camera) 
+    }
+
+    private var classificationEnabled: Bool { 
+        image != nil && classification == nil 
+    }
     // END ddd_cv_vars
     
     // BEGIN ddd_cv_bodyview
@@ -69,11 +75,26 @@ struct ContentView: View {
 extension ContentView {
     private func mainView() -> AnyView {
         return AnyView(NavigationView {
-            MainView(image: image ?? placeholderImage, text: "\(classification ?? "Nothing detected")") {
-                TwoStateButton(text: "Classify", disabled: !classificationEnabled, action: classify)
-                }.padding().navigationBarTitle(Text("DDDemo"), displayMode: .inline)
-                .navigationBarItems(leading: Button(action: summonImagePicker) { Text("Select") },
-                                    trailing: Button(action: summonCamera) { Image(systemName: "camera") }.disabled(!cameraEnabled))
+            MainView(
+                image: image ?? placeholderImage, 
+                text: "\(classification ?? "Nothing detected")") {
+                    TwoStateButton(
+                        text: "Classify", 
+                        disabled: !classificationEnabled, action: classify
+                    )
+                }
+                .padding()
+                .navigationBarTitle(
+                    Text("DDDemo"), 
+                    displayMode: .inline)
+                .navigationBarItems(
+                    leading: Button(action: summonImagePicker) { 
+                        Text("Select")
+                        },
+                    trailing: Button(action: summonCamera) { 
+                        Image(systemName: "camera") 
+                    }.disabled(!cameraEnabled)
+                )
         })
     }
     

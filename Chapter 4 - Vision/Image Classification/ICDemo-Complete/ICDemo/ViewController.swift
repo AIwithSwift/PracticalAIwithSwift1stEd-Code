@@ -22,12 +22,22 @@ class ViewController: UIViewController {
     
     // MARK: Actions
     
-    @IBAction func selectButtonPressed(_ sender: Any) { getPhoto() }
-    @IBAction func cameraButtonPressed(_ sender: Any) { getPhoto(cameraSource: true) }
-    @IBAction func classifyImageButtonPressed(_ sender: Any) { classifyImage() }
+    @IBAction func selectButtonPressed(_ sender: Any) { 
+        getPhoto() 
+    }
+
+    @IBAction func cameraButtonPressed(_ sender: Any) { 
+        getPhoto(cameraSource: true) 
+    }
+
+    @IBAction func classifyImageButtonPressed(_ sender: Any) { 
+        classifyImage() 
+    }
     
     // BEGIN im_class_ai_newvar
-    private let classifier = VisionClassifier(mlmodel: BananaOrApple().model)
+    private let classifier = VisionClassifier(
+        mlmodel: BananaOrApple().model
+    )
     // END im_class_ai_newvar
     private var inputImage: UIImage?
     var classification: String?
@@ -37,7 +47,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
+        cameraButton.isEnabled = 
+            UIImagePickerController.isSourceTypeAvailable(.camera)
         imageView.contentMode = .scaleAspectFill
         imageView.image = UIImage.placeholder
         // BEGIN im_class_ai_vdl

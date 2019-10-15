@@ -17,9 +17,13 @@ struct OptionalResizableImage: View {
     
     var body: some View {
         if let image = image {
-            return Image(uiImage: image).resizable().aspectRatio(contentMode: .fit)
+            return Image(uiImage: image)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
         } else {
-            return Image(uiImage: placeholder).resizable().aspectRatio(contentMode: .fit)
+            return Image(uiImage: placeholder)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
         }
     }
 }
@@ -51,7 +55,10 @@ struct ImagePickerView: View {
     private let camera: Bool
     
     var body: some View {
-        ImagePickerControllerWrapper(camera: camera, completion: completion)
+        ImagePickerControllerWrapper(
+            camera: camera, 
+            completion: completion
+        )
     }
     
     init(camera: Bool = false, completion: @escaping (UIImage?) -> ()) {
@@ -79,33 +86,47 @@ struct ImagePickerControllerWrapper: UIViewControllerRepresentable {
         return coordinator
     }
     
-    func makeUIViewController(context: Context) -> UIImagePickerController {
+    func makeUIViewController(context: Context) -> 
+        UIImagePickerController {
+
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = context.coordinator
-        imagePickerController.sourceType = cameraSource ? .camera : .photoLibrary
+        imagePickerController.sourceType = 
+            cameraSource ? .camera : .photoLibrary
         return imagePickerController
     }
     
-    func updateUIViewController(_ uiViewController: UIImagePickerController, context: Context) {
+    func updateUIViewController(
+        _ uiViewController: UIImagePickerController, context: Context) {
         //uiViewController.setViewControllers(?, animated: true)
     }
     
-    class Coordinator: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    class Coordinator: NSObject, 
+        UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+
         var parent: ImagePickerControllerWrapper
         var completion: ((UIImage?) -> ())?
         
-        init(_ imagePickerControllerWrapper: ImagePickerControllerWrapper) {
+        init(_ imagePickerControllerWrapper: 
+            ImagePickerControllerWrapper) {
             self.parent = imagePickerControllerWrapper
         }
         
-        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+        func imagePickerController(_ picker: UIImagePickerController, 
+            didFinishPickingMediaWithInfo info: 
+                [UIImagePickerController.InfoKey: Any]) {
+
             print("Image picker complete...")
-            let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
+            let selectedImage = 
+                info[UIImagePickerController.InfoKey.originalImage] 
+                as? UIImage
             picker.dismiss(animated: true)
             completion?(selectedImage)
         }
         
-        func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        func imagePickerControllerDidCancel(
+            _ picker: UIImagePickerController) {
+                
             print("Image picker cancelled...")
             picker.dismiss(animated: true)
             completion?(nil)

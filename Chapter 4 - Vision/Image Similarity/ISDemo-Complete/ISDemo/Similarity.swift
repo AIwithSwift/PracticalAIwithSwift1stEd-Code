@@ -18,7 +18,10 @@ extension UIImage {
         var similarity: Float = 0
         guard let firstImageFPO = self.featurePrintObservation(),
             let secondImageFPO = image.featurePrintObservation(),
-            let _ = try? secondImageFPO.computeDistance(&similarity, to: firstImageFPO) else {
+            let _ = try? secondImageFPO.computeDistance(
+                &similarity, 
+                to: firstImageFPO
+            ) else {
                 return nil
         }
         
@@ -30,9 +33,16 @@ extension UIImage {
     private func featurePrintObservation() -> VNFeaturePrintObservation? {
         guard let cgImage = self.cgImage else { return nil }
         
-        let requestHandler = VNImageRequestHandler(cgImage: cgImage, orientation: self.cgImageOrientation, options: [:])
+        let requestHandler = 
+            VNImageRequestHandler(cgImage: cgImage, 
+            orientation: self.cgImageOrientation, 
+            options: [:]
+        )
+
         let request = VNGenerateImageFeaturePrintRequest()
-        if let _ = try? requestHandler.perform([request]), let result = request.results?.first as? VNFeaturePrintObservation {
+        if let _ = try? requestHandler.perform([request]), 
+            let result = request.results?.first 
+                as? VNFeaturePrintObservation {
             return result
         }
         

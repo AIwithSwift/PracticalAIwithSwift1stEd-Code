@@ -40,8 +40,11 @@ class SpeechRecognizer {
     // END SR_class2
     
     // BEGIN SR_class3
-    func checkSessionPermissions(_ session: AVAudioSession, completion: @escaping (Bool) -> ()) {
-        if session.responds(to: #selector(AVAudioSession.requestRecordPermission(_:))) {
+    func checkSessionPermissions(_ session: AVAudioSession, 
+        completion: @escaping (Bool) -> ()) {
+
+        if session.responds(
+            to: #selector(AVAudioSession.requestRecordPermission(_:))) {
             session.requestRecordPermission(completion)
         }
     }
@@ -55,9 +58,17 @@ class SpeechRecognizer {
         
         // BEGIN SR_class4_inner1
         // audio/microphone access permissions
-        checkSessionPermissions(session) { success in self.permissions = success }
-        guard let _ = try? session.setCategory(.record, mode: .measurement, options: .duckOthers),
-            let _ = try? session.setActive(true, options: .notifyOthersOnDeactivation),
+        checkSessionPermissions(session) { 
+            success in self.permissions = success 
+        }
+
+        guard let _ = try? session.setCategory(
+                .record, 
+                mode: .measurement, 
+                options: .duckOthers),
+            let _ = try? session.setActive(
+                true,
+                options: .notifyOthersOnDeactivation),
             let _ = try? audioEngine.start(),
             let request = self.request
             else {
@@ -67,8 +78,12 @@ class SpeechRecognizer {
         
         // BEGIN SR_class4_inner2
         let recordingFormat = inputNode.outputFormat(forBus: inputBus)
-        inputNode.installTap(onBus: inputBus, bufferSize: 1024, format: recordingFormat) { (buffer: AVAudioPCMBuffer, when: AVAudioTime) in
-            self.request?.append(buffer)
+        inputNode.installTap(
+            onBus: inputBus, 
+            bufferSize: 1024, 
+            format: recordingFormat) { 
+                (buffer: AVAudioPCMBuffer, when: AVAudioTime) in
+                self.request?.append(buffer)
         }
         // END SR_class4_inner2
 

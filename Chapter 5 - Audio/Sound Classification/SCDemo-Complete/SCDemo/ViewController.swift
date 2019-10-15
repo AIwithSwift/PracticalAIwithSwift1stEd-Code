@@ -76,11 +76,21 @@ class ViewController: UIViewController {
         
         refresh(clear: true)
         
-        recordButton.changeState(to: .inProgress(title: "Recording...", color: .systemRed))
+        recordButton.changeState(
+            to: .inProgress(
+                title: "Recording...", 
+                color: .systemRed
+            )
+        )
+
         progressBar.isHidden = false
         
         audioRecorder.record(forDuration: TimeInterval(recordingLength))
-        UIView.animate(withDuration: recordingLength) { self.progressBar.setProgress(Float(self.recordingLength), animated: true) }
+        UIView.animate(withDuration: recordingLength) { 
+            self.progressBar.setProgress(
+                Float(self.recordingLength), 
+                animated: true) 
+        }
     }
     // END SC_complete_recAud
 
@@ -90,7 +100,9 @@ class ViewController: UIViewController {
         progressBar.progress = 0
         
         if success {
-            recordButton.changeState(to: .disabled(title: "Record Sound", color: .systemGray))
+            recordButton.changeState(
+                to: .disabled(title: "Record Sound", color: .systemGray)
+            )
             classifySound(file: recordedAudioFilename)
         } else {
             classify(nil)
@@ -100,7 +112,12 @@ class ViewController: UIViewController {
     
     private func classify(_ animal: Animal?) {
         classification = animal
-        recordButton.changeState(to: .enabled(title: "Record Sound", color: .systemBlue))
+        recordButton.changeState(
+            to: .enabled(
+                title: "Record Sound", 
+                color: .systemBlue
+            )
+        )
         // BEGIN SC_new_bits_in_classify
         refresh()
         
@@ -127,7 +144,13 @@ extension ViewController {
             preferredStyle: .alert
         )
         
-        alertController.addAction(UIAlertAction(title: "OK", style: .default))
+        alertController.addAction(
+            UIAlertAction(
+                title: "OK", 
+                style: .default
+            )
+        )
+        
         present(alertController, animated: true)
     }
 }

@@ -21,7 +21,11 @@ struct ContentView: View {
     // BEGIN FD_starter_cv_2_a
     private var faceCount: Int { return faces?.count ?? 0 }
     private let placeholderImage = UIImage(named: "placeholder")!
-    private var cameraEnabled: Bool { UIImagePickerController.isSourceTypeAvailable(.camera) }
+    
+    private var cameraEnabled: Bool { 
+        UIImagePickerController.isSourceTypeAvailable(.camera) 
+    }
+
     private var detectionEnabled: Bool { image != nil && faces == nil }
     // END FD_starter_cv_2_a
     
@@ -72,11 +76,25 @@ extension ContentView {
     // BEGIN FD_starter_cv_ext_1_a
     private func mainView() -> AnyView {
         return AnyView(NavigationView {
-            MainView(image: image ?? placeholderImage, text: "\(faceCount) face\(faceCount == 1 ? "" : "s")") {
-                TwoStateButton(text: "Detect Faces", disabled: !detectionEnabled, action: getFaces)
-            }.padding().navigationBarTitle(Text("FDDemo"), displayMode: .inline)
-            .navigationBarItems(leading: Button(action: summonImagePicker) { Text("Select") },
-                                trailing: Button(action: summonCamera) { Image(systemName: "camera") }.disabled(!cameraEnabled))
+            MainView(
+                image: image ?? placeholderImage, 
+                text: "\(faceCount) face\(faceCount == 1 ? "" : "s")") {
+                    TwoStateButton(
+                        text: "Detect Faces", 
+                        disabled: !detectionEnabled, 
+                        action: getFaces
+                    )
+            }
+            .padding()
+            .navigationBarTitle(Text("FDDemo"), displayMode: .inline)
+            .navigationBarItems(
+                leading: Button(action: summonImagePicker) { 
+                    Text("Select")
+                },
+                trailing: Button(action: summonCamera) { 
+                    Image(systemName: "camera") 
+                }.disabled(!cameraEnabled)
+            )
         })
     }
     // END FD_starter_cv_ext_1_a
