@@ -22,14 +22,20 @@ extension MnistGan : ImageGenerator {
     // Initialise the MnistGan class using the name of a compiled model
     convenience init(modelName: String) {
         let bundle = Bundle(for: MnistGan.self)
-        let url = bundle.url(forResource: modelName, withExtension:"mlmodelc")!
+
+        let url = bundle.url(
+            forResource: modelName, withExtension:"mlmodelc")!
+
         try! self.init(contentsOf: url)
     }
-    // Generate an image, using an array of random noise; the number displayed in
-    // the image will depend upon which model was loaded
+    // Generate an image, using an array of random noise; the number
+    // displayed in the image will depend upon which model was loaded
     func prediction() -> UIImage? {
+        
         if let noiseArray = MLMultiArray.getRandomNoise(),
-            let output = try? self.prediction(input: MnistGanInput(input1: noiseArray)) {
+            let output = try? self.prediction(
+                input: MnistGanInput(input1: noiseArray)) {
+
             return UIImage(data: output.output1)
         }
         return nil

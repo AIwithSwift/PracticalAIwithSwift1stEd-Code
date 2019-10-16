@@ -66,7 +66,10 @@ def setup_data():
         class_label = y_full[i]
 
         # put the image in the right array
-        class_data = images[class_label] if images[class_label] is not None else []
+        class_data = (
+            images[class_label] if images[class_label] is not None else []
+        )
+
         image = x_full[i]
         class_data.append(image)
         images[class_label] = class_data
@@ -101,7 +104,9 @@ def get_discriminator():
     input_x = Input(shape=(28, 28, 1))
     x = input_x
 
-    x = Conv2D(64, kernel_size=(5, 5), padding='same', activation='tanh')(x)
+    x = Conv2D(64, kernel_size=(5, 5), 
+        padding='same', activation='tanh')(x)
+
     x = MaxPooling2D(pool_size=(2, 2))(x)
 
     x = Conv2D(128, kernel_size=(5, 5), activation='tanh')(x)
@@ -127,7 +132,8 @@ def get_generator(z_dim=100):
     x = Reshape((7, 7, 128))(x)
 
     x = UpSampling2D(size=(2, 2))(x)
-    x = Conv2D(64, kernel_size=(5, 5), padding='same', activation='tanh')(x)
+    x = Conv2D(64, kernel_size=(5, 5), 
+        padding='same', activation='tanh')(x)
 
     x = UpSampling2D(size=(2, 2))(x)
     x = Conv2D(1, kernel_size=(5, 5), padding='same', activation='tanh')(x)
@@ -195,7 +201,8 @@ def plot_generated_images(epoch, generator, class_label):
         plt.imshow(generated_images[i], interpolation='nearest')
         plt.axis('off')
     plt.tight_layout()
-    plt.savefig(OUTPUT_DIRECTORY + '/%depoch_%d.png' % (class_label, epoch))
+    plt.savefig(OUTPUT_DIRECTORY + 
+        '/%depoch_%d.png' % (class_label, epoch))
     plt.close()
 # END gan_plot
 ########################################################################
@@ -206,7 +213,9 @@ def make_gan(x_train, y_train, class_label):
     # BEGIN gan_make_gan1
     print('Making discriminator model...')
     discriminator = get_discriminator()
-    discriminator.compile(loss='binary_crossentropy', optimizer=get_optimizer())
+    discriminator.compile(
+        loss='binary_crossentropy', optimizer=get_optimizer()
+    )
 
     print('Making generator model...')
     generator = get_generator()
@@ -216,7 +225,9 @@ def make_gan(x_train, y_train, class_label):
     adversarial = Sequential()
     adversarial.add(generator)
     adversarial.add(discriminator)
-    adversarial.compile(loss='binary_crossentropy', optimizer=get_optimizer())
+    adversarial.compile(
+        loss='binary_crossentropy', optimizer=get_optimizer()
+    )
 
     print('Preprocessing images...')
     x_train = preprocess_images(x_train)
@@ -238,8 +249,12 @@ def make_gan(x_train, y_train, class_label):
             # Discriminator
 
             # images: half real input, half fake/generated
-            real_images, real_labels = get_real_input(x_train, half_batch_size)
-            fake_images, fake_labels = get_fake_input(generator, half_batch_size)
+            real_images, real_labels = get_real_input(
+                x_train, half_batch_size)
+                
+            fake_images, fake_labels = get_fake_input(
+                generator, half_batch_size)
+
             x = np.concatenate([real_images, fake_images])
             y = np.concatenate([real_labels, fake_labels])
 
@@ -259,11 +274,15 @@ def make_gan(x_train, y_train, class_label):
             generator_loss_epoch.append(gen_loss_epoch)
 
         # add average loss for this epoch to list of average losses
-        dis_loss = sum(discriminator_loss_epoch) / len(discriminator_loss_epoch)
+        dis_loss = (
+            sum(discriminator_loss_epoch) / len(discriminator_loss_epoch)
+        )
+
         gen_loss = sum(generator_loss_epoch) / len(generator_loss_epoch)
         discriminator_loss.append(dis_loss)
         generator_loss.append(gen_loss)
-        print('Epoch %d/%d | Gen loss: %.2f | Dis loss: %.2f' % (e, GAN_EPOCHS, gen_loss, dis_loss))
+        print('Epoch %d/%d | Gen loss: %.2f | Dis loss: %.2f' % 
+            (e, GAN_EPOCHS, gen_loss, dis_loss))
 
         # checkpoint every n epochs
         if e == 1 or e % CHECKPOINT == 0:
@@ -288,10 +307,16 @@ for class_label in range(10):
     y_train = class_vector * x_train.shape[0]
     generator_model = make_gan(x_train, y_train, class_label)
 
-    generator_model.save(OUTPUT_DIRECTORY + '/gan-model-%d.model' % class_label)
+    generator_model.save(
+        OUTPUT_DIRECTORY + '/gan-model-%d.model' % class_label)
+
     coreml_model = convert(generator_model)
-    coreml_model.save(OUTPUT_DIRECTORY + '/gan-model-%d.mlmodel' % class_label)
-    # if you want to work in Playgrounds then go compile it on the command linem with
+    coreml_model.save(
+        OUTPUT_DIRECTORY + '/gan-model-%d.mlmodel' % class_label)
+
+    # if you want to work in Playgrounds then go compile it on the command
+    # line with:
+    #
     # $ xcrun coremlcompiler compile MnistGan.mlmodel MnistGan.mlmodelc
 
 print('Complete.')

@@ -15,10 +15,13 @@ enum StyleModel: String, CaseIterable {
     case left = "Spin Left"
     case right = "Spin RIght"
     
-    var isActive: Bool { return true } // Make this a conditional to enable only certain models
+    // Make this a conditional to enable only certain models
+    var isActive: Bool { return true } 
     
     init(index: Int) { self = StyleModel.styles[index] }
-    static var styles: [StyleModel] { return self.allCases.filter { style in style.isActive } }
+    static var styles: [StyleModel] { 
+        return self.allCases.filter { style in style.isActive } 
+    }
     
     var name: String { return self.rawValue }
     var styleIndex: Int { return StyleModel.styles.firstIndex(of: self)! }

@@ -22,14 +22,23 @@ class ViewController: UIViewController {
     
     // MARK: Actions
     
-    @IBAction func selectButtonPressed(_ sender: Any) { summonImagePicker() }
-    @IBAction func shareButtonPressed(_ sender: Any) {summonShareSheet() }
-    @IBAction func transferStyleButtonPressed(_ sender: Any) { performStyleTransfer() }
+    @IBAction func selectButtonPressed(_ sender: Any) { 
+        summonImagePicker() 
+    }
+
+    @IBAction func shareButtonPressed(_ sender: Any) {
+        summonShareSheet() 
+    }
+
+    @IBAction func transferStyleButtonPressed(_ sender: Any) { 
+        performStyleTransfer() 
+    }
 
     private var inputImage: UIImage?
     private var outputImage: UIImage?
     private var modelSelection: StyleModel {
         let selectedModelIndex = modelSelector.selectedRow(inComponent: 0)
+
         return StyleModel(index: selectedModelIndex)
     }
     
@@ -45,7 +54,8 @@ class ViewController: UIViewController {
         refresh()
     }
     
-    /// Disables and enables controls based on presence of input to Style Transfer and output to Share
+    /// Disables and enables controls based on presence of input to Style
+    /// Transfer and output to Share
     ///
     /// `if (input but no output) then  { enable NST function }`
     /// `else if (input and output) then { enable NST and Share function }`
@@ -81,12 +91,17 @@ class ViewController: UIViewController {
 
 extension ViewController: UINavigationControllerDelegate {
     private func summonShareSheet() {
+        
         guard let outputImage = outputImage else {
             summonAlertView()
             return
         }
         
-        let shareSheet = UIActivityViewController(activityItems: [outputImage as Any], applicationActivities: nil)
+        let shareSheet = UIActivityViewController(
+            activityItems: [outputImage as Any], 
+            applicationActivities: nil
+        )
+
         present(shareSheet, animated: true)
     }
     
@@ -97,7 +112,13 @@ extension ViewController: UINavigationControllerDelegate {
             preferredStyle: .alert
         )
         
-        alertController.addAction(UIAlertAction(title: "OK", style: .default))
+        alertController.addAction(
+            UIAlertAction(
+                title: "OK", 
+                style: .default
+            )
+        )
+
         present(alertController, animated: true)
     }
 }
@@ -111,8 +132,13 @@ extension ViewController: UIImagePickerControllerDelegate {
         present(imagePicker, animated: true)
     }
     // BEGIN NST_complete_impickcon
-    @objc func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
-        let rawImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
+    @objc func imagePickerController(_ picker: UIImagePickerController, 
+        didFinishPickingMediaWithInfo info: 
+            [UIImagePickerController.InfoKey: Any]) {
+
+        let rawImage = 
+            info[UIImagePickerController.InfoKey.originalImage] as? UIImage
+
         inputImage = rawImage?.aspectFilled(to: modelSelection.constraints)
         outputImage = nil
         
@@ -131,11 +157,15 @@ extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource {
         return 1
     }
     
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    func pickerView(_ pickerView: UIPickerView, 
+        numberOfRowsInComponent component: Int) -> Int {
+
         return StyleModel.styles.count
     }
     
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    func pickerView(_ pickerView: UIPickerView, 
+        titleForRow row: Int, forComponent component: Int) -> String? {
+
         return StyleModel(index: row).name
     }
 }

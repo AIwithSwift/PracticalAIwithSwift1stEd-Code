@@ -15,7 +15,9 @@ import Foundation
 // BEGIN gan_utils_mlm
 extension MLMultiArray {
     static func getRandomNoise(length: NSNumber = 100) -> MLMultiArray? {
-        guard let input = try? MLMultiArray(shape: [length], dataType: .double) else {
+        guard let input = try? MLMultiArray(
+            shape: [length], dataType: .double) else {
+
             return nil
         }
         
@@ -51,18 +53,30 @@ extension UIImage {
         
         for xIndex in 0..<width {
             for yIndex in 0..<height {
-                let pixelValue = Float32(truncating: data[xIndex * height + yIndex])
+                let pixelValue = 
+                    Float32(truncating: data[xIndex * height + yIndex])
                 let byteOut: UInt8 = UInt8((pixelValue * 127.5) + 127.5)
                 byteData.append(byteOut)
             }
         }
 
-        self.init(data: byteData, width: width, height: height, components: 1)
+        self.init(
+            data: byteData, 
+            width: width, 
+            height: height, 
+            components: 1
+        )
+
     }
     // END gan_utils_uiimage1
     
     // BEGIN gan_utils_uiimage2
-    convenience init?(data: [UInt8], width: Int, height: Int, components: Int) {
+    convenience init?(
+        data: [UInt8], 
+        width: Int, 
+        height: Int, 
+        components: Int) {
+
         let dataSize = (width * height * components * 8)
         guard let cfData = CFDataCreate(nil, data, dataSize / 8),
             let provider = CGDataProvider(data: cfData),
@@ -82,7 +96,11 @@ extension UIImage {
 
 // BEGIN gan_utils_cgimage
 extension CGImage {
-    static func makeFrom(dataProvider: CGDataProvider, width: Int, height: Int, components: Int) -> CGImage? {
+    static func makeFrom(dataProvider: CGDataProvider, 
+        width: Int, 
+        height: Int, 
+        components: Int) -> CGImage? {
+
         if components != 1 && components != 3 { return nil }
         
         let bitMapInfo: CGBitmapInfo = .byteOrder16Little

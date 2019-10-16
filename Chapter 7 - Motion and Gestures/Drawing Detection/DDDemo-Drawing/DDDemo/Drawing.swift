@@ -14,21 +14,25 @@ import Vision
 // BEGIN ddnew_drawing_enum
 enum Drawing: String, CaseIterable {
     /// These only include those the model was trained on
-    /// For others that can be included in the training phase, see the [full list of categories in the dataset](https://raw.githubusercontent.com/googlecreativelab/quickdraw-dataset/master/categories.txt)
+    /// For others that can be included in the training phase, see the 
+    /// full list of categories in the dataset:
+    /// https://raw.githubusercontent.com/googlecreativelab/
+    ///     quickdraw-dataset/master/categories.txt
     case apple, banana, bread, broccoli, cake, carrot, coffee, cookie
     case donut, grapes, hotdog, icecream, lollipop, mushroom, peanut, pear
     case pineapple, pizza, potato, sandwich, steak, strawberry, watermelon
     
     // BEGIN ddnew_drawing_enum0
     init?(rawValue: String) {
-        if let match = Drawing.allCases.first(where: { $0.rawValue == rawValue }) {
+        if let match = 
+            Drawing.allCases.first(where: { $0.rawValue == rawValue }) {
             self = match
         } else {
             switch rawValue {
-            case "coffee cup":  self = .coffee
-            case "hot dog":     self = .hotdog
-            case "ice cream":   self = .icecream
-            default: return nil
+                case "coffee cup":  self = .coffee
+                case "hot dog":     self = .hotdog
+                case "ice cream":   self = .icecream
+                default: return nil
             }
         }
     }
@@ -79,7 +83,9 @@ extension VNImageRequestHandler {
 
 // BEGIN ddnew_drawing_dcm
 extension DrawingClassifierModel {    
-    func classify(_ image: UIImage?, completion: @escaping (Drawing?) -> ()) {
+    func classify(_ image: UIImage?, 
+        completion: @escaping (Drawing?) -> ()) {
+
         guard let image = image,
             let model = try? VNCoreMLModel(for: self.model) else {
                 return completion(nil)
@@ -89,11 +95,20 @@ extension DrawingClassifierModel {
         
         DispatchQueue.global(qos: .userInitiated).async {
             if let handler = VNImageRequestHandler(uiImage: image) {
+
                 try? handler.perform([request])
-                let results = request.results as? [VNClassificationObservation]
-                let highestResult = results?.max { $0.confidence < $1.confidence }
+
+                let results = request.results 
+                    as? [VNClassificationObservation]
+
+                let highestResult = 
+                    results?.max { $0.confidence < $1.confidence }
+
                 print(results?.list ?? "")
-                completion(Drawing(rawValue: highestResult?.identifier ?? ""))
+
+                completion(
+                    Drawing(rawValue: highestResult?.identifier ?? "")
+                )
             } else {
                 completion(nil)
             }
@@ -107,7 +122,8 @@ extension Collection where Element == VNClassificationObservation {
     var list: String {
         var string = ""
         for element in self {
-            string += "\(element.identifier): \(element.confidence * 100.0)%\n"
+            string += "\(element.identifier): " +
+                "\(element.confidence * 100.0)%\n"
         }
         return string
     }

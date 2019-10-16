@@ -25,9 +25,16 @@ class MarkovChain {
 
     // BEGIN markov3
     init?(with inputFilepath: String) {
-        guard let filePath = Bundle.main.path(forResource: inputFilepath, ofType: ".txt"),
+        guard 
+            let filePath = Bundle.main.path(
+                forResource: inputFilepath, ofType: ".txt"
+            ),
             let inputFile = FileManager.default.contents(atPath: filePath),
-            let inputString = String(data: inputFile, encoding: .utf8) else { return nil }
+            let inputString = String(data: inputFile, encoding: .utf8) 
+            else { 
+                return nil 
+            }
+
         print("File imported successfully!")
         let tokens = inputString.tokenize()
         
@@ -100,12 +107,20 @@ class MarkovChain {
     func nextWord() -> String {
         let newWord: String
         
-        // if there was no last token or it was a sentence end, get a randon new word
-        if self.sequence.isEmpty || self.sequence.last == String.sentenceEnd {
-            newWord = startWords.randomElement()! // can't be empty, else this object would be nil
+        // if there was no last token or it was a sentence end, get a
+        // random new word
+        if self.sequence.isEmpty || 
+            self.sequence.last == String.sentenceEnd {
+            
+            // '!' is safe here - startWords can't be empty, else this
+            // object would be nil
+            newWord = startWords.randomElement()! 
         } else {
             // otherwise get a random new token to follow the last word
-            let lastWord = self.sequence.last! // can't be empty, else the above .isEmpty would have been true
+
+            // '!' is safe here - self.sequence can't be empty, else the
+            // above .isEmpty would have been true
+            let lastWord = self.sequence.last! 
 
             // get random word or sentence end
             let link = links[lastWord]?.randomElement()
@@ -119,9 +134,14 @@ class MarkovChain {
     
     // BEGIN markov6
     func generate(wordCount: Int = 100) -> String {
+
         // get n words, put them together
-        for _ in 0..<wordCount { let _ = self.nextWord() }
-        return self.sequence.joined(separator: " ").replacingOccurrences(of: " .", with: ".") + " ..."
+        for _ in 0..<wordCount { 
+            let _ = self.nextWord()
+        }
+        
+        return self.sequence.joined(separator: " ")
+            .replacingOccurrences(of: " .", with: ".") + " ..."
     }
     // END markov6
 }

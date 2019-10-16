@@ -10,7 +10,11 @@
 import UIKit
 // END ddnew_image_imports
 
-/// see [here](https://developer.apple.com/library/archive/documentation/GraphicsImaging/Reference/CoreImageFilterReference/index.html#//apple_ref/doc/uid/TP30000136-SW55) for full list of inbuilt CIFilters, else you can make your own
+/// see 
+/// https://developer.apple.com/library/archive/documentation/
+///     GraphicsImaging/Reference/CoreImageFilterReference/index.html#//
+///     apple_ref/doc/uid/TP30000136-SW55 
+/// for full list of inbuilt CIFilters, else you can make your own
 
 // BEGIN ddnew_image_cifilter
 extension CIFilter {
@@ -28,11 +32,16 @@ extension UIImage {
         
         let context = CIContext(options: nil)
         guard let output = filter.outputImage,
-            let cgImage = context.createCGImage(output, from: output.extent) else {
-                return nil
+            let cgImage = context.createCGImage(
+                    output, from: output.extent
+                ) else {
+                    return nil
         }
         
-        return UIImage(cgImage: cgImage, scale: scale, orientation: imageOrientation)
+        return UIImage(
+            cgImage: cgImage, 
+            scale: scale, 
+            orientation: imageOrientation)
     }
     // END ddnew_image_uiimage0
     

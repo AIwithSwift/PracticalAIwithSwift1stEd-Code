@@ -9,15 +9,28 @@ data_dir = 'HAPT/RawData/'
 
 # BEGIN acpyfindlabel
 def find_label_for_containing_interval(intervals, index):
-    containing_interval = intervals[:, 0][(intervals[:, 1] <= index) & (index <= intervals[:, 2])]
+    containing_interval = intervals[:, 0][
+        (intervals[:, 1] <= index) & (index <= intervals[:, 2])
+    ]
     if len(containing_interval) == 1:
         return containing_interval[0]
 # END acpyfindlabel      
     
 # Load labels
 # BEGIN acpylabels
-labels = tc.SFrame.read_csv(data_dir + 'labels.txt', delimiter=' ', header=False, verbose=False)
-labels = labels.rename({'X1': 'exp_id', 'X2': 'user_id', 'X3': 'activity_id', 'X4': 'start', 'X5': 'end'})
+labels = tc.SFrame.read_csv(
+    data_dir + 'labels.txt', 
+    delimiter=' ', 
+    header=False, 
+    verbose=False)
+
+labels = labels.rename({
+    'X1': 'exp_id', 
+    'X2': 'user_id', 
+    'X3': 'activity_id', 
+    'X4': 'start', 
+    'X5': 'end'
+})
 print(labels)
 # END acpylabels
 
@@ -37,20 +50,41 @@ for acc_file, gyro_file in files:
     user_id = int(acc_file.split('_')[2][4:6])
     
     # Load accel data
-    sf = tc.SFrame.read_csv(acc_file, delimiter=' ', header=False, verbose=False)
+    sf = tc.SFrame.read_csv(
+        acc_file, 
+        delimiter=' ', 
+        header=False, 
+        verbose=False)
+
     sf = sf.rename({'X1': 'acc_x', 'X2': 'acc_y', 'X3': 'acc_z'})
     sf['exp_id'] = exp_id
     sf['user_id'] = user_id
     
     # Load gyro data
-    gyro_sf = tc.SFrame.read_csv(gyro_file, delimiter=' ', header=False, verbose=False)
-    gyro_sf = gyro_sf.rename({'X1': 'gyro_x', 'X2': 'gyro_y', 'X3': 'gyro_z'})
+    gyro_sf = tc.SFrame.read_csv(
+        gyro_file, 
+        delimiter=' ', 
+        header=False, 
+        verbose=False)
+
+    gyro_sf = gyro_sf.rename({
+        'X1': 'gyro_x', 
+        'X2': 'gyro_y', 
+        'X3': 'gyro_z'
+    })
     sf = sf.add_columns(gyro_sf)
     
     # Calc labels
-    exp_labels = labels[labels['exp_id'] == exp_id][['activity_id', 'start', 'end']].to_numpy()
+    exp_labels = labels[labels['exp_id'] == exp_id][
+        ['activity_id', 'start', 'end']
+    ].to_numpy()
+
     sf = sf.add_row_number()
-    sf['activity_id'] = sf['id'].apply(lambda x: find_label_for_containing_interval(exp_labels, x))
+
+    sf['activity_id'] = sf['id'].apply(
+        lambda x: find_label_for_containing_interval(exp_labels, x)
+    )
+
     sf = sf.remove_columns(['id'])
     
     data = data.append(sf)
@@ -91,12 +125,17 @@ data.save('hapt_data.sframe')
 
 # Train/test split by recording sessions
 # BEGIN acpytraintest
-train, test = tc.activity_classifier.util.random_split_by_session(data, session_id='exp_id', fraction=0.8)
+train, test = tc.activity_classifier.util.random_split_by_session(
+    data, session_id='exp_id', fraction=0.8)
 # END acpytraintest
 
 # Create an activity classifier
 # BEGIN acpymakemodel
-model = tc.activity_classifier.create(train, session_id='exp_id', target='activity', prediction_window=50)
+model = tc.activity_classifier.create(
+    train, 
+    session_id='exp_id', 
+    target='activity', 
+    prediction_window=50)
 # END acpymakemodel
 
 # Evaluate the model and save the results into a dictionary
@@ -118,6 +157,10 @@ model.export_coreml('ActivityClassifier.mlmodel')
 # loaded_sframe = tc.load_sframe(`hapt_data.sframe`)
 # loaded_model = tc.load_model('ActivityClassifier.model')
 # BEGIN acpyaskingforprediction
-walking_3_sec = loaded_sframe[(loaded_sframe['activity'] == 'walking') & (loaded_sframe['exp_id'] == 1)][1000:1150]
+walking_3_sec = loaded_sframe[
+    (loaded_sframe['activity'] == 'walking') & 
+        (loaded_sframe['exp_id'] == 1)
+][1000:1150]
+
 print(loaded_model.predict(walking_3_sec, output_frequency='per_window'))
 # END acpyaskingforprediction

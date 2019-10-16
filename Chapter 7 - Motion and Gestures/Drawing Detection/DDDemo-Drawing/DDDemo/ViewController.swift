@@ -42,7 +42,9 @@ class ViewController: UIViewController {
     
     // BEGIN dd_new_tb
     // new stroke started
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, 
+        with event: UIEvent?) {
+
         guard let touch = touches.first else { return }
         
         let newStroke = CGMutablePath()
@@ -54,8 +56,13 @@ class ViewController: UIViewController {
     
     // BEGIN dd_new_tm
     // stroke moved
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first, let currentStroke = self.currentStroke else { return }
+    override func touchesMoved(_ touches: Set<UITouch>, 
+        with event: UIEvent?) {
+
+        guard let touch = touches.first, 
+            let currentStroke = self.currentStroke else {                 
+                return
+        }
         
         currentStroke.addLine(to: touch.location(in: imageView))
         refresh()
@@ -64,8 +71,13 @@ class ViewController: UIViewController {
     
     // BEGIN dd_new_te
     // stroke ended
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first, let currentStroke = self.currentStroke else { return }
+    override func touchesEnded(_ touches: Set<UITouch>, 
+        with event: UIEvent?) {
+
+        guard let touch = touches.first, 
+            let currentStroke = self.currentStroke else { 
+                return 
+        }
         
         currentStroke.addLine(to: touch.location(in: imageView))
         refresh()
@@ -137,7 +149,10 @@ class ViewController: UIViewController {
     
     // BEGIN dd_new_classify
     func classify() {
-        guard let grayscaleImage = imageView.image?.applying(filter: .noir) else { return }
+        guard let grayscaleImage = 
+            imageView.image?.applying(filter: .noir) else { 
+                return 
+        }
         
         classifyButton.disable()
         classifier.classify(grayscaleImage) { result in

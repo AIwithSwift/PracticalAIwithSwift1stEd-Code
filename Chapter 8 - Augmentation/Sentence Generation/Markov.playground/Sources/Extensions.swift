@@ -12,7 +12,10 @@ public extension Collection {
 // BEGIN markov_ext2
 public extension NSRegularExpression {
     func matches(in text: String) -> [NSTextCheckingResult] {
-        return self.matches(in: text, range: NSRange(text.startIndex..., in: text))
+        return self.matches(
+            in: text, 
+            range: NSRange(text.startIndex..., in: text)
+        )
     }
 }
 // END markov_ext2
@@ -23,7 +26,9 @@ public extension String {
         do {
             let regex = try NSRegularExpression(pattern: pattern)
             let matches = regex.matches(in: self)
-            return matches.map({ String(self[Range($0.range, in: self)!]) })
+            return matches.map({ 
+                String(self[Range($0.range, in: self)!]) 
+            })
         } catch {
             throw error as Error
         }
@@ -37,8 +42,13 @@ public extension String {
     
     func tokenize() -> [String] {
         var tokens: [String] = []
-        let sentenceRegex = "[^.!?\\s][^.!?]*(?:[.!?](?!['\"]?\\s[A-Z]|$)[^.!?]*)*[.!?]?['\"]?(?=\\s|$)"
+
+        let sentenceRegex = 
+            "[^.!?\\s][^.!?]*(?:[.!?](?!['\"]?\\s[A-Z]|$)[^.!?]*)*" + 
+                "[.!?]?['\"]?(?=\\s|$)"
+
         let wordRegex = "((\\b[^\\s]+\\b)((?<=\\.\\w).)?)"
+        
         if let sentences = try? self.matches(regex: sentenceRegex) {
             for sentence in sentences {
                 if let words = try? sentence.matches(regex: wordRegex),

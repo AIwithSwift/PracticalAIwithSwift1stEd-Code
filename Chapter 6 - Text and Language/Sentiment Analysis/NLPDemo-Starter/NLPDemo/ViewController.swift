@@ -21,7 +21,9 @@ class ViewController: UIViewController {
     // MARK: Actions
     
     // BEGIN nlp_starter_actions
-    @IBAction func analyseSentimentButtonPressed(_ sender: Any) { performSentimentAnalysis() }
+    @IBAction func analyseSentimentButtonPressed(_ sender: Any) { 
+        performSentimentAnalysis() 
+    }
     // END nlp_starter_actions
     
     // MARK: Attributes

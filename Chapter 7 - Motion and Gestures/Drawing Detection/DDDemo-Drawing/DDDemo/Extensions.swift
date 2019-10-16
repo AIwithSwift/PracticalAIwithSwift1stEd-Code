@@ -12,12 +12,21 @@ import UIKit
 
 // BEGIN dd_new_extensions_cgcontext
 extension CGContext {
-    static func create(size: CGSize, action: (inout CGContext) -> ()) -> UIImage? {
+    static func create(size: CGSize, 
+        action: (inout CGContext) -> ()) -> UIImage? {
+
         UIGraphicsBeginImageContextWithOptions(size, false, 1.0)
-        guard var context = UIGraphicsGetCurrentContext() else { return nil }
+        
+        guard var context = UIGraphicsGetCurrentContext() else { 
+            return nil 
+        }
+
         action(&context)
+
         let result = UIGraphicsGetImageFromCurrentImageContext()
+
         UIGraphicsEndImageContext()
+        
         return result
     }
 }

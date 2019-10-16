@@ -39,7 +39,9 @@ extension CMMotionActivityManager {
     // END ardemo_motion_ext_cmmotam_1
     
     // BEGIN ardemo_motion_ext_cmmotam_2
-    func startTracking(handler: @escaping (CMMotionActivity?) -> Void) throws {
+    func startTracking(handler: @escaping (CMMotionActivity?) -> Void) 
+        throws {
+            
         if !CMMotionActivityManager.isActivityAvailable() {
             throw Error.notAvailable
         }

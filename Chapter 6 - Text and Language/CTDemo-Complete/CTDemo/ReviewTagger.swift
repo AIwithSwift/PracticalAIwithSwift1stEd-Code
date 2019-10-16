@@ -24,10 +24,17 @@ final class ReviewTagger {
     // BEGIN ct_class2
     private lazy var tagger: NLTagger? = {
         do {
-            let modelFile = Bundle.main.url(forResource: "ReviewMLTextClassifier", withExtension: "mlmodelc")!
-            let model = try NLModel(contentsOf: modelFile) // makes the ML model an NL model
+            let modelFile = Bundle.main.url(
+                forResource: "ReviewMLTextClassifier", 
+                withExtension: "mlmodelc")!
+
+            // make the ML model an NL model
+            let model = try NLModel(contentsOf: modelFile) 
+            
+            // connect model to (custom) scheme name
             let tagger = NLTagger(tagSchemes: [scheme])
-            tagger.setModels([model], forTagScheme: scheme) // connect model to (custom) scheme name
+            tagger.setModels([model], forTagScheme: scheme) 
+
             print("Success loading model")
             return tagger
         } catch {
