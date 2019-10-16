@@ -35,9 +35,7 @@ class ViewController: UIViewController {
     }
     
     // BEGIN im_class_ai_newvar
-    private let classifier = VisionClassifier(
-        mlmodel: BananaOrApple().model
-    )
+    private let classifier = VisionClassifier(mlmodel: BananaOrApple().model)
     // END im_class_ai_newvar
     private var inputImage: UIImage?
     var classification: String?

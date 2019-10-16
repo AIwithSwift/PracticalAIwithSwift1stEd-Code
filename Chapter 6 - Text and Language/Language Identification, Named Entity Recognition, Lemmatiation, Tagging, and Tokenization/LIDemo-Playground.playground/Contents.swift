@@ -31,7 +31,7 @@ print("### Language Identification Demo ###")
 // BEGIN nlp_pg_li_string
 let text = ["My hovercraft is full of eels",
             "Mijn hovercraft zit vol palingen",
-            "我的氣墊船裝滿了鱔魚 [我的气垫船装满了鳝鱼]",
+            "我的氣墊船充滿了鰻魚",
             "Mit luftpudefartøj er fyldt med ål",
             "Το χόβερκραφτ μου είναι γεμάτο χέλια",
             "제 호버크래프트가 장어로 가득해요",

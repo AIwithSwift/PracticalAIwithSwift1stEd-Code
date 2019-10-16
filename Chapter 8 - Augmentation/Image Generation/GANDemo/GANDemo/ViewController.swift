@@ -49,10 +49,6 @@ class ViewController: UIViewController {
         MnistGan(modelName: "MnistGan8"),
         MnistGan(modelName: "MnistGan9"),
     ]
-//    private var ganModels: [ImageGenerator] = [
-//        MnistGan0(), MnistGan1(), MnistGan2(), MnistGan3(), MnistGan4(),
-//        MnistGan5(), MnistGan6(), MnistGan7(), MnistGan8(), MnistGan9()
-//    ]
     // END gan_swift_vars
     
     // BEGIN gan_swift_vdl

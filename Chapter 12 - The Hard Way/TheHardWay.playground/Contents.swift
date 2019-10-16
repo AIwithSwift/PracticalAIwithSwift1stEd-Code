@@ -11,8 +11,8 @@ var outputFilter: BNNSFilter?
 func buildNetwork(inputWeights: [Float],
                   inputBiases: [Float],
                   outputWeights: [Float],
-                  outputBiases: [Float])
-{
+                  outputBiases: [Float]) {
+                      
     // BEGIN thw_build_one
     let activation = BNNSActivation(function: .sigmoid, alpha: 0, beta: 0)
     

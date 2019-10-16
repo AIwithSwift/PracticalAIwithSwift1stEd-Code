@@ -145,14 +145,6 @@ extension Collection where Element == VNFaceObservation {
                 dx: -insets.x, 
                 dy: -insets.y)
 
-            // !!! PROD !!!
-            // NOTE: CHECK WITH NAN ABOUT THIS BEFORE PRINTING; DO *NOT*
-            // GO TO PRINT WITH THIS
-            /*
-            let randomEmoji = ["ߙ⢬ "ߘ᢬ "ߘꢬ "ߤ袬 "ߘ墬 "ߙ䢬 "ߘ좬 "ߘ "ߘ䢝
-                .randomElement()!
-            */
-            
             let randomEmoji = [
                 "🙂", 
                 "😁", 
