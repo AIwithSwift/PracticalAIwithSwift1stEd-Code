@@ -50,7 +50,7 @@ total_categories = len(categories)
 for index, category in enumerate(categories):
 	bitmap_filename = '/' + category + '.npy'
 
-	with open(bitmap_directory + bitmap_filename, 'w+') as bitmap_file:
+	with open(bitmap_directory + bitmap_filename, 'wb+') as bitmap_file:
 		bitmap_response = requests.get(bitmap_url + bitmap_filename)
 		bitmap_file.write(bitmap_response.content)
 
